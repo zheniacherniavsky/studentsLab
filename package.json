@@ -5,14 +5,14 @@
   "main": "main.jsx",
   "scripts": {
     "test": "npm run lint",
-    "serve": "./node_modules/.bin/webpack serve --hot --open --config webpack.devServer.js",
-    "build-prod": "./node_modules/.bin/webpack --mode production --config webpack.prod.js",
-    "build-prod-withMap": "./node_modules/.bin/webpack --mode production --config webpack.prod.js --sourceMap",
-    "build-dev": "./node_modules/.bin/webpack --mode development --config webpack.dev.js",
+    "serve": "webpack serve --hot --open --config webpack.devServer.js",
+    "build-prod": "webpack --mode production --config webpack.prod.js",
+    "build-prod-withMap": "webpack --mode production --config webpack.prod.js --sourceMap",
+    "build-dev": "webpack --mode development --config webpack.dev.js",
     "lint": "npm run lint-code && npm run lint-styles",
-    "lint-code": "./node_modules/.bin/eslint --fix --cache ./**/*.{js,jsx,ts,tsx,json}",
-    "lint-styles": "./node_modules/.bin/stylelint --fix --cache ./**/*.{css,scss,less}",
-    "lint-md": "./node_modules/.bin/markdownlint --fix **/*.md --ignore node_modules"
+    "lint-code": "eslint --fix --cache ./**/*.{js,jsx,ts,tsx,json}",
+    "lint-styles": "stylelint --fix --cache ./**/*.{css,scss,less}",
+    "lint-md": "markdownlint --fix **/*.md --ignore node_modules"
   },
   "repository": {
     "type": "git",
