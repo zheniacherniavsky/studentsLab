@@ -1,16 +1,22 @@
 // eslint-disable-next-line no-use-before-define
 import React from "react";
 import ReactDom from "react-dom";
+import Title from "./Components/Navbar/Title";
 import "./style/styles.css";
-
-function HelloWorld(props) {
-  return <h1>Hello world, {props.name}</h1>;
-}
+import "./style/navbar.css";
+import NavLink from "./Components/Navbar/NavLink";
 
 function App() {
   return (
-    <div className="header">
-      <HelloWorld name="Yauheni" />
+    <div className="navbar_container">
+      <Title title="Game Market" />
+      <ul className="navlinks">
+        <NavLink name="Sign Up" />
+        <NavLink name="Sign In" />
+        <NavLink name="About" />
+        <NavLink name="Products" />
+        <NavLink name="Home" />
+      </ul>
     </div>
   );
 }

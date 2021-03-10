@@ -2,4 +2,4 @@
 
 last 1 version    # the last 1 versions for each browser.
 > 1%              # browsers versions selected by global usage statistics
-IE>=10            # exclude IE 10 +
+IE>=11            # exclude IE 11+
