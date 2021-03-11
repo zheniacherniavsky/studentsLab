@@ -1,6 +1,6 @@
 .navbar_container {
   background-color: black;
-  position: absolute;
+  position: relative;
   right: 0;
   left: 0;
   height: 100px;
@@ -40,6 +40,25 @@
   display: inline;
   position: relative;
   margin: 0 40px;
+}
+
+.navlinks li a:active,
+.navlinks li a:hover,
+.navlinks li a {
+  text-decoration: none;
+}
+
+.navlinks li a {
+  color: lightgray;
+}
+
+.navlinks li a.active {
+  color: white;
+  font-weight: bold;
+}
+
+.navlinks li a:hover {
+  color: white;
 }
 
 .navlinks li:hover {
