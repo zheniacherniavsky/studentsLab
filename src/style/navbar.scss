@@ -1,0 +1,72 @@
+.navbar {
+  &_container {
+    background-color: $navbar_background;
+    position: relative;
+    right: 0;
+    left: 0;
+    height: 100px;
+    font-size: 19px;
+    cursor: default;
+  }
+  &_title {
+    position: absolute;
+    color: $navbar_activetext;
+    margin: 0;
+    padding-top: 33px;
+    font-weight: bold;
+    height: 100%;
+    width: 20%;
+    font-size: 25px;
+    box-sizing: border-box;
+
+    p {
+      position: relative;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+
+.navlinks {
+  position: absolute;
+  box-sizing: border-box;
+  right: 0;
+  height: 100%;
+  width: 80%;
+  margin: 0;
+  padding: 38px 0 0 0;
+
+  li {
+    color: $navbar_text;
+    float: right;
+    display: inline;
+    position: relative;
+    //margin: 0 40px;
+
+    a {
+      color: $navbar_text;
+      text-decoration: none;
+      padding: 39px;
+      transition: background 0.2s ease-in-out;
+
+      &.active {
+        color: $navbar_activetext;
+        font-weight: bold;
+        padding-bottom: 34px;
+        border-bottom: 5px solid $navbar_tilebottom;
+      }
+
+      &:active,
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+      }
+
+      &:hover,
+      &:focus {
+        color: $navbar_activetext;
+      }
+    }
+  }
+}

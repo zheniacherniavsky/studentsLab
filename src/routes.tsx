@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AboutPage from "./Pages/AboutPage";
 import HomePage from "./Pages/HomePage";

@@ -1,13 +1,15 @@
-import React from "react";
-import ReactDom from "react-dom";
+import * as ReactDom from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import Title from "./Components/Navbar/Title";
 import UseRoutes from "./routes";
-import { BrowserRouter } from "react-router-dom";
 import NavLinks from "./Components/Navbar/NavLinks";
+import Footer from "./Components/Footer/Footer";
 
 // Styles
-import "./style/styles.css";
-import "./style/navbar.css";
+import "./style/styles.scss";
+import "./style/navbar.scss";
+import "./style/pages.scss";
+import "./style/footer.scss";
 
 function App() {
   const routes = UseRoutes();
@@ -18,7 +20,8 @@ function App() {
           <Title title="Game Market" />
           <NavLinks />
         </div>
-        <div>{routes}</div>
+        <div className="pages_container">{routes}</div>
+        <Footer />
       </BrowserRouter>
     </div>
   );

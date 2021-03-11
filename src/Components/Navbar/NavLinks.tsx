@@ -1,7 +1,6 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
-function NavLinks() {
+export default function NavLinks() {
   return (
     <ul className="navlinks">
       <li>
@@ -32,5 +31,3 @@ function NavLinks() {
     </ul>
   );
 }
-
-export default NavLinks;
