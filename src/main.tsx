@@ -1,3 +1,4 @@
+import React from "react";
 import * as ReactDom from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import Title from "./Components/Navbar/Title";
@@ -8,7 +9,6 @@ import Footer from "./Components/Footer/Footer";
 
 // Styles
 import "./style/styles.scss";
-import "./style/navbar.scss";
 import "./style/pages.scss";
 import "./style/footer.scss";
 
@@ -17,7 +17,6 @@ import "./style/footer.scss";
 // BUT if we define react, eslint tell us that React has been defined and you cant
 // define it again
 
-// eslint-disable-next-line no-undef
 class App extends React.Component {
   componentDidCatch(error) {
     /* modal window with error in future */

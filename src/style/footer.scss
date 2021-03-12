@@ -1,3 +1,4 @@
+// TODO : flex refactor
 .footer {
   position: relative;
   width: 100%;
@@ -25,10 +26,9 @@
     bottom: 30px;
 
     img {
-      width: 37px;
       height: 37px;
       margin: 7px;
-      border-radius: 10px;
+      filter: grayscale(0.35);
     }
   }
 }
