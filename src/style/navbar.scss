@@ -1,58 +1,142 @@
-.navbar {
-  &_container {
+@media (min-width: 820px) {
+  .navbar_container {
     background-color: $navbar_background;
     display: flex;
     font-size: 19px;
     cursor: default;
-  }
-  &_title {
-    color: $navbar_activetext;
-    margin: 0;
-    margin: auto;
-    font-weight: bold;
-    font-size: 25px;
-    box-sizing: border-box;
 
-    p {
-      position: relative;
-      text-align: center;
-      margin: 0;
+    // Navbar title
+    &__title {
+      color: $navbar_activetext;
+      display: flex;
+      margin-right: auto;
+      margin-left: 30px;
+      font-weight: bold;
+      font-size: 25px;
+      box-sizing: border-box;
+
+      // Toggle menu btn
+      .toggle_menu_btn {
+        display: none;
+      }
+    }
+
+    // Links
+    &__navlinks {
+      ul {
+        box-sizing: border-box;
+        display: flex;
+        margin: auto;
+        li {
+          color: $navbar_text;
+          display: flex;
+
+          a {
+            color: $navbar_text;
+            text-decoration: none;
+            padding: 25px;
+            box-sizing: border-box;
+            transition: background 0.4s ease;
+
+            &.active {
+              color: $navbar_activetext;
+              font-weight: bold;
+              border-bottom: 5px solid $navbar_tilebottom;
+              background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+            }
+
+            &:active,
+            &:hover,
+            &:focus {
+              text-decoration: none;
+            }
+
+            &:hover {
+              color: $navbar_activetext;
+              background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+            }
+          }
+        }
+      }
     }
   }
 }
 
-.navlinks {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  margin: auto;
+@media (max-width: 820px) {
+  .navbar_container {
+    cursor: default;
 
-  li {
-    color: $navbar_text;
-    display: flex;
+    // Navbar title
+    &__title {
+      background-color: $navbar_background;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
 
-    a {
-      color: $navbar_text;
-      text-decoration: none;
-      padding: 25px;
-      transition: background 0.2s ease-in-out;
-
-      &.active {
-        color: $navbar_activetext;
-        font-weight: bold;
-        border-bottom: 5px solid $navbar_tilebottom;
+      // p - title
+      p,
+      .toggle_menu_btn {
+        padding: 20px;
+        font-size: 25px;
+        margin: 0;
       }
-
-      &:active,
-      &:hover,
-      &:focus {
-        text-decoration: none;
-        background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
-      }
-
-      &:hover,
-      &:focus {
+      .toggle_menu_btn {
+        border-radius: 10px;
+        background-color: $navbar_background;
+        border-width: 0;
         color: $navbar_activetext;
+        margin: 0;
+      }
+      .toggle_menu_btn:focus,
+      .toggle_menu_btn:active {
+        border: none;
+      }
+    }
+
+    // Links
+    &__navlinks {
+      ul {
+        &.hidden {
+          display: none;
+        }
+
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        border-bottom: 2px solid $navbar_tilebottom;
+
+        li {
+          display: flex;
+          margin: auto;
+          height: 50px;
+          width: 100%;
+          box-sizing: content-box;
+
+          a {
+            text-decoration: none;
+            color: $navbar_text;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding-left: 20px;
+
+            &.active {
+              color: $navbar_activetext;
+              font-weight: bold;
+              border-left: 5px solid $navbar_tilebottom;
+              background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+            }
+
+            &:focus {
+              text-decoration: none;
+              color: $navbar_activetext;
+              background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+            }
+          }
+        }
       }
     }
   }

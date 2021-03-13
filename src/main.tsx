@@ -1,9 +1,7 @@
 import React from "react";
 import * as ReactDom from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import Title from "./Components/Navbar/Title";
 import UseRoutes from "./routes";
-import NavLinks from "./Components/Navbar/NavLinks";
 import Footer from "./Components/Footer/Footer";
 // import ErrorChecker from "./Components/ErrorChecker";
 
@@ -11,6 +9,7 @@ import Footer from "./Components/Footer/Footer";
 import "./style/styles.scss";
 import "./style/pages.scss";
 import "./style/footer.scss";
+import NavBar from "./Components/Navbar/Navbar";
 
 // * ISSUE
 // without this comment eslint dont want run 'App', because React is not defined
@@ -31,10 +30,7 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-          <div className="navbar_container">
-            <Title title="Game Market" />
-            <NavLinks />
-          </div>
+          <NavBar title="Game Store" />
           <div className="pages_container">{routes}</div>
           {/* <ErrorChecker error /> */}
           <Footer />
