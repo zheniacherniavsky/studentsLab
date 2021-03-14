@@ -1,9 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
+::-webkit-scrollbar {
+  width: 0px;
+}
+
 body {
   margin: 0;
   padding: 0;
   background: #080808;
   color: #e3e3e3;
   font-family: "Roboto", sans-serif;
+}
+
+button {
+  border: none;
+  font-family: "Roboto", sans-serif;
+  &:active,
+  &:hover {
+    outline: none;
+  }
 }

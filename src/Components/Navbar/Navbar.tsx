@@ -5,6 +5,7 @@ import "@/style/navbar.scss";
 
 function NavBar(props) {
   const [menuIsActive, toggleMenu] = useState(false);
+  const [productsDropDownIsActive, togglePDD] = useState(false);
 
   return (
     <div className="navbar_container">
@@ -15,16 +16,37 @@ function NavBar(props) {
         </button>
       </div>
       <div className="navbar_container__navlinks">
-        <ul className={menuIsActive ? "" : "hidden"}>
+        <ul className={menuIsActive ? "" : "hidden"} onMouseLeave={() => toggleMenu(!menuIsActive)}>
           <li>
             <NavLink exact to="/" activeClassName="active">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="products" activeClassName="active">
-              Products
-            </NavLink>
+            <button type="button" className="dropdownBtn" onClick={() => togglePDD(!productsDropDownIsActive)}>
+              Products {productsDropDownIsActive ? "▴" : "▾"}
+              {productsDropDownIsActive ? (
+                <ul className={productsDropDownIsActive ? "dropdown visible" : "dropdown"}>
+                  <li>
+                    <NavLink exact to="/pc" activeClassName="active">
+                      PC
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to="/playstationfive" activeClassName="active">
+                      Playstation 5
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to="/xboxone" activeClassName="active">
+                      XBox One
+                    </NavLink>
+                  </li>
+                </ul>
+              ) : (
+                ""
+              )}
+            </button>
           </li>
           <li>
             <NavLink to="about" activeClassName="active">

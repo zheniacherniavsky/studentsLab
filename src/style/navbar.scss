@@ -10,10 +10,9 @@
       color: $navbar_activetext;
       display: flex;
       margin-right: auto;
-      margin-left: 30px;
+      padding-left: 20px;
       font-weight: bold;
-      font-size: 25px;
-      box-sizing: border-box;
+      font-size: 24px;
 
       // Toggle menu btn
       .toggle_menu_btn {
@@ -24,36 +23,82 @@
     // Links
     &__navlinks {
       ul {
-        box-sizing: border-box;
         display: flex;
         margin: auto;
         li {
           color: $navbar_text;
           display: flex;
 
-          a {
+          .dropdownBtn {
+            background-color: $navbar_background;
+            font-size: 19px;
+          }
+
+          a,
+          .dropdownBtn {
             color: $navbar_text;
             text-decoration: none;
-            padding: 25px;
-            box-sizing: border-box;
-            transition: background 0.4s ease;
+            padding: 27px;
+            border-bottom: 5px solid $navbar_background;
 
             &.active {
               color: $navbar_activetext;
               font-weight: bold;
               border-bottom: 5px solid $navbar_tilebottom;
-              background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+              background-color: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
             }
 
             &:active,
             &:hover,
             &:focus {
+              cursor: pointer;
               text-decoration: none;
             }
 
             &:hover {
               color: $navbar_activetext;
-              background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+              border-bottom: 5px solid rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+              background-color: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+            }
+            &.active:hover {
+              border-bottom: 5px solid $navbar_tilebottom;
+            }
+          }
+
+          .dropdown {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+
+            li {
+              background-color: $navbar_background;
+              display: flex;
+              margin-left: -27px;
+
+              a {
+                width: 100%;
+              }
+
+              &.active {
+                color: $navbar_activetext;
+                font-weight: bold;
+                border-left: 5px solid $navbar_tilebottom;
+              }
+
+              &:active,
+              &:hover,
+              &:focus {
+                text-decoration: none;
+              }
+
+              &:hover {
+                color: $navbar_activetext;
+              }
+            }
+
+            li:first-child {
+              margin-top: 32px;
             }
           }
         }
@@ -100,28 +145,22 @@
         &.hidden {
           display: none;
         }
-
         margin: auto;
-        display: flex;
-        flex-direction: column;
         padding: 0;
         border-bottom: 2px solid $navbar_tilebottom;
 
         li {
-          display: flex;
-          margin: auto;
-          height: 50px;
-          width: 100%;
+          background: $navbar_background;
           box-sizing: content-box;
+          display: flex;
 
           a {
             text-decoration: none;
             color: $navbar_text;
             display: flex;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            padding-left: 20px;
+            width: 100vw;
+            flex-direction: column;
+            padding: 18px;
 
             &.active {
               color: $navbar_activetext;
@@ -134,6 +173,37 @@
               text-decoration: none;
               color: $navbar_activetext;
               background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
+            }
+
+            .dropdown {
+              display: flex;
+              flex-direction: column;
+              padding: 18px;
+              li {
+                display: flex;
+                margin-left: -25px;
+                a {
+                  display: flex;
+                  padding-left: 50px;
+                }
+
+                &.active {
+                  color: $navbar_activetext;
+                  font-weight: bold;
+                  border-left: 5px solid $navbar_tilebottom;
+                }
+
+                &:active,
+                &:hover,
+                &:focus {
+                  text-decoration: none;
+                }
+
+                &:hover {
+                  color: $navbar_activetext;
+                  border-left: 2px solid $navbar_tilebottom;
+                }
+              }
             }
           }
         }
