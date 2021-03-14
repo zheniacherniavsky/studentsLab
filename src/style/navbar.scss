@@ -154,7 +154,13 @@
           box-sizing: content-box;
           display: flex;
 
-          a {
+          .dropdownBtn {
+            background-color: $navbar_background;
+            font-size: 16px;
+          }
+
+          a,
+          .dropdownBtn {
             text-decoration: none;
             color: $navbar_text;
             display: flex;
