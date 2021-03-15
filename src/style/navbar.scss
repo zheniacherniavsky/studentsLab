@@ -1,6 +1,6 @@
 @media (min-width: 820px) {
   .navbar_container {
-    background-color: $navbar_background;
+    background-color: $lightblack;
     display: flex;
     font-size: 19px;
     cursor: default;
@@ -30,7 +30,7 @@
           display: flex;
 
           .dropdownBtn {
-            background-color: $navbar_background;
+            background-color: $lightblack;
             font-size: 19px;
           }
 
@@ -39,7 +39,7 @@
             color: $navbar_text;
             text-decoration: none;
             padding: 27px;
-            border-bottom: 5px solid $navbar_background;
+            border-bottom: 5px solid $lightblack;
 
             &.active {
               color: $navbar_activetext;
@@ -70,9 +70,10 @@
             display: flex;
             flex-direction: column;
             padding-left: 0;
+            z-index: 2;
 
             li {
-              background-color: $navbar_background;
+              background-color: $lightblack;
               display: flex;
               margin-left: -27px;
 
@@ -113,7 +114,7 @@
 
     // Navbar title
     &__title {
-      background-color: $navbar_background;
+      background-color: $lightblack;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -128,7 +129,7 @@
       }
       .toggle_menu_btn {
         border-radius: 10px;
-        background-color: $navbar_background;
+        background-color: $lightblack;
         border-width: 0;
         color: $navbar_activetext;
         margin: 0;
@@ -150,12 +151,12 @@
         border-bottom: 2px solid $navbar_tilebottom;
 
         li {
-          background: $navbar_background;
+          background: $lightblack;
           box-sizing: content-box;
           display: flex;
 
           .dropdownBtn {
-            background-color: $navbar_background;
+            background-color: $lightblack;
             font-size: 16px;
           }
 
@@ -185,29 +186,23 @@
               display: flex;
               flex-direction: column;
               padding: 18px;
+              padding-left: 5px;
+              z-index: 2;
               li {
                 display: flex;
                 margin-left: -25px;
-                a {
-                  display: flex;
-                  padding-left: 50px;
-                }
-
                 &.active {
                   color: $navbar_activetext;
                   font-weight: bold;
                   border-left: 5px solid $navbar_tilebottom;
-                }
 
-                &:active,
-                &:hover,
-                &:focus {
                   text-decoration: none;
                 }
-
                 &:hover {
                   color: $navbar_activetext;
                   border-left: 2px solid $navbar_tilebottom;
+
+                  text-decoration: none;
                 }
               }
             }

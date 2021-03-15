@@ -1,0 +1,12 @@
+{
+  "products": [
+    {
+      "name": "Battlefield 1",
+      "price": 3000
+    },
+    {
+      "name": "Fortnite",
+      "price": 3000
+    }
+  ]
+}

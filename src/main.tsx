@@ -6,15 +6,10 @@ import Footer from "./Components/Footer/Footer";
 // import ErrorChecker from "./Components/ErrorChecker";
 
 // Styles
-import "./style/styles.scss";
-import "./style/pages.scss";
-import "./style/footer.scss";
-import NavBar from "./Components/Navbar/Navbar";
+import "@/style/styles.scss";
+import "@/style/pages.scss";
 
-// * ISSUE
-// without this comment eslint dont want run 'App', because React is not defined
-// BUT if we define react, eslint tell us that React has been defined and you cant
-// define it again
+import NavBar from "./Components/Navbar/Navbar";
 
 class App extends React.Component {
   componentDidCatch(error) {

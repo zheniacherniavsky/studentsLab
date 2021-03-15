@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import AboutPage from "./Pages/AboutPage";
-import HomePage from "./Pages/HomePage";
+import HomePage from "./Pages/HomePage/Home";
 import SignUpPage from "./Pages/SignUpPage";
 import SignInPage from "./Pages/SignInPage";
 import PCPage from "./Pages/ProductsPages/PCPage";

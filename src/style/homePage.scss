@@ -1,0 +1,45 @@
+.homepage_container {
+  &__search {
+    display: flex;
+    justify-content: center;
+
+    input {
+      box-sizing: border-box;
+      margin-top: 20px;
+      width: 45vw;
+      height: 50px;
+      display: flex;
+      border-radius: 20px;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      padding-left: 10px;
+      background: $lightblack;
+      border: 1px solid $navbar_activetext;
+      color: $navbar_activetext;
+      font-size: 16px;
+    }
+
+    input:active,
+    input:focus {
+      border: 2px solid $navbar_activetext;
+      outline: none;
+    }
+  }
+  &__search_results {
+    &__loading {
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .homepage_container {
+    &__search {
+      input {
+        width: 90vw;
+      }
+    }
+  }
+}

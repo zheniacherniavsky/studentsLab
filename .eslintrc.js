@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: ["json", "prettier", "import", "@typescript-eslint"],
   rules: {
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }], // debounce should be listed.... error
     "@typescript-eslint/no-use-before-define": "error",
     "no-use-before-define": 0,
     "prettier/prettier": ["error"],
