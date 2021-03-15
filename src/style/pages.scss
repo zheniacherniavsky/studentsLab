@@ -1,23 +1,4 @@
 .pages_container {
-  min-height: 100vh;
-
-  .background_image {
-    position: fixed;
-    left: -300px;
-    top: -150px;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    img {
-      filter: brightness(0.7);
-    }
-  }
-}
-
-@media (max-width: 820px) {
-  .pages_container {
-    .background_image {
-      left: -800px;
-    }
-  }
+  min-height: 80vh;
+  background: $background url("../assets/images/homeBackgroundImage.jpg") no-repeat top center fixed;
 }

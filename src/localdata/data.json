@@ -1,12 +1,88 @@
 {
   "products": [
     {
-      "name": "Battlefield 1",
-      "price": 3000
+      "name": "Terraria",
+      "price": 2999,
+      "age": 12,
+      "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
+      "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg"
     },
     {
-      "name": "Fortnite",
-      "price": 3000
+      "name": "Battlefield 1",
+      "price": 2999,
+      "age": 18,
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg"
+    },
+    {
+      "name": "Terraria",
+      "price": 2999,
+      "age": 12,
+      "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
+      "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg"
+    },
+    {
+      "name": "Battlefield 1",
+      "price": 2999,
+      "age": 18,
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg"
+    },
+    {
+      "name": "Terraria",
+      "price": 2999,
+      "age": 12,
+      "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
+      "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg"
+    },
+    {
+      "name": "Battlefield 1",
+      "price": 2999,
+      "age": 18,
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg"
+    },
+    {
+      "name": "Terraria",
+      "price": 2999,
+      "age": 12,
+      "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
+      "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg"
+    },
+    {
+      "name": "Battlefield 1",
+      "price": 2999,
+      "age": 18,
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg"
+    },
+    {
+      "name": "Terraria",
+      "price": 2999,
+      "age": 12,
+      "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
+      "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg"
+    },
+    {
+      "name": "Battlefield 1",
+      "price": 2999,
+      "age": 18,
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg"
+    },
+    {
+      "name": "Terraria",
+      "price": 2999,
+      "age": 12,
+      "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
+      "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg"
+    },
+    {
+      "name": "Battlefield 1",
+      "price": 2999,
+      "age": 18,
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg"
     }
   ]
 }

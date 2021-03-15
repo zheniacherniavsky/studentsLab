@@ -26,10 +26,29 @@
     }
   }
   &__search_results {
+    padding: 20px;
     &__loading {
       display: flex;
       justify-content: center;
       z-index: 100;
+    }
+    &__title {
+      cursor: default;
+      margin: 20px;
+      padding: 10px 20px;
+      width: 300px;
+      border-bottom: 1px solid $basicColor;
+    }
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-direction: inline;
+
+      .card_container {
+        margin: 31px;
+      }
     }
   }
 }

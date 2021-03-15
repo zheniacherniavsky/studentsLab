@@ -1,18 +1,37 @@
 import { useState } from "react";
-import backgroundImage from "@/assets/images/homeBackgroundImage.jpg";
 import debounce from "debounce";
 import getData from "@/api/search/searchData";
 import loadingImage from "@/assets/images/loading.svg";
+import Card from "./Card";
 
 import "@/style/homePage.scss";
 
-const Card = ({ product }) => (
-  <>
-    <div>
-      <h1>{product.name}</h1>
-    </div>
-  </>
-);
+const Loading = ({ hook }) => {
+  if (hook) {
+    return (
+      <div className="homepage_container__search_results__loading">
+        <img src={loadingImage} alt="loading" />
+      </div>
+    );
+  }
+  return <></>;
+};
+
+const SearchResults = ({ data, spinner }) => {
+  if (data.length !== 0)
+    return (
+      <div className="homepage_container__search_results">
+        <h1 className="homepage_container__search_results__title">Search results</h1>
+        <Loading hook={spinner} />
+        <div className="homepage_container__search_results__content">
+          {data.map((item) => (
+            <Card product={item} />
+          ))}
+        </div>
+      </div>
+    );
+  return <></>;
+};
 
 const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
@@ -20,40 +39,20 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="background_image">
-        <img src={backgroundImage} alt="" />
-      </div>
       <div className="homepage_container">
         <div className="homepage_container__search">
           <input
             onChange={debounce(async () => {
-              updateLoading(true); // refactor this
+              updateLoading(true);
               updateSearchData(await getData());
               updateLoading(false);
-            }, 200)}
+            }, 300)}
             type="text"
             placeholder="Search"
             id="search_input"
           />
         </div>
-        <div className="homepage_container__search_results">
-          {loading ? (
-            <div className="homepage_container__search_results__loading">
-              <img src={loadingImage} alt="loading" />
-            </div>
-          ) : (
-            ""
-          )}
-          {searchData !== [] ? (
-            <div className="homepage_container__search_results__content">
-              {searchData.map((item) => (
-                <Card product={item} />
-              ))}
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
+        <SearchResults data={searchData} spinner={loading} />
       </div>
     </>
   );
