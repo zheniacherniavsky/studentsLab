@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
-import "@/style/navbar.scss";
+import "@/Components/navbar.scss";
 
 function NavBar(props) {
   const [menuIsActive, toggleMenu] = useState(false);

@@ -12,7 +12,7 @@
       margin-right: auto;
       padding-left: 20px;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 20px;
 
       // Toggle menu btn
       .toggle_menu_btn {
@@ -38,12 +38,11 @@
           .dropdownBtn {
             color: $navbar_text;
             text-decoration: none;
-            padding: 27px;
+            padding: 20px;
             border-bottom: 5px solid $lightblack;
 
             &.active {
               color: $navbar_activetext;
-              font-weight: bold;
               border-bottom: 5px solid $navbar_tilebottom;
               background-color: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
             }
@@ -99,7 +98,7 @@
             }
 
             li:first-child {
-              margin-top: 32px;
+              margin-top: 25px;
             }
           }
         }
@@ -171,7 +170,6 @@
 
             &.active {
               color: $navbar_activetext;
-              font-weight: bold;
               border-left: 5px solid $navbar_tilebottom;
               background: rgba($color: $navbar_tilecolor, $alpha: $navbar_tiletime);
             }

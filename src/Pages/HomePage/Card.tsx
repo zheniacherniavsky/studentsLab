@@ -1,4 +1,4 @@
-import "@/style/card.scss";
+import "@/Pages/HomePage/card.scss";
 
 const Card = ({ product: p }) => (
   <div className="card_container">
@@ -8,7 +8,7 @@ const Card = ({ product: p }) => (
       <div className="card_container__frontinfo">
         <p className="card_container__frontinfo_title">{p.name}</p>
         <p className="card_container__frontinfo_age">
-          Age: <span>{p.age}+</span>
+          <span>{p.age}+</span>
         </p>
       </div>
     </div>

@@ -1,7 +1,9 @@
 .homepage_container {
   &__search {
+    position: relative;
     display: flex;
     justify-content: center;
+    padding: 0 10px;
 
     input {
       box-sizing: border-box;
@@ -24,14 +26,18 @@
       border: 2px solid $navbar_activetext;
       outline: none;
     }
+
+    img {
+      width: 95px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      top: 80px;
+    }
   }
   &__search_results {
     padding: 20px;
-    &__loading {
-      display: flex;
-      justify-content: center;
-      z-index: 100;
-    }
+
     &__title {
       cursor: default;
       margin: 20px;

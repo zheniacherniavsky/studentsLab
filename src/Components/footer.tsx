@@ -2,7 +2,7 @@ import rockstarLogo from "@/assets/images/rockstarGamesLogo.svg";
 import epicgamesLogo from "@/assets/images/epicGamesLogo.svg";
 import riotGamesLogo from "@/assets/images/riotGames.svg";
 
-import "@/style/footer.scss";
+import "@/Components/footer.scss";
 
 function Footer() {
   return (

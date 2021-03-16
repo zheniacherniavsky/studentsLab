@@ -2,14 +2,13 @@ import React from "react";
 import * as ReactDom from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import UseRoutes from "./routes";
-import Footer from "./Components/Footer/Footer";
+import Footer from "./Components/footer";
+import NavBar from "./Components/navbar";
 // import ErrorChecker from "./Components/ErrorChecker";
 
 // Styles
-import "@/style/styles.scss";
-import "@/style/pages.scss";
-
-import NavBar from "./Components/Navbar/Navbar";
+import "@/styles/styles.scss";
+import "@/Pages/pages.scss";
 
 class App extends React.Component {
   componentDidCatch(error) {

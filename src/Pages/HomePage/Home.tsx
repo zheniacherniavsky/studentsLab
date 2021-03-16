@@ -1,28 +1,24 @@
 import { useState } from "react";
-import debounce from "debounce";
+// import debounce from "debounce";
+import debounce from "@/api/debounse";
 import getData from "@/api/search/searchData";
 import loadingImage from "@/assets/images/loading.svg";
-import Card from "./Card";
+import Card from "./card";
 
-import "@/style/homePage.scss";
+import "@/Pages/HomePage/homePage.scss";
 
 const Loading = ({ hook }) => {
   if (hook) {
-    return (
-      <div className="homepage_container__search_results__loading">
-        <img src={loadingImage} alt="loading" />
-      </div>
-    );
+    return <img src={loadingImage} alt="loading" />;
   }
   return <></>;
 };
 
-const SearchResults = ({ data, spinner }) => {
+const SearchResults = ({ data }) => {
   if (data.length !== 0)
     return (
       <div className="homepage_container__search_results">
         <h1 className="homepage_container__search_results__title">Search results</h1>
-        <Loading hook={spinner} />
         <div className="homepage_container__search_results__content">
           {data.map((item) => (
             <Card product={item} />
@@ -41,6 +37,7 @@ const HomePage = () => {
     <>
       <div className="homepage_container">
         <div className="homepage_container__search">
+          <Loading hook={loading} />
           <input
             onChange={debounce(async () => {
               updateLoading(true);
@@ -52,7 +49,7 @@ const HomePage = () => {
             id="search_input"
           />
         </div>
-        <SearchResults data={searchData} spinner={loading} />
+        <SearchResults data={searchData} />
       </div>
     </>
   );
