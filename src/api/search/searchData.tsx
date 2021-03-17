@@ -1,6 +1,4 @@
-class Value {
-  name: string;
-}
+import Product from "@/api/Product";
 
 async function getData() {
   // i will find a better way to do it
@@ -12,7 +10,7 @@ async function getData() {
   const json = await result.json();
   const products = Object.values(json);
 
-  return products.filter((value) => (value as Value).name.toLowerCase().includes(inputValue.toLowerCase()));
+  return products.filter((value: Product) => value.name.toLowerCase().includes(inputValue.toLowerCase()));
 }
 
 export default getData;
