@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 // import debounce from "debounce";
 import debounce from "@/api/debounse";
 import getData from "@/api/search/searchData";
+import getRecentlyAddedProducts from "@/api/getTopProducts";
 import loadingImage from "@/assets/images/loading.svg";
 
 // categories
@@ -35,6 +37,21 @@ const SearchResults = ({ data }) => {
   return <></>;
 };
 
+const TopProducts = ({ data, count }) => {
+  if (data.length !== 0)
+    return (
+      <div className="homepage_container__search_results">
+        <h1 className="homepage_container__search_results__title">Top {count} products</h1>
+        <div className="homepage_container__search_results__content">
+          {data.map((item) => (
+            <Card product={item} />
+          ))}
+        </div>
+      </div>
+    );
+  return <></>;
+};
+
 const Category = ({ name, image }) => (
   <>
     <div className="category">
@@ -49,9 +66,15 @@ const Categories = () => (
     <div className="categories_container">
       <h1>Categories</h1>
       <div className="categories_container__tiles">
-        <Category name="PC" image={pcImage} />
-        <Category name="Playstation 5" image={playstationImage} />
-        <Category name="XBox One" image={xboxImage} />
+        <Link to="/pc">
+          <Category name="PC" image={pcImage} />
+        </Link>
+        <Link to="/playstationfive">
+          <Category name="Playstation 5" image={playstationImage} />
+        </Link>
+        <Link to="/xboxone">
+          <Category name="XBox One" image={xboxImage} />
+        </Link>
       </div>
     </div>
   </>
@@ -59,7 +82,16 @@ const Categories = () => (
 
 const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
+  const [topProducts, loadTopProducts] = useState([]);
   const [loading, updateLoading] = useState(false);
+
+  const topProductsCount = 3; // how much top product we want see on home page
+
+  useEffect(() => {
+    const preload = async () => loadTopProducts(await getRecentlyAddedProducts(topProductsCount));
+
+    preload();
+  }, []);
 
   return (
     <>
@@ -79,6 +111,7 @@ const HomePage = () => {
         </div>
         <SearchResults data={searchData} />
         <Categories />
+        <TopProducts data={topProducts} count={topProductsCount} />
       </div>
     </>
   );
