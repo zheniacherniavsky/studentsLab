@@ -3,9 +3,15 @@ import { useState } from "react";
 import debounce from "@/api/debounse";
 import getData from "@/api/search/searchData";
 import loadingImage from "@/assets/images/loading.svg";
+
+// categories
+import pcImage from "@/assets/images/Categories/computer.svg";
+import playstationImage from "@/assets/images/Categories/playstation.svg";
+import xboxImage from "@/assets/images/Categories/xbox.svg";
 import Card from "./card";
 
 import "@/Pages/HomePage/homePage.scss";
+import "@/Pages/HomePage/categories.scss";
 
 const Loading = ({ hook }) => {
   if (hook) {
@@ -29,6 +35,28 @@ const SearchResults = ({ data }) => {
   return <></>;
 };
 
+const Category = ({ name, image }) => (
+  <>
+    <div className="category">
+      <img src={image} alt="" />
+      <p>{name}</p>
+    </div>
+  </>
+);
+
+const Categories = () => (
+  <>
+    <div className="categories_container">
+      <h1>Categories</h1>
+      <div className="categories_container__tiles">
+        <Category name="PC" image={pcImage} />
+        <Category name="Playstation 5" image={playstationImage} />
+        <Category name="XBox One" image={xboxImage} />
+      </div>
+    </div>
+  </>
+);
+
 const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
   const [loading, updateLoading] = useState(false);
@@ -50,6 +78,7 @@ const HomePage = () => {
           />
         </div>
         <SearchResults data={searchData} />
+        <Categories />
       </div>
     </>
   );
