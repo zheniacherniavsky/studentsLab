@@ -20,3 +20,12 @@ button {
     outline: none;
   }
 }
+
+a {
+  text-decoration: none;
+  color: $navbar_text;
+
+  &:hover {
+    color: $navbar_activetext;
+  }
+}
