@@ -1,4 +1,4 @@
-import "@/Pages/HomePage/card.scss";
+import "@/Components/Cards/card.scss";
 
 const Card = ({ product: p }) => (
   <div className="card_container">

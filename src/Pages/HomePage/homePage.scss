@@ -35,28 +35,6 @@
       top: 80px;
     }
   }
-  &__search_results {
-    padding: 20px;
-
-    &__title {
-      cursor: default;
-      margin: 20px;
-      padding: 10px 20px;
-      width: 94%;
-      border-bottom: 1px solid $basicColor;
-    }
-    &__content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      flex-direction: inline;
-
-      .card_container {
-        margin: 31px;
-      }
-    }
-  }
 }
 
 @media (max-width: 820px) {
