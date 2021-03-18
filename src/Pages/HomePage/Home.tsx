@@ -10,7 +10,8 @@ import loadingImage from "@/assets/images/loading.svg";
 import pcImage from "@/assets/images/Categories/computer.svg";
 import playstationImage from "@/assets/images/Categories/playstation.svg";
 import xboxImage from "@/assets/images/Categories/xbox.svg";
-import Card from "./card";
+import CardsContainer from "@/Components/Cards/cardsContainer";
+// import Card from "@/Components/Cards/card";
 
 import "@/Pages/HomePage/homePage.scss";
 import "@/Pages/HomePage/categories.scss";
@@ -19,36 +20,6 @@ const Loading = ({ hook }) => {
   if (hook) {
     return <img src={loadingImage} alt="loading" />;
   }
-  return <></>;
-};
-
-const SearchResults = ({ data }) => {
-  if (data.length !== 0)
-    return (
-      <div className="homepage_container__search_results">
-        <h1 className="homepage_container__search_results__title">Search results</h1>
-        <div className="homepage_container__search_results__content">
-          {data.map((item) => (
-            <Card product={item} />
-          ))}
-        </div>
-      </div>
-    );
-  return <></>;
-};
-
-const TopProducts = ({ data, count }) => {
-  if (data.length !== 0)
-    return (
-      <div className="homepage_container__search_results">
-        <h1 className="homepage_container__search_results__title">Top {count} products</h1>
-        <div className="homepage_container__search_results__content">
-          {data.map((item) => (
-            <Card product={item} />
-          ))}
-        </div>
-      </div>
-    );
   return <></>;
 };
 
@@ -85,7 +56,7 @@ const HomePage = () => {
   const [topProducts, loadTopProducts] = useState([]);
   const [loading, updateLoading] = useState(false);
 
-  const topProductsCount = 3; // how much top product we want see on home page
+  const topProductsCount = 5; // how much top product we want see on home page
 
   useEffect(() => {
     const preload = async () => loadTopProducts(await getRecentlyAddedProducts(topProductsCount));
@@ -109,9 +80,9 @@ const HomePage = () => {
             id="search_input"
           />
         </div>
-        <SearchResults data={searchData} />
+        <CardsContainer type="search" data={searchData} />
         <Categories />
-        <TopProducts data={topProducts} count={topProductsCount} />
+        <CardsContainer type="top" data={topProducts} count={topProductsCount} />
       </div>
     </>
   );
