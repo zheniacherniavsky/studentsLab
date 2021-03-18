@@ -1,11 +1,11 @@
 import { Switch, Route, Redirect } from "react-router-dom";
-import AboutPage from "./Pages/aboutPage";
-import HomePage from "./Pages/HomePage/home";
-import SignUpPage from "./Pages/signUpPage";
-import SignInPage from "./Pages/signInPage";
-import PCPage from "./Pages/ProductsPages/pcPage";
-import Playstation5Page from "./Pages/ProductsPages/playstation5Page";
-import XBoxOnePage from "./Pages/ProductsPages/xBoxOnePage";
+import AboutPage from "@/Pages/aboutPage";
+import HomePage from "@/Pages/HomePage/home";
+import SignUpPage from "@/Pages/signUpPage";
+import SignInPage from "@/Pages/signInPage";
+import PCPage from "@/Pages/ProductsPages/pcPage";
+import Playstation5Page from "@/Pages/ProductsPages/playstation5Page";
+import XBoxOnePage from "@/Pages/ProductsPages/xBoxOnePage";
 
 function UseRoutes() {
   return (
