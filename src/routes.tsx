@@ -9,30 +9,32 @@ import XBoxOnePage from "@/Pages/ProductsPages/xBoxOnePage";
 
 function UseRoutes() {
   return (
-    <Switch>
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
-      <Route path="/about" exact>
-        <AboutPage />
-      </Route>
-      <Route path="/pc" exact>
-        <PCPage />
-      </Route>
-      <Route path="/playstationfive" exact>
-        <Playstation5Page />
-      </Route>
-      <Route path="/xboxone" exact>
-        <XBoxOnePage />
-      </Route>
-      <Route path="/signup" exact>
-        <SignUpPage />
-      </Route>
-      <Route path="/signin" exact>
-        <SignInPage />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
+    <>
+      <Switch>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/about" exact>
+          <AboutPage />
+        </Route>
+        <Route path="/pc" exact>
+          <PCPage />
+        </Route>
+        <Route path="/playstationfive" exact>
+          <Playstation5Page />
+        </Route>
+        <Route path="/xboxone" exact>
+          <XBoxOnePage />
+        </Route>
+        <Route path="/signup" exact>
+          <SignUpPage />
+        </Route>
+        <Route path="/signin" exact>
+          <SignInPage />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    </>
   );
 }
 

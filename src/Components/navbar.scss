@@ -29,13 +29,13 @@
           color: $navbar_text;
           display: flex;
 
-          .dropdownBtn {
+          button {
             background-color: $lightblack;
             font-size: 19px;
           }
 
           a,
-          .dropdownBtn {
+          button {
             color: $navbar_text;
             text-decoration: none;
             padding: 20px;

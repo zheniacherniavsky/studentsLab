@@ -79,6 +79,7 @@
       align-items: center;
       background: $lightblack;
       color: $basicColor;
+      font-weight: bold;
       border: 1px solid $navbar_tilebottom;
       border-radius: 20px;
 
@@ -95,7 +96,6 @@
 
       &:hover {
         background-color: $background;
-        font-weight: bold;
         box-shadow: 0px 0px 5px $navbar_tilebottom;
       }
     }
