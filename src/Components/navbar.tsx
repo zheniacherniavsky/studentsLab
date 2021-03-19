@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 
 import "@/Components/navbar.scss";
@@ -6,6 +6,12 @@ import "@/Components/navbar.scss";
 const NavBar = ({ title, modalToggle, username, setUsername }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
+
+  const history = useHistory();
+
+  const redirect = (path) => {
+    history.push(path);
+  };
 
   return (
     <>
@@ -58,7 +64,13 @@ const NavBar = ({ title, modalToggle, username, setUsername }) => {
                   <button type="button">{username}</button>
                 </li>
                 <li>
-                  <button type="button" onClick={() => setUsername("")}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUsername("");
+                      redirect("/");
+                    }}
+                  >
                     Log out
                   </button>
                 </li>
