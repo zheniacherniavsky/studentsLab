@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "@/Components/Modal/modal.scss";
 
+import closeImg from "@/assets/images/close.svg";
+
 class Modal extends React.Component<any, any> {
   constructor(props) {
     super(props);
@@ -15,9 +17,9 @@ class Modal extends React.Component<any, any> {
 
   render() {
     return ReactDOM.createPortal(
-      <div className="modal">
-        <button type="button" className="modal__close_button" onClick={() => this.props.toggleOff()}>
-          Закрыть
+      <div className="modal_window">
+        <button type="button" className="modal_window__close_button" onClick={() => this.props.toggleOff()}>
+          <img src={closeImg} alt="X" />
         </button>
         {this.props.children}
       </div>,
