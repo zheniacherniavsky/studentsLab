@@ -27,3 +27,29 @@ class Modal extends React.Component<any, any> {
 }
 
 export default Modal;
+
+//
+//  future plans : make modals with React.context
+
+// const Modal = ({ modalButtonElement = null, children }) => {
+//   const [active, setActive] = useState(false);
+
+//   return (
+//     <>
+//       <button type="button" onClick={() => setActive(true)}>
+//         {modalButtonElement}
+//       </button>
+
+//       {active && (
+//         <div>
+//           <div>
+//             <button type="button" onClick={() => setActive(false)}>
+//               X
+//             </button>
+//           </div>
+//           <div>{children}</div>
+//         </div>
+//       )}
+//     </>
+//   );
+// }

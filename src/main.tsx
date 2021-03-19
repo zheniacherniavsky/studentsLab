@@ -4,12 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import UseRoutes from "./routes";
 import Footer from "./Components/footer";
 import NavBar from "./Components/navbar";
+import Modals from "./Components/Modal/modals";
 // import ErrorChecker from "./Components/ErrorChecker";
 
 // Styles
 import "@/styles/styles.scss";
 import "@/Pages/pages.scss";
-import Modal from "./Components/Modal/modal";
 
 interface IMyComponentState {
   isModalOpen: boolean;
@@ -47,16 +47,11 @@ class App extends React.Component<any, IMyComponentState> {
     const routes = UseRoutes();
     return (
       <>
-        {this.state.isModalOpen && this.state.modalType === "signin" && (
-          <Modal toggleOff={this.toggleOffModal}>
-            <h1>Sign in page</h1>
-          </Modal>
-        )}
-        {this.state.isModalOpen && this.state.modalType === "signup" && (
-          <Modal toggleOff={this.toggleOffModal}>
-            <h1>Sign up page</h1>
-          </Modal>
-        )}
+        <Modals
+          isModalOpen={this.state.isModalOpen}
+          modalType={this.state.modalType}
+          toggleOffModal={this.toggleOffModal}
+        />
         <BrowserRouter>
           <NavBar title="Game Store" modalToggle={this.toggleOnModal} />
           <div className="pages_container">{routes}</div>
