@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import "@/Components/navbar.scss";
 
-const NavBar = ({ title, modalToggle }) => {
+const NavBar = ({ title, modalToggle, username, setUsername }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
@@ -52,16 +52,31 @@ const NavBar = ({ title, modalToggle }) => {
                 About
               </NavLink>
             </li>
-            <li>
-              <button type="button" className="dropdownBtn" onClick={() => modalToggle("signin")}>
-                Sign In
-              </button>
-            </li>
-            <li>
-              <button type="button" className="dropdownBtn" onClick={() => modalToggle("signup")}>
-                Sign Up
-              </button>
-            </li>
+            {username ? (
+              <>
+                <li>
+                  <button type="button">{username}</button>
+                </li>
+                <li>
+                  <button type="button" onClick={() => setUsername("")}>
+                    Log out
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button type="button" onClick={() => modalToggle("signin")}>
+                    Sign In
+                  </button>
+                </li>
+                <li>
+                  <button type="button" onClick={() => modalToggle("signup")}>
+                    Sign Up
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

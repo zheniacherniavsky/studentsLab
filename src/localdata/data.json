@@ -1,11 +1,22 @@
 {
+  "users": [
+    {
+      "login": "zhenia",
+      "password": "123123",
+      "id": 1
+    }
+  ],
   "products": [
     {
       "name": "Terraria",
       "price": 2999,
       "age": 12,
       "category": "Action",
-      "platform": ["pc", "ps5", "xbox1"],
+      "platform": [
+        "pc",
+        "ps5",
+        "xbox1"
+      ],
       "shortdescription": "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites found on the Super NES.",
       "image": "https://m.media-amazon.com/images/M/MV5BYWU2YmJhZTktNTcxYy00ZmYwLTg2MmQtM2Q5MTZmZjRiNjRkXkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg",
       "date": "17 March 2021"
@@ -15,7 +26,11 @@
       "price": 2999,
       "age": 18,
       "category": "Shooter",
-      "platform": ["pc", "ps5", "xbox1"],
+      "platform": [
+        "pc",
+        "ps5",
+        "xbox1"
+      ],
       "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
       "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg",
       "date": "7 March 2021"
@@ -25,7 +40,11 @@
       "price": 2999,
       "age": 14,
       "category": "RPG",
-      "platform": ["pc", "ps5", "xbox1"],
+      "platform": [
+        "pc",
+        "ps5",
+        "xbox1"
+      ],
       "shortdescription": "Genshin Impact is an action role-playing game developed and published by miHoYo. The game features an open-world environment and action-based battle system using elemental magic and character-switching, and uses gacha game monetization for players to obtain new characters, weapons, and other resources.",
       "image": "https://media.kg-portal.ru/games/g/genshinimpact/posters/genshinimpact_1.jpg",
       "date": "11 March 2021"
@@ -35,7 +54,11 @@
       "price": 2999,
       "age": 3,
       "category": "RPG",
-      "platform": ["pc", "ps5", "xbox1"],
+      "platform": [
+        "pc",
+        "ps5",
+        "xbox1"
+      ],
       "shortdescription": "Minecraft is a video game in which players create and break apart various kinds of blocks in three-dimensional worlds. The game's two main modes are Survival and Creative. In Survival, players must find their own building supplies and food. They also interact with blocklike mobs, or moving creatures.",
       "image": "https://cdn1.ozone.ru/s3/multimedia-j/c500/6021462751.jpg",
       "date": "17 March 2021"
@@ -45,7 +68,10 @@
       "price": 2999,
       "age": 12,
       "category": "Simulator",
-      "platform": ["pc", "ps5"],
+      "platform": [
+        "pc",
+        "ps5"
+      ],
       "shortdescription": "The Sims 4 is a life simulation game, similar to its predecessors. Players create a Sim character and control their life to explore different personalities which change the way the game plays out. Sims can multitask.",
       "image": "https://gamefans.ru/uploads/posts/2020-06/1592290046_the-sims-4-poster.jpeg",
       "date": "11 March 2021"
@@ -55,7 +81,9 @@
       "price": 2999,
       "age": 18,
       "category": "Simulator",
-      "platform": ["pc"],
+      "platform": [
+        "pc"
+      ],
       "shortdescription": "The Sims 4 is a life simulation game, similar to its predecessors. Players create a Sim character and control their life to explore different personalities which change the way the game plays out. Sims can multitask.",
       "image": "https://i.pinimg.com/originals/03/cc/7c/03cc7cc933ae62ceceea8880fa860d25.jpg",
       "date": "11 March 2021"
@@ -65,7 +93,11 @@
       "price": 2999,
       "age": 18,
       "category": "Simulator",
-      "platform": ["pc", "ps5", "xbox1"],
+      "platform": [
+        "pc",
+        "ps5",
+        "xbox1"
+      ],
       "shortdescription": "Grand Theft Auto V is an action-adventure game played from either a third-person or first-person perspective. Players complete missions—linear scenarios with set objectives—to progress through the story. Outside of the missions, players may freely roam the open world.",
       "image": "https://static.gabestore.ru/product/bzWYflpfTNj2oa93U4TuZdF44hDjW2Pb.jpg",
       "date": "11 March 2021"

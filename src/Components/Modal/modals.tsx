@@ -1,6 +1,8 @@
 import Modal from "@/Components/Modal/modal";
+import signin from "@/api/auth/singin";
+import signup from "@/api/auth/signup";
 
-const Modals = ({ isModalOpen, modalType, toggleOffModal }) => (
+const Modals = ({ isModalOpen, modalType, toggleOffModal, setNickname }) => (
   <>
     {isModalOpen && modalType === "signin" && (
       <Modal toggleOff={toggleOffModal}>
@@ -8,13 +10,24 @@ const Modals = ({ isModalOpen, modalType, toggleOffModal }) => (
           <h1>Authorization</h1>
           <div className="modal_container__info">
             <p>Login</p>
-            <input type="login" placeholder="" />
+            <input id="signin_login" type="login" placeholder="" />
           </div>
           <div className="modal_container__info">
             <p>Password</p>
-            <input type="password" placeholder="" />
+            <input id="signin_password" type="password" placeholder="" />
           </div>
-          <button type="button">Sign In</button>
+          <button
+            type="button"
+            onClick={async () => {
+              const response = await signin();
+              if (response.username) {
+                setNickname(response.username);
+                toggleOffModal();
+              } else alert(response.errorMessage);
+            }}
+          >
+            Sign In
+          </button>
         </div>
       </Modal>
     )}
@@ -23,22 +36,29 @@ const Modals = ({ isModalOpen, modalType, toggleOffModal }) => (
         <div className="modal_container">
           <h1>Registration</h1>
           <div className="modal_container__info">
-            <p>Email</p>
-            <input type="email" placeholder="example@exam.ple" />
-          </div>
-          <div className="modal_container__info">
             <p>Login</p>
-            <input type="login" placeholder="Your future nickname" />
+            <input id="signup_login" type="login" placeholder="Your future nickname" />
           </div>
           <div className="modal_container__info">
             <p>Password</p>
-            <input type="password" placeholder="" />
+            <input id="signup_password" type="password" placeholder="" />
           </div>
           <div className="modal_container__info">
             <p>Confirm password</p>
-            <input type="password" placeholder="" />
+            <input id="signup_confirmPassword" type="password" placeholder="" />
           </div>
-          <button type="button">Sign Up</button>
+          <button
+            type="button"
+            onClick={async () => {
+              const response = await signup();
+              if (response.username) {
+                setNickname(response.username);
+                toggleOffModal();
+              } else alert(`${response.response} - ${response.errorMessage}`);
+            }}
+          >
+            Sign Up
+          </button>
         </div>
       </Modal>
     )}

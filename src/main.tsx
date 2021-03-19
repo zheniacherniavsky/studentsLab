@@ -14,6 +14,7 @@ import "@/Pages/pages.scss";
 interface IMyComponentState {
   isModalOpen: boolean;
   modalType: string;
+  username: string;
 }
 
 class App extends React.Component<any, IMyComponentState> {
@@ -22,6 +23,7 @@ class App extends React.Component<any, IMyComponentState> {
     this.state = {
       isModalOpen: false,
       modalType: "",
+      username: "",
     };
   }
 
@@ -32,6 +34,10 @@ class App extends React.Component<any, IMyComponentState> {
     console.error("UI ERROR:", error); // how i remember, console.error is disabled in configurations
     window.location.assign("/");
   }
+
+  setNickname = (nick) => {
+    this.setState({ username: nick });
+  };
 
   toggleOnModal = (type) => {
     this.setState({ modalType: type });
@@ -51,9 +57,15 @@ class App extends React.Component<any, IMyComponentState> {
           isModalOpen={this.state.isModalOpen}
           modalType={this.state.modalType}
           toggleOffModal={this.toggleOffModal}
+          setNickname={this.setNickname}
         />
         <BrowserRouter>
-          <NavBar title="Game Store" modalToggle={this.toggleOnModal} />
+          <NavBar
+            title="Game Store"
+            modalToggle={this.toggleOnModal}
+            username={this.state.username}
+            setUsername={this.setNickname}
+          />
           <div className="pages_container">{routes}</div>
           {/* <ErrorChecker error /> */}
           <Footer />
