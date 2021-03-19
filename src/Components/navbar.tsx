@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import "@/Components/navbar.scss";
 
-function NavBar({ title, modalToggle }) {
+const NavBar = ({ title, modalToggle }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
@@ -26,7 +26,7 @@ function NavBar({ title, modalToggle }) {
             <li>
               <button type="button" className="dropdownBtn" onClick={() => togglePDD(!productsDropDownIsActive)}>
                 Products {productsDropDownIsActive ? "▴" : "▾"}
-                {productsDropDownIsActive ? (
+                {productsDropDownIsActive && (
                   <ul className={productsDropDownIsActive ? "dropdown visible" : "dropdown"}>
                     <li>
                       <NavLink exact to="/pc" activeClassName="active">
@@ -44,8 +44,6 @@ function NavBar({ title, modalToggle }) {
                       </NavLink>
                     </li>
                   </ul>
-                ) : (
-                  ""
                 )}
               </button>
             </li>
@@ -69,6 +67,6 @@ function NavBar({ title, modalToggle }) {
       </div>
     </>
   );
-}
+};
 
 export default NavBar;
