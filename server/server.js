@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+
 const app = express();
 const port = 3000;
 
@@ -16,45 +17,52 @@ app
     try {
       const { login, password } = req.body;
 
-      let data = fs.readFileSync("./server/accounts.json");
-      let accounts = JSON.parse(data)["accounts"];
+      const data = fs.readFileSync("./server/accounts.json");
+      const { accounts } = JSON.parse(data);
+      let currentUser;
 
-      for (let user of accounts) {
-        if (user.login == login) {
-          const isMatch = await bcrypt.compare(password, user.password);
-          if (isMatch) return res.send(200);
-          else return res.send(400);
+      /* eslint-disable-next-line */
+      for (const user of accounts) {
+        if (user.login === login) {
+          currentUser = user;
+          break;
         }
       }
 
-      res.send(400);
+      if (currentUser) {
+        const isMatch = await bcrypt.compare(password, currentUser.password);
+        if (isMatch) return res.send(200);
+      }
+
+      return res.status(400);
     } catch (e) {
-      res.status(500).json({ message: "Something went wrong. Try again!" });
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
   })
 
   .put("/register", async (req, res) => {
     try {
       const { login, password } = req.body;
+      res.setHeader("Content-Type", "application/json");
 
       let data = fs.readFileSync("./server/accounts.json");
-      let accounts = JSON.parse(data)["accounts"];
-      for (let user of accounts) {
-        if (user.login == login) {
-          res.setHeader("Content-Type", "application/json");
+      const { accounts } = JSON.parse(data);
+      /* eslint-disable-next-line */
+      for (const user of accounts) {
+        if (user.login === login) {
           return res.status(400).json({ message: "A user with this login already exists!" });
         }
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      accounts.push({ login: login, password: hashedPassword });
-      data = JSON.stringify({ accounts: accounts });
+      accounts.push({ login, password: hashedPassword });
+      data = JSON.stringify({ accounts });
 
       fs.writeFileSync("./server/accounts.json", data);
-      res.send(201);
+      return res.status(201).json({ message: "Account has been created." });
     } catch (e) {
-      res.status(500).json({ message: "Something went wrong. Try again!" });
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
   });
 
