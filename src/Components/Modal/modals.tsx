@@ -2,8 +2,11 @@ import Modal from "@/Components/Modal/modal";
 import signin from "@/api/auth/singin";
 import signup from "@/api/auth/signup";
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import Context from "@/api/context";
 
-const Modals = ({ isModalOpen, modalType, toggleOffModal, setNickname, redirectPath = "/" }) => {
+const Modals = ({ redirectPath = "/" }) => {
+  const { isModalOpen, modalType, toggleOffModal, setNickname } = useContext(Context);
   const history = useHistory();
 
   const redirect = (path) => {

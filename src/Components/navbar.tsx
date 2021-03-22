@@ -1,12 +1,14 @@
 import { NavLink, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import "@/Components/navbar.scss";
+import Context from "@/api/context";
 
-const NavBar = ({ title, modalToggle, username, setUsername }) => {
+const NavBar = ({ title }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
+  const { toggleOnModal, username, setUsername } = useContext(Context);
   const history = useHistory();
 
   const redirect = (path) => {
@@ -78,12 +80,12 @@ const NavBar = ({ title, modalToggle, username, setUsername }) => {
             ) : (
               <>
                 <li>
-                  <button type="button" onClick={() => modalToggle("signin")}>
+                  <button type="button" onClick={() => toggleOnModal("signin")}>
                     Sign In
                   </button>
                 </li>
                 <li>
-                  <button type="button" onClick={() => modalToggle("signup")}>
+                  <button type="button" onClick={() => toggleOnModal("signup")}>
                     Sign Up
                   </button>
                 </li>

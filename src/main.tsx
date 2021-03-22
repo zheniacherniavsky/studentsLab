@@ -1,10 +1,11 @@
 import React from "react";
 import * as ReactDom from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import UseRoutes from "./routes";
-import Footer from "./Components/footer";
-import NavBar from "./Components/navbar";
-import Modals from "./Components/Modal/modals";
+import Context from "@/api/context";
+import UseRoutes from "@/routes";
+import Footer from "@/Components/footer";
+import NavBar from "@/Components/navbar";
+import Modals from "@/Components/Modal/modals";
 // import ErrorChecker from "./Components/ErrorChecker";
 
 // Styles
@@ -54,23 +55,27 @@ class App extends React.Component<any, IMyComponentState> {
 
     return (
       <>
-        <BrowserRouter>
-          <Modals
-            isModalOpen={this.state.isModalOpen}
-            modalType={this.state.modalType}
-            toggleOffModal={this.toggleOffModal}
-            setNickname={this.setNickname}
-          />
-          <NavBar
-            title="Game Store"
-            modalToggle={this.toggleOnModal}
-            username={this.state.username}
-            setUsername={this.setNickname}
-          />
-          <div className="pages_container">{routes}</div>
-          {/* <ErrorChecker error /> */}
-          <Footer />
-        </BrowserRouter>
+        <Context.Provider
+          value={{
+            // modal windows
+            toggleOnModal: this.toggleOnModal,
+            toggleOffModal: this.toggleOffModal,
+            isModalOpen: this.state.isModalOpen,
+            modalType: this.state.modalType,
+
+            // profile details
+            username: this.state.username,
+            setNickname: this.setNickname,
+          }}
+        >
+          <BrowserRouter>
+            <Modals />
+            <NavBar title="Game Store" />
+            <div className="pages_container">{routes}</div>
+            {/* <ErrorChecker error /> */}
+            <Footer />
+          </BrowserRouter>
+        </Context.Provider>
       </>
     );
   }
