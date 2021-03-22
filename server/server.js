@@ -30,11 +30,12 @@ app
       }
 
       if (currentUser) {
+        console.log("finded");
         const isMatch = await bcrypt.compare(password, currentUser.password);
         if (isMatch) return res.send(200);
       }
 
-      return res.status(400);
+      return res.status(400).json({ message: "This account does not exist." });
     } catch (e) {
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
@@ -65,6 +66,7 @@ app
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
   })
+
   .get("/products", (req, res) => {
     try {
       const data = fs.readFileSync("./server/data.json");
