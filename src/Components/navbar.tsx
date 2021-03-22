@@ -8,7 +8,7 @@ const NavBar = ({ title }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
-  const { toggleOnModal, username, setUsername } = useContext(Context);
+  const { toggleOnModal, username, setNickname } = useContext(Context);
   const history = useHistory();
 
   const redirect = (path) => {
@@ -69,7 +69,7 @@ const NavBar = ({ title }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      setUsername("");
+                      setNickname(null);
                       redirect("/");
                     }}
                   >
