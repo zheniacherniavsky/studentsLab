@@ -23,7 +23,7 @@ class App extends React.Component<any, IMyComponentState> {
     this.state = {
       isModalOpen: false,
       modalType: "",
-      username: "",
+      username: null,
     };
   }
 
@@ -50,7 +50,7 @@ class App extends React.Component<any, IMyComponentState> {
   };
 
   render() {
-    const routes = UseRoutes();
+    const routes = UseRoutes(this.state.username, this.toggleOnModal);
 
     return (
       <>

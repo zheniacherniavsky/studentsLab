@@ -3,7 +3,7 @@ import signin from "@/api/auth/singin";
 import signup from "@/api/auth/signup";
 import { useHistory } from "react-router-dom";
 
-const Modals = ({ isModalOpen, modalType, toggleOffModal, setNickname }) => {
+const Modals = ({ isModalOpen, modalType, toggleOffModal, setNickname, redirectPath = "/" }) => {
   const history = useHistory();
 
   const redirect = (path) => {
@@ -31,6 +31,7 @@ const Modals = ({ isModalOpen, modalType, toggleOffModal, setNickname }) => {
                 if (response.username) {
                   setNickname(response.username);
                   toggleOffModal();
+                  redirect(redirectPath);
                 } else alert(response.errorMessage);
               }}
             >
