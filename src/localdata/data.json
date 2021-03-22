@@ -4,6 +4,26 @@
       "login": "zhenia",
       "password": "123123",
       "id": 1
+    },
+    {
+      "login": "testtest",
+      "password": "123123",
+      "id": 2
+    },
+    {
+      "login": "twetwetwet",
+      "password": "123123",
+      "id": 3
+    },
+    {
+      "login": "sddasdd",
+      "password": "asdasd",
+      "id": 4
+    },
+    {
+      "login": "123123123",
+      "password": "123123123",
+      "id": 5
     }
   ],
   "products": [

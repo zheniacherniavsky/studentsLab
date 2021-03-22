@@ -6,6 +6,7 @@ import SignInPage from "@/Pages/signInPage";
 import PCPage from "@/Pages/ProductsPages/pcPage";
 import Playstation5Page from "@/Pages/ProductsPages/playstation5Page";
 import XBoxOnePage from "@/Pages/ProductsPages/xBoxOnePage";
+import ProfilePage from "./Pages/profilePage";
 
 function UseRoutes() {
   return (
@@ -19,6 +20,9 @@ function UseRoutes() {
         </Route>
         <Route path="/pc" exact>
           <PCPage />
+        </Route>
+        <Route path="/profile" exact>
+          <ProfilePage />
         </Route>
         <Route path="/playstationfive" exact>
           <Playstation5Page />

@@ -51,15 +51,16 @@ class App extends React.Component<any, IMyComponentState> {
 
   render() {
     const routes = UseRoutes();
+
     return (
       <>
-        <Modals
-          isModalOpen={this.state.isModalOpen}
-          modalType={this.state.modalType}
-          toggleOffModal={this.toggleOffModal}
-          setNickname={this.setNickname}
-        />
         <BrowserRouter>
+          <Modals
+            isModalOpen={this.state.isModalOpen}
+            modalType={this.state.modalType}
+            toggleOffModal={this.toggleOffModal}
+            setNickname={this.setNickname}
+          />
           <NavBar
             title="Game Store"
             modalToggle={this.toggleOnModal}
