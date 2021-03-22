@@ -64,6 +64,16 @@ app
     } catch (e) {
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
+  })
+  .get("/products", (req, res) => {
+    try {
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+      res.setHeader("Content-Type", "application/json");
+      return res.send(JSON.stringify(products));
+    } catch (e) {
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
   });
 
 app.listen(port, () => {
