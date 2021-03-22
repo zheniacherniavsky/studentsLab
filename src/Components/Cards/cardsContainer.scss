@@ -1,11 +1,13 @@
 .cards_container {
   padding: 20px;
+  background: rgba($lightblack, 0.3);
+  border-radius: 60px;
+  margin: 30px 30px;
 
   &__title {
     cursor: default;
     margin: 20px;
     padding: 10px 20px;
-    width: 94%;
     border-bottom: 1px solid $basicColor;
   }
   &__content {
