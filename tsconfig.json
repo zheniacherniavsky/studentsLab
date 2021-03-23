@@ -17,7 +17,9 @@
     "esModuleInterop": true,
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitThis": false, 
   },
   "exclude": ["node_modules", "dist", "build", ".vscode"]
 }
