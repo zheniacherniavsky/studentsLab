@@ -2,7 +2,6 @@ async function signin() {
   const login = (document.getElementById("signin_login") as HTMLInputElement).value;
   const password = (document.getElementById("signin_password") as HTMLInputElement).value;
 
-  console.log(23);
   if (login.length < 6) {
     return { errorMessage: "Minimum login length - 6 symbols" };
   }
@@ -21,9 +20,13 @@ async function signin() {
       password,
     }),
   });
+
+  if (response.ok) {
+    alert("OK");
+    return login;
+  }
   const answer = await response.json();
-  if (response.ok) alert("OK");
-  else alert(answer.message);
+  alert(answer.message);
 
   return null;
 }

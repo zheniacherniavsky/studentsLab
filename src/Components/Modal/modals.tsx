@@ -30,12 +30,12 @@ const Modals = ({ redirectPath = "/" }) => {
             <button
               type="button"
               onClick={async () => {
-                const response = await signin();
-                if (response.username) {
-                  setNickname(response.username);
+                const username = await signin();
+                if (username) {
+                  setNickname(username);
                   toggleOffModal();
                   redirect(redirectPath);
-                } else alert(response.errorMessage);
+                }
               }}
             >
               Sign In
@@ -62,12 +62,12 @@ const Modals = ({ redirectPath = "/" }) => {
             <button
               type="button"
               onClick={async () => {
-                const response = await signup();
-                if (response.username) {
-                  setNickname(response.username);
+                const username = await signup();
+                if (username) {
+                  setNickname(username);
                   toggleOffModal();
                   redirect("/profile");
-                } else alert(`${response.response} - ${response.errorMessage}`);
+                }
               }}
             >
               Sign Up

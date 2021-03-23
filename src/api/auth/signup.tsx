@@ -15,9 +15,12 @@ async function signup() {
     body: JSON.stringify({ login, password }),
   });
 
+  if (response.ok) {
+    alert("OK");
+    return login;
+  }
   const answer = await response.json();
-  if (response.ok) alert("OK");
-  else alert(answer.message);
+  alert(answer.message);
 
   return null;
 }
