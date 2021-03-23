@@ -1,4 +1,4 @@
-import Product from "@/api/Product";
+import IProduct from "@/api/product";
 
 async function getData() {
   // i will find a better way to do it
@@ -9,7 +9,7 @@ async function getData() {
   const result = await fetch("http://localhost:3000/products");
   const products = await result.json();
 
-  return products.filter((value: Product) => value.name.toLowerCase().includes(inputValue.toLowerCase()));
+  return products.filter((value: IProduct) => value.name.toLowerCase().includes(inputValue.toLowerCase()));
 }
 
 export default getData;

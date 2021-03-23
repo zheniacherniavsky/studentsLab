@@ -1,4 +1,4 @@
-export default class Product {
+export default interface IProduct {
   name: string;
 
   price: Number;

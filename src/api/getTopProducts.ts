@@ -1,10 +1,10 @@
-import Product from "@/api/Product";
+import IProduct from "./product";
 
-async function getRecentlyAddedProducts(count) {
+async function getRecentlyAddedProducts(count: number) {
   const result = await fetch("http://localhost:3000/products");
   const products = await result.json();
 
-  products.sort((a: Product, b: Product) => Date.parse(b.date) - Date.parse(a.date));
+  products.sort((a: IProduct, b: IProduct) => Date.parse(b.date) - Date.parse(a.date));
 
   const resultArray = [];
   for (let i = 0; i < count; i++) if (products[i]) resultArray.push(products[i]);
