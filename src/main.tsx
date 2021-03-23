@@ -10,7 +10,7 @@ import Modals from "@/Components/Modal/modals";
 
 // Styles
 import "@/styles/styles.scss";
-import "@/Pages/pages.scss";
+import "@/styles/pages.scss";
 
 interface IMyComponentState {
   isModalOpen: boolean;

@@ -9,7 +9,7 @@ import loadingImage from "@/assets/images/loading.svg";
 import CardsContainer from "@/Components/Cards/cardsContainer";
 // import Card from "@/Components/Cards/card";
 
-import "@/Pages/HomePage/homePage.scss";
+import "@/Pages/HomePage/home.scss";
 import "@/Pages/HomePage/categories.scss";
 import Categories from "./categories";
 
