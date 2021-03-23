@@ -2,8 +2,7 @@ import Product from "@/api/Product";
 
 async function getRecentlyAddedProducts(count) {
   const result = await fetch("http://localhost:3000/products");
-  const json = await result.json();
-  const products = Object.values(json);
+  const products = await result.json();
 
   products.sort((a: Product, b: Product) => Date.parse(b.date) - Date.parse(a.date));
 

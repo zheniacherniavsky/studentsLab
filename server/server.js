@@ -30,11 +30,12 @@ app
       }
 
       if (currentUser) {
+        console.log("finded");
         const isMatch = await bcrypt.compare(password, currentUser.password);
         if (isMatch) return res.send(200);
       }
 
-      return res.status(400);
+      return res.status(400).json({ message: "This account does not exist." });
     } catch (e) {
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
@@ -61,6 +62,17 @@ app
 
       fs.writeFileSync("./server/accounts.json", data);
       return res.status(201).json({ message: "Account has been created." });
+    } catch (e) {
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .get("/products", (req, res) => {
+    try {
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+      res.setHeader("Content-Type", "application/json");
+      return res.send(JSON.stringify(products));
     } catch (e) {
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
