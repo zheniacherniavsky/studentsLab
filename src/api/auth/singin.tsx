@@ -11,7 +11,7 @@ async function signin() {
     return { errorMessage: "Minimum password length - 6 symbols" };
   }
 
-  const responce = await fetch("http://localhost:3000/login", {
+  const response = await fetch("http://localhost:3000/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -21,9 +21,9 @@ async function signin() {
       password,
     }),
   });
-
-  if (responce.ok) alert("OK");
-  else alert("Error");
+  const answer = await response.json();
+  if (response.ok) alert("OK");
+  else alert(answer.message);
 
   return null;
 }

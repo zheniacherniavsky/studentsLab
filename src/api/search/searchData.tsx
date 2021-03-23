@@ -7,8 +7,7 @@ async function getData() {
   if (inputValue === (undefined || "")) return [];
 
   const result = await fetch("http://localhost:3000/products");
-  const json = await result.json();
-  const products = Object.values(json);
+  const products = await result.json();
 
   return products.filter((value: Product) => value.name.toLowerCase().includes(inputValue.toLowerCase()));
 }
