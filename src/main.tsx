@@ -3,9 +3,9 @@ import * as ReactDom from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import Context from "@/api/context";
 import UseRoutes from "@/routes";
-import Footer from "@/Components/footer";
-import NavBar from "@/Components/navbar";
-import Modals from "@/Components/Modal/modals";
+import Footer from "@/components/footer";
+import NavBar from "@/components/navbar";
+import Modals from "@/components/modal/modals";
 // import ErrorChecker from "./Components/ErrorChecker";
 
 // Styles

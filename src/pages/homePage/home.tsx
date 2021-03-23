@@ -6,11 +6,11 @@ import getRecentlyAddedProducts from "@/api/getTopProducts";
 import loadingImage from "@/assets/images/loading.svg";
 
 // categories
-import CardsContainer from "@/Components/Cards/cardsContainer";
+import CardsContainer from "@/components/cards/cardsContainer";
 // import Card from "@/Components/Cards/card";
 
-import "@/Pages/HomePage/home.scss";
-import "@/Pages/HomePage/categories.scss";
+import "@/pages/homePage/home.scss";
+import "@/pages/homePage/categories.scss";
 import Categories from "./categories";
 
 const Loading = ({ hook }: { hook: boolean }) => {

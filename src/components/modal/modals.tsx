@@ -1,4 +1,4 @@
-import Modal from "@/Components/Modal/modal";
+import Modal from "@/components/modal/modal";
 import signin from "@/api/auth/singin";
 import signup from "@/api/auth/signup";
 import { useHistory } from "react-router-dom";
@@ -9,7 +9,7 @@ const Modals = ({ redirectPath = "/" }) => {
   const { isModalOpen, modalType, toggleOffModal, setNickname } = useContext(Context);
   const history = useHistory();
 
-  const redirect = (path) => {
+  const redirect = (path: string) => {
     history.push(path);
   };
 
@@ -30,10 +30,10 @@ const Modals = ({ redirectPath = "/" }) => {
             <button
               type="button"
               onClick={async () => {
-                const username = await signin();
+                const username = (await signin()) as string;
                 if (username) {
-                  setNickname(username);
-                  toggleOffModal();
+                  if (setNickname) setNickname(username);
+                  if (toggleOffModal) toggleOffModal();
                   redirect(redirectPath);
                 }
               }}
@@ -62,10 +62,10 @@ const Modals = ({ redirectPath = "/" }) => {
             <button
               type="button"
               onClick={async () => {
-                const username = await signup();
+                const username = (await signup()) as string;
                 if (username) {
-                  setNickname(username);
-                  toggleOffModal();
+                  if (setNickname) setNickname(username);
+                  if (toggleOffModal) toggleOffModal();
                   redirect("/profile");
                 }
               }}

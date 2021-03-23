@@ -5,7 +5,7 @@ type IContextType = {
   isModalOpen: boolean;
   modalType: string;
   username: string | null;
-  setNickname: (nick: string) => void;
+  setNickname: (nick: string | null) => void;
 };
 
 export default IContextType;

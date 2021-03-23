@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "@/Components/Modal/modal.scss";
+import "@/components/modal/modal.scss";
 
 import closeImg from "@/assets/images/close.svg";
 
 class Modal extends React.Component<any, any> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = { root: document.createElement("div") };
     document.body.appendChild(this.state.root);

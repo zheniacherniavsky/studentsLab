@@ -1,13 +1,13 @@
 import { Switch, Route, Redirect } from "react-router-dom";
-import AboutPage from "@/Pages/aboutPage";
-import HomePage from "@/Pages/HomePage/home";
-import PCPage from "@/Pages/ProductsPages/pcPage";
-import Playstation5Page from "@/Pages/ProductsPages/playstation5Page";
-import XBoxOnePage from "@/Pages/ProductsPages/xBoxOnePage";
-import ProfilePage from "./Pages/profilePage";
+import AboutPage from "@/pages/aboutPage";
+import HomePage from "@/pages/homePage/home";
+import PCPage from "@/pages/productsPages/pcPage";
+import Playstation5Page from "@/pages/productsPages/playstation5Page";
+import XBoxOnePage from "@/pages/productsPages/xBoxOnePage";
+import ProfilePage from "./pages/profilePage";
 
-function UseRoutes(username, modal) {
-  const authChecker = (component) => {
+function UseRoutes(username: string | null, modal: Function) {
+  const authChecker = (component: any) => {
     if (username) return component;
     modal("signin");
     return <Redirect to="/" />;

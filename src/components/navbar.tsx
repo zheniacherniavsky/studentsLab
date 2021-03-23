@@ -1,7 +1,7 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
 
-import "@/Components/navbar.scss";
+import "@/components/navbar.scss";
 import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 

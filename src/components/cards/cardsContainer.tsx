@@ -1,6 +1,6 @@
 import IProduct from "@/api/product";
-import Card from "@/Components/Cards/card";
-import "@/Components/Cards/cardsContainer.scss";
+import Card from "@/components/cards/card";
+import "@/components/cards/cardsContainer.scss";
 
 const CardsContainer = (props: any) => {
   let title;
