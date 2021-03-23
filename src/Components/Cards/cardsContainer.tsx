@@ -1,7 +1,8 @@
+import IProduct from "@/api/product";
 import Card from "@/Components/Cards/card";
 import "@/Components/Cards/cardsContainer.scss";
 
-const CardsContainer = (props) => {
+const CardsContainer = (props: any) => {
   let title;
 
   if (props.data.length !== 0) {
@@ -19,7 +20,7 @@ const CardsContainer = (props) => {
       <div className="cards_container">
         <h1 className="cards_container__title">{title}</h1>
         <div className="cards_container__content">
-          {props.data.map((item) => (
+          {props.data.map((item: IProduct) => (
             <Card product={item} />
           ))}
         </div>

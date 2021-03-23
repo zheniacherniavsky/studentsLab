@@ -15,11 +15,11 @@ import "@/Pages/pages.scss";
 interface IMyComponentState {
   isModalOpen: boolean;
   modalType: string;
-  username: string;
+  username: string | null;
 }
 
 class App extends React.Component<any, IMyComponentState> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       isModalOpen: false,
@@ -28,7 +28,7 @@ class App extends React.Component<any, IMyComponentState> {
     };
   }
 
-  componentDidCatch(error) {
+  componentDidCatch(error: any) {
     /* modal window with error in future */
     alert(error); // is it simple alert?
 
@@ -36,11 +36,11 @@ class App extends React.Component<any, IMyComponentState> {
     window.location.assign("/");
   }
 
-  setNickname = (nick) => {
+  setNickname = (nick: string) => {
     this.setState({ username: nick });
   };
 
-  toggleOnModal = (type) => {
+  toggleOnModal = (type: string) => {
     this.setState({ modalType: type });
     this.setState({ isModalOpen: true });
   };

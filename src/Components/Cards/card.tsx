@@ -1,6 +1,7 @@
 import "@/Components/Cards/card.scss";
+import IProduct from "@/api/product";
 
-const Card = ({ product: p }) => (
+const Card = ({ product: p }: { product: IProduct }) => (
   <div className="card_container">
     <div className="front">
       <img className="card_container__image" src={p.image} alt="productImage" />

@@ -4,7 +4,7 @@ import pcImage from "@/assets/images/Categories/computer.svg";
 import playstationImage from "@/assets/images/Categories/playstation.svg";
 import xboxImage from "@/assets/images/Categories/xbox.svg";
 
-const Category = ({ name, image }) => (
+const Category = ({ name, image }: { name: string; image: string }) => (
   <>
     <div className="category">
       <img src={image} alt="" />

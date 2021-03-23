@@ -13,11 +13,11 @@ import "@/Pages/HomePage/homePage.scss";
 import "@/Pages/HomePage/categories.scss";
 import Categories from "./categories";
 
-const Loading = ({ hook }) => {
+const Loading = ({ hook }: { hook: boolean }) => {
   if (hook) {
     return <img src={loadingImage} alt="loading" />;
   }
-  return <></>;
+  return null;
 };
 
 const HomePage = () => {
@@ -28,7 +28,7 @@ const HomePage = () => {
   const topProductsCount = 5; // how much top product we want see on home page
 
   useEffect(() => {
-    const preload = async () => loadTopProducts(await getRecentlyAddedProducts(topProductsCount));
+    const preload = async () => loadTopProducts((await getRecentlyAddedProducts(topProductsCount)) as never[]); // ?
 
     preload();
   }, []);

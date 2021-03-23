@@ -3,15 +3,16 @@ import { useContext, useState } from "react";
 
 import "@/Components/navbar.scss";
 import Context from "@/api/context";
+import IContextType from "@/api/context.d";
 
-const NavBar = ({ title }) => {
+const NavBar = ({ title }: { title: string }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
-  const { toggleOnModal, username, setNickname } = useContext(Context);
+  const { toggleOnModal, username, setNickname } = useContext<Partial<IContextType>>(Context);
   const history = useHistory();
 
-  const redirect = (path) => {
+  const redirect = (path: string) => {
     history.push(path);
   };
 
@@ -69,7 +70,7 @@ const NavBar = ({ title }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      setNickname(null);
+                      if (setNickname) setNickname(null);
                       redirect("/");
                     }}
                   >
@@ -80,12 +81,22 @@ const NavBar = ({ title }) => {
             ) : (
               <>
                 <li>
-                  <button type="button" onClick={() => toggleOnModal("signin")}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (toggleOnModal) toggleOnModal("signin");
+                    }}
+                  >
                     Sign In
                   </button>
                 </li>
                 <li>
-                  <button type="button" onClick={() => toggleOnModal("signup")}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (toggleOnModal) toggleOnModal("signup");
+                    }}
+                  >
                     Sign Up
                   </button>
                 </li>
