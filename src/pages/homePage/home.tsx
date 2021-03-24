@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import debounce from "debounce";
 import debounce from "@/api/debounse";
-import getData from "@/api/search/searchData";
+import getData from "@/api/apiSearchData";
 import getRecentlyAddedProducts from "@/api/getTopProducts";
 import loadingImage from "@/assets/images/loading.svg";
 

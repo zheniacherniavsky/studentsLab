@@ -36,7 +36,7 @@ class App extends React.Component<any, IMyComponentState> {
     window.location.assign("/");
   }
 
-  setNickname = (nick: string) => {
+  setNickname = (nick: string | null) => {
     this.setState({ username: nick });
   };
 

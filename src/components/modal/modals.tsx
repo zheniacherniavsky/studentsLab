@@ -1,6 +1,6 @@
 import Modal from "@/components/modal/modal";
-import signin from "@/api/auth/singin";
-import signup from "@/api/auth/signup";
+import signin from "@/api/auth/apiSignin";
+import signup from "@/api/auth/apiSignup";
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import Context from "@/api/context";
