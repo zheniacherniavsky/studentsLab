@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: ["json", "prettier", "import", "@typescript-eslint"],
   rules: {
+    "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
     // "import/no-extraneous-dependencies": ["error", { devDependencies: true }], // debounce should be listed.... error
     "@typescript-eslint/no-use-before-define": "error",
     "no-use-before-define": 0,
@@ -37,7 +38,6 @@ module.exports = {
     "react/jsx-props-no-spreading": 0,
     "react/jsx-curly-newline": 0, // it conflicts with prettier
     "react/jsx-wrap-multilines": ["error", { arrow: true, return: true, declaration: true }],
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".tsx", ".ts"] }],
     "no-underscore-dangle": 0,
     "no-unused-expressions": ["error", { allowShortCircuit: true }],
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
