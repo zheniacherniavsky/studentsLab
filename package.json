@@ -5,7 +5,7 @@
   "main": "main.jsx",
   "scripts": {
     "test": "npm run lint",
-    "serve": "webpack serve --hot --open --config webpack.devServer.js",
+    "serve": "webpack serve --open --config webpack.devServer.js",
     "build-prod": "webpack --mode production --config webpack.prod.js",
     "build-prod-withMap": "webpack --mode production --config webpack.prod.js --sourceMap",
     "build-dev": "webpack --mode development --config webpack.dev.js",
