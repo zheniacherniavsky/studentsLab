@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: ["json", "prettier", "import", "@typescript-eslint"],
   rules: {
+    "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
     // "import/no-extraneous-dependencies": ["error", { devDependencies: true }], // debounce should be listed.... error
     "@typescript-eslint/no-use-before-define": "error",
     "no-use-before-define": 0,
