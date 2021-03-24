@@ -1,9 +1,7 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import AboutPage from "@/pages/aboutPage";
 import HomePage from "@/pages/homePage/home";
-import PCPage from "@/pages/productsPages/pcPage";
-import Playstation5Page from "@/pages/productsPages/playstation5Page";
-import XBoxOnePage from "@/pages/productsPages/xBoxOnePage";
+import ProductPage from "@/pages/productPage";
 import ProfilePage from "./pages/profilePage";
 
 function UseRoutes(username: string | null, modal: Function) {
@@ -20,10 +18,10 @@ function UseRoutes(username: string | null, modal: Function) {
           <HomePage />
         </Route>
         <Route path="/about" exact render={() => authChecker(AboutPage())} />
-        <Route path="/pc" exact render={() => authChecker(PCPage())} />
+        <Route path="/pc" exact render={() => authChecker(ProductPage({ type: "pc" }))} />
         <Route path="/profile" exact render={() => authChecker(ProfilePage())} />
-        <Route path="/playstationfive" exact render={() => authChecker(Playstation5Page())} />
-        <Route path="/xboxone" exact render={() => authChecker(XBoxOnePage())} />
+        <Route path="/playstationfive" exact render={() => authChecker(ProductPage({ type: "ps5" }))} />
+        <Route path="/xboxone" exact render={() => authChecker(ProductPage({ type: "xbox1" }))} />
         <Redirect to="/" />
       </Switch>
     </>
