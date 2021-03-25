@@ -1,9 +1,8 @@
 type IContextType = {
-  function?: () => void;
-  toggleOnModal: (type: string) => void;
-  toggleOffModal: () => void;
-  isModalOpen: boolean;
-  modalType: string;
+  isSignInOpen: boolean;
+  toggleSignInModal: (mode: boolean) => void;
+  isSignUpOpen: boolean;
+  toggleSignUpModal: (mode: boolean) => void;
   username: string | null;
   setNickname: (nick: string | null) => void;
 };

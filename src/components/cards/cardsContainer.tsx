@@ -18,10 +18,10 @@ const CardsContainer = (props: any) => {
     }
     return (
       <div className="cards_container">
-        <h1 className="cards_container__title">{title}</h1>
+        <h2 className="cards_container__title">{title}</h2>
         <div className="cards_container__content">
           {props.data.map((item: IProduct) => (
-            <Card product={item} />
+            <Card product={item} key={item.name} />
           ))}
         </div>
       </div>

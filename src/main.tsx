@@ -1,30 +1,35 @@
 import React from "react";
 import * as ReactDom from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Context from "@/api/context";
-import UseRoutes from "@/routes";
 import Footer from "@/components/footer";
 import NavBar from "@/components/navbar";
-import Modals from "@/components/modal/modals";
-// import ErrorChecker from "./Components/ErrorChecker";
+
+// Pages
+import AboutPage from "@/pages/aboutPage";
+import HomePage from "@/pages/homePage/home";
+import ProductPage from "@/pages/productPage";
+import ProfilePage from "./pages/profilePage";
 
 // Styles
 import "@/styles/styles.scss";
 import "@/styles/pages.scss";
+import SignInModal from "./components/modal/signInModal";
+import SignUpModal from "./components/modal/signUpModal";
 
 interface IMyComponentState {
-  isModalOpen: boolean;
-  modalType: string;
   username: string | null;
+  isSignInOpen: boolean;
+  isSignUpOpen: boolean;
 }
 
 class App extends React.Component<any, IMyComponentState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isModalOpen: false,
-      modalType: "",
       username: null,
+      isSignInOpen: false,
+      isSignUpOpen: false,
     };
   }
 
@@ -40,39 +45,50 @@ class App extends React.Component<any, IMyComponentState> {
     this.setState({ username: nick });
   };
 
-  toggleOnModal = (type: string) => {
-    this.setState({ modalType: type });
-    this.setState({ isModalOpen: true });
+  toggleSignInModal = (mode: boolean) => {
+    this.setState({ isSignInOpen: mode });
   };
 
-  toggleOffModal = () => {
-    this.setState({ modalType: "" });
-    this.setState({ isModalOpen: false });
+  toggleSignUpModal = (mode: boolean) => {
+    this.setState({ isSignUpOpen: mode });
+  };
+
+  authChecker = (component: any) => {
+    if (this.state.username) return component;
+    return <SignInModal willRenderPage={component} />;
   };
 
   render() {
-    const routes = UseRoutes(this.state.username, this.toggleOnModal);
-
     return (
       <>
         <Context.Provider
           value={{
-            // modal windows
-            toggleOnModal: this.toggleOnModal,
-            toggleOffModal: this.toggleOffModal,
-            isModalOpen: this.state.isModalOpen,
-            modalType: this.state.modalType,
-
+            isSignInOpen: this.state.isSignInOpen,
+            isSignUpOpen: this.state.isSignUpOpen,
+            toggleSignInModal: this.toggleSignInModal,
+            toggleSignUpModal: this.toggleSignUpModal,
             // profile details
             username: this.state.username,
             setNickname: this.setNickname,
           }}
         >
           <BrowserRouter>
-            <Modals />
+            {this.state.isSignInOpen ? <SignInModal willRenderPage={null} /> : null}
+            {this.state.isSignUpOpen ? <SignUpModal /> : null}
             <NavBar title="Game Store" />
-            <div className="pages_container">{routes}</div>
-            {/* <ErrorChecker error /> */}
+            <div className="pages_container">
+              <Switch>
+                <Route path="/" exact>
+                  <HomePage />
+                </Route>
+                <Route path="/about" exact render={() => this.authChecker(AboutPage())} />
+                <Route path="/pc" exact render={() => this.authChecker(ProductPage())} />
+                <Route path="/profile" exact render={() => this.authChecker(ProfilePage())} />
+                <Route path="/playstationfive" exact render={() => this.authChecker(ProductPage())} />
+                <Route path="/xboxone" exact render={() => this.authChecker(ProductPage())} />
+                <Redirect to="/" />
+              </Switch>
+            </div>
             <Footer />
           </BrowserRouter>
         </Context.Provider>

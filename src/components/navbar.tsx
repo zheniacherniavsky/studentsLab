@@ -9,7 +9,8 @@ const NavBar = ({ title }: { title: string }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
-  const { toggleOnModal, username, setNickname } = useContext<Partial<IContextType>>(Context);
+  const { toggleSignInModal, toggleSignUpModal, username, setNickname } = useContext<Partial<IContextType>>(Context);
+
   const history = useHistory();
 
   const redirect = (path: string) => {
@@ -57,14 +58,16 @@ const NavBar = ({ title }: { title: string }) => {
               </button>
             </li>
             <li>
-              <NavLink to="about" activeClassName="active">
+              <NavLink to="/about" activeClassName="active">
                 About
               </NavLink>
             </li>
             {username ? (
               <>
                 <li>
-                  <button type="button">{username}</button>
+                  <NavLink to="/profile" activeClassName="active">
+                    {username}
+                  </NavLink>
                 </li>
                 <li>
                   <button
@@ -84,7 +87,7 @@ const NavBar = ({ title }: { title: string }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      if (toggleOnModal) toggleOnModal("signin");
+                      if (toggleSignInModal) toggleSignInModal(true);
                     }}
                   >
                     Sign In
@@ -94,7 +97,7 @@ const NavBar = ({ title }: { title: string }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      if (toggleOnModal) toggleOnModal("signup");
+                      if (toggleSignUpModal) toggleSignUpModal(true);
                     }}
                   >
                     Sign Up

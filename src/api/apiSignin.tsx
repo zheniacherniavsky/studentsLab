@@ -1,4 +1,4 @@
-async function signin() {
+async function signin(): Promise<{ username?: string; errorMessage?: string }> {
   const login = (document.getElementById("signin_login") as HTMLInputElement).value;
   const password = (document.getElementById("signin_password") as HTMLInputElement).value;
 
@@ -22,13 +22,11 @@ async function signin() {
   });
 
   if (response.ok) {
-    alert("OK");
-    return login;
+    return { username: login };
   }
   const answer = await response.json();
-  alert(answer.message);
 
-  return null;
+  return { errorMessage: answer.message };
 }
 
 export default signin;

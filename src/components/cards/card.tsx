@@ -4,8 +4,7 @@ import IProduct from "@/api/product";
 const Card = ({ product: p }: { product: IProduct }) => (
   <div className="card_container">
     <div className="front">
-      <img className="card_container__image" src={p.image} alt="productImage" />
-
+      <img className="card_container__image" src={p.image} alt="Product" />
       <div className="card_container__frontinfo">
         <p className="card_container__frontinfo_title">{p.name}</p>
         <p className="card_container__frontinfo_age">
