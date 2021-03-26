@@ -6,7 +6,8 @@ import { useHistory } from "react-router-dom";
 import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 
-const SignInModal = ({ willRenderPage }: { willRenderPage: any | null }) => {
+// any type - cause idk type of WillRenderPage. If it's will be JSX.Element, it's not callable
+const SignInModal = ({ WillRenderPage }: { WillRenderPage: any | null }) => {
   const context = useContext<Partial<IContextType>>(Context);
   const history = useHistory();
 
@@ -33,11 +34,10 @@ const SignInModal = ({ willRenderPage }: { willRenderPage: any | null }) => {
 
             if (username) {
               if (context.setNickname) context.setNickname(username);
-              if (willRenderPage) willRenderPage();
-              if (context.toggleSignInModal) context.toggleSignInModal(false);
-              else redirect("/");
+              if (WillRenderPage) WillRenderPage();
             } else {
               alert(errorMessage);
+              redirect("/");
             }
           }}
         >

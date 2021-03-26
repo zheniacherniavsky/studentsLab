@@ -2,7 +2,13 @@ import IProduct from "@/api/product";
 import Card from "@/components/cards/card";
 import "@/components/cards/cardsContainer.scss";
 
-const CardsContainer = (props: any) => {
+interface ICardsProps {
+  data: Array<IProduct>;
+  type: string;
+  count: number;
+}
+
+const CardsContainer = (props: ICardsProps) => {
   let title;
 
   if (props.data.length !== 0) {

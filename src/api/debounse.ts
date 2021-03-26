@@ -1,6 +1,6 @@
-function debounce(func: Function, wait: number) {
+function debounce(func: FunctionStringCallback, wait: number) {
   let timeout: ReturnType<typeof setTimeout>;
-  return (...arg: any[]) => {
+  return (...arg: [data: string]) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(this, arg), wait);
   };

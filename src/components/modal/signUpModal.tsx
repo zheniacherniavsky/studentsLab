@@ -18,7 +18,6 @@ const SignUpModal = () => {
     <Modal>
       <div className="modal_container">
         <h1>Registration</h1>
-        {/* component */}
         <div className="modal_container__info">
           <p>Login</p>
           <input id="signup_login" type="login" placeholder="Your future nickname" />

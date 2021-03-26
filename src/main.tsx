@@ -23,8 +23,8 @@ interface IMyComponentState {
   isSignUpOpen: boolean;
 }
 
-class App extends React.Component<any, IMyComponentState> {
-  constructor(props: any) {
+class App extends React.Component<unknown, IMyComponentState> {
+  constructor(props: unknown) {
     super(props);
     this.state = {
       username: null,
@@ -33,7 +33,7 @@ class App extends React.Component<any, IMyComponentState> {
     };
   }
 
-  componentDidCatch(error: any) {
+  componentDidCatch(error: Error) {
     /* modal window with error in future */
     alert(error); // is it simple alert?
 
@@ -53,9 +53,9 @@ class App extends React.Component<any, IMyComponentState> {
     this.setState({ isSignUpOpen: mode });
   };
 
-  authChecker = (component: any) => {
+  authChecker = (component: JSX.Element) => {
     if (this.state.username) return component;
-    return <SignInModal willRenderPage={component} />;
+    return <SignInModal WillRenderPage={component} />;
   };
 
   render() {
@@ -73,9 +73,11 @@ class App extends React.Component<any, IMyComponentState> {
           }}
         >
           <BrowserRouter>
-            {this.state.isSignInOpen ? <SignInModal willRenderPage={null} /> : null}
+            {this.state.isSignInOpen ? <SignInModal WillRenderPage={null} /> : null}
             {this.state.isSignUpOpen ? <SignUpModal /> : null}
-            <NavBar title="Game Store" />
+            <header>
+              <NavBar title="Game Store" />
+            </header>
             <div className="pages_container">
               <Switch>
                 <Route path="/" exact>
@@ -89,7 +91,9 @@ class App extends React.Component<any, IMyComponentState> {
                 <Redirect to="/" />
               </Switch>
             </div>
-            <Footer />
+            <footer>
+              <Footer />
+            </footer>
           </BrowserRouter>
         </Context.Provider>
       </>
