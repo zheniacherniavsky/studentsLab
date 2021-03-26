@@ -1,6 +1,6 @@
 import Modal from "@/elements/modal";
 import signup from "@/api/apiSignup";
-import { useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import Context from "@/api/context";
@@ -14,37 +14,67 @@ const SignUpModal = () => {
     history.push(path);
   };
 
+  const [login, setLogin] = useState("");
+  const [firstPassword, setFirstPassword] = useState("");
+  const [secondPassword, setSecondPassword] = useState("");
+
+  const handleChange = (event: FormEvent<HTMLInputElement>) => {
+    const t = event.currentTarget;
+    if (t.id === "login") setLogin(t.value);
+    if (t.id === "firstPassword") setFirstPassword(t.value);
+    if (t.id === "secondPassword") setSecondPassword(t.value);
+  };
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup(
+      login,
+      firstPassword,
+      secondPassword
+    );
+    if (username) {
+      if (context.setNickname) context.setNickname(username);
+      if (context.toggleSignUpModal) context.toggleSignUpModal(false);
+      redirect("/profile");
+    } else {
+      alert(errorMessage);
+      setFirstPassword("");
+      setSecondPassword("");
+    }
+  };
+
   return (
     <Modal>
-      <div className="modal_container">
-        <h1>Registration</h1>
-        <div className="modal_container__info">
-          <p>Login</p>
-          <input id="signup_login" type="login" placeholder="Your future nickname" />
-        </div>
-        <div className="modal_container__info">
-          <p>Password</p>
-          <input id="signup_password" type="password" placeholder="" />
-        </div>
-        <div className="modal_container__info">
-          <p>Confirm password</p>
-          <input id="signup_confirmPassword" type="password" placeholder="" />
-        </div>
-        <button
-          type="button"
-          onClick={async () => {
-            const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup();
-
-            if (username) {
-              if (context.setNickname) context.setNickname(username);
-              if (context.toggleSignUpModal) context.toggleSignUpModal(false);
-              redirect("/profile");
-            } else alert(errorMessage);
-          }}
-        >
-          Sign Up
-        </button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <h2>Registration</h2>
+        <label htmlFor="login">
+          Login
+          <input type="text" id="login" value={login} onChange={handleChange} required minLength={6} />
+        </label>
+        <label htmlFor="firstPassword">
+          Password
+          <input
+            type="password"
+            id="firstPassword"
+            value={firstPassword}
+            onChange={handleChange}
+            required
+            minLength={6}
+          />
+        </label>
+        <label htmlFor="secondPassword">
+          Repeat password
+          <input
+            type="password"
+            id="secondPassword"
+            value={secondPassword}
+            onChange={handleChange}
+            required
+            minLength={6}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
     </Modal>
   );
 };
