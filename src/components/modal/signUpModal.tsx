@@ -1,52 +1,54 @@
-import Modal from "@/elements/modal";
-import signup from "@/api/apiSignup";
-import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+// i will rewrite this code in 5-task-issueFixes
 
-import Context from "@/api/context";
-import IContextType from "@/api/context.d";
+// import Modal from "@/elements/modal";
+// import signup from "@/api/apiSignup";
+// import { useContext } from "react";
+// import { useHistory } from "react-router-dom";
 
-const SignUpModal = () => {
-  const context = useContext<Partial<IContextType>>(Context);
-  const history = useHistory();
+// import Context from "@/api/context";
+// import IContextType from "@/api/context.d";
 
-  const redirect = (path: string) => {
-    history.push(path);
-  };
+// const SignUpModal = () => {
+//   const context = useContext<Partial<IContextType>>(Context);
+//   const history = useHistory();
 
-  return (
-    <Modal>
-      <div className="modal_container">
-        <h1>Registration</h1>
-        <div className="modal_container__info">
-          <p>Login</p>
-          <input id="signup_login" type="login" placeholder="Your future nickname" />
-        </div>
-        <div className="modal_container__info">
-          <p>Password</p>
-          <input id="signup_password" type="password" placeholder="" />
-        </div>
-        <div className="modal_container__info">
-          <p>Confirm password</p>
-          <input id="signup_confirmPassword" type="password" placeholder="" />
-        </div>
-        <button
-          type="button"
-          onClick={async () => {
-            const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup();
+//   const redirect = (path: string) => {
+//     history.push(path);
+//   };
 
-            if (username) {
-              if (context.setNickname) context.setNickname(username);
-              if (context.toggleSignUpModal) context.toggleSignUpModal(false);
-              redirect("/profile");
-            } else alert(errorMessage);
-          }}
-        >
-          Sign Up
-        </button>
-      </div>
-    </Modal>
-  );
-};
+//   return (
+//     <Modal>
+//       <div className="modal_container">
+//         <h1>Registration</h1>
+//         <div className="modal_container__info">
+//           <p>Login</p>
+//           <input id="signup_login" type="login" placeholder="Your future nickname" />
+//         </div>
+//         <div className="modal_container__info">
+//           <p>Password</p>
+//           <input id="signup_password" type="password" placeholder="" />
+//         </div>
+//         <div className="modal_container__info">
+//           <p>Confirm password</p>
+//           <input id="signup_confirmPassword" type="password" placeholder="" />
+//         </div>
+//         <button
+//           type="button"
+//           onClick={async () => {
+//             const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup();
 
-export default SignUpModal;
+//             if (username) {
+//               if (context.setNickname) context.setNickname(username);
+//               if (context.toggleSignUpModal) context.toggleSignUpModal(false);
+//               redirect("/profile");
+//             } else alert(errorMessage);
+//           }}
+//         >
+//           Sign Up
+//         </button>
+//       </div>
+//     </Modal>
+//   );
+// };
+
+// export default SignUpModal;

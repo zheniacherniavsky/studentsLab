@@ -14,8 +14,8 @@ import ProfilePage from "./pages/profilePage";
 // Styles
 import "@/styles/styles.scss";
 import "@/styles/pages.scss";
-import SignInModal from "./components/modal/signInModal";
-import SignUpModal from "./components/modal/signUpModal";
+// import SignInModal from "./components/modal/signInModal";
+// import SignUpModal from "./components/modal/signUpModal";
 
 interface IMyComponentState {
   username: string | null;
@@ -53,10 +53,10 @@ class App extends React.Component<unknown, IMyComponentState> {
     this.setState({ isSignUpOpen: mode });
   };
 
-  authChecker = (component: JSX.Element) => {
-    if (this.state.username) return component;
-    return <SignInModal WillRenderPage={component} />;
-  };
+  authChecker = (component: JSX.Element) => component;
+
+  // if (this.state.username) return component;
+  // return <SignInModal WillRenderPage={component} />;
 
   render() {
     return (
@@ -73,8 +73,6 @@ class App extends React.Component<unknown, IMyComponentState> {
           }}
         >
           <BrowserRouter>
-            {this.state.isSignInOpen ? <SignInModal WillRenderPage={null} /> : null}
-            {this.state.isSignUpOpen ? <SignUpModal /> : null}
             <header>
               <NavBar title="Game Store" />
             </header>
@@ -83,11 +81,21 @@ class App extends React.Component<unknown, IMyComponentState> {
                 <Route path="/" exact>
                   <HomePage />
                 </Route>
-                <Route path="/about" exact render={() => this.authChecker(AboutPage())} />
-                <Route path="/pc" exact render={() => this.authChecker(ProductPage())} />
-                <Route path="/profile" exact render={() => this.authChecker(ProfilePage())} />
-                <Route path="/playstationfive" exact render={() => this.authChecker(ProductPage())} />
-                <Route path="/xboxone" exact render={() => this.authChecker(ProductPage())} />
+                <Route path="/about" exact>
+                  <AboutPage />
+                </Route>
+                <Route path="/pc" exact>
+                  <ProductPage />
+                </Route>
+                <Route path="/profile" exact>
+                  <ProfilePage />
+                </Route>
+                <Route path="/playstationfive" exact>
+                  <ProductPage />
+                </Route>
+                <Route path="/xboxone" exact>
+                  <ProductPage />
+                </Route>
                 <Redirect to="/" />
               </Switch>
             </div>
