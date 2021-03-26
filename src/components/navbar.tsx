@@ -73,7 +73,7 @@ const NavBar = ({ title }: { title: string }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      if (setNickname) setNickname(null);
+                      if (setNickname) setNickname(undefined);
                       redirect("/");
                     }}
                   >

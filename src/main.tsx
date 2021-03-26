@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 import * as ReactDom from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Context from "@/api/context";
@@ -14,22 +14,22 @@ import ProfilePage from "./pages/profilePage";
 // Styles
 import "@/styles/styles.scss";
 import "@/styles/pages.scss";
-// import SignInModal from "./components/modal/signInModal";
-// import SignUpModal from "./components/modal/signUpModal";
+import SignInModal from "./components/modal/signInModal";
+import SignUpModal from "./components/modal/signUpModal";
 
 interface IMyComponentState {
-  username: string | null;
-  isSignInOpen: boolean;
-  isSignUpOpen: boolean;
+  username?: string;
+  showSignInModal: boolean;
+  showSignUpModal: boolean;
 }
 
-class App extends React.Component<unknown, IMyComponentState> {
-  constructor(props: unknown) {
+class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentState> {
+  constructor(props: PropsWithChildren<ReactNode>) {
     super(props);
     this.state = {
-      username: null,
-      isSignInOpen: false,
-      isSignUpOpen: false,
+      username: undefined,
+      showSignInModal: false,
+      showSignUpModal: false,
     };
   }
 
@@ -41,16 +41,20 @@ class App extends React.Component<unknown, IMyComponentState> {
     window.location.assign("/");
   }
 
-  setNickname = (nick: string | null) => {
+  setNickname = (nick?: string) => {
     this.setState({ username: nick });
   };
 
-  toggleSignInModal = (mode: boolean) => {
-    this.setState({ isSignInOpen: mode });
+  toggleSignInModal = (flag: boolean) => {
+    this.setState({
+      showSignInModal: flag,
+    });
   };
 
-  toggleSignUpModal = (mode: boolean) => {
-    this.setState({ isSignUpOpen: mode });
+  toggleSignUpModal = (flag: boolean) => {
+    this.setState({
+      showSignUpModal: flag,
+    });
   };
 
   authChecker = (component: JSX.Element) => component;
@@ -63,8 +67,6 @@ class App extends React.Component<unknown, IMyComponentState> {
       <>
         <Context.Provider
           value={{
-            isSignInOpen: this.state.isSignInOpen,
-            isSignUpOpen: this.state.isSignUpOpen,
             toggleSignInModal: this.toggleSignInModal,
             toggleSignUpModal: this.toggleSignUpModal,
             // profile details
@@ -73,6 +75,8 @@ class App extends React.Component<unknown, IMyComponentState> {
           }}
         >
           <BrowserRouter>
+            {this.state.showSignInModal ? <SignInModal /> : null}
+            {this.state.showSignUpModal ? <SignUpModal /> : null}
             <header>
               <NavBar title="Game Store" />
             </header>
@@ -82,19 +86,19 @@ class App extends React.Component<unknown, IMyComponentState> {
                   <HomePage />
                 </Route>
                 <Route path="/about" exact>
-                  <AboutPage />
+                  {this.state.username ? <AboutPage /> : <SignInModal />}
                 </Route>
                 <Route path="/pc" exact>
-                  <ProductPage />
+                  {this.state.username ? <ProductPage /> : <SignInModal />}
                 </Route>
                 <Route path="/profile" exact>
-                  <ProfilePage />
+                  {this.state.username ? <ProfilePage /> : <SignInModal />}
                 </Route>
                 <Route path="/playstationfive" exact>
-                  <ProductPage />
+                  {this.state.username ? <ProductPage /> : <SignInModal />}
                 </Route>
                 <Route path="/xboxone" exact>
-                  <ProductPage />
+                  {this.state.username ? <ProductPage /> : <SignInModal />}
                 </Route>
                 <Redirect to="/" />
               </Switch>

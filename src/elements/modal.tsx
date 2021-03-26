@@ -1,43 +1,86 @@
-import { PropsWithChildren, ReactNode, useEffect, useContext } from "react";
-import ReactDOM from "react-dom";
+import React, { PropsWithChildren, ReactNode } from "react";
+import { createPortal } from "react-dom";
 import "@/elements/modal.scss";
 import Context from "@/api/context";
-
-import IContextType from "@/api/context.d";
-
 import closeImg from "@/assets/images/close.svg";
 
-const Modal = (props: PropsWithChildren<ReactNode>) => {
-  const context = useContext<Partial<IContextType>>(Context);
-  const root = document.createElement("div");
+const modalRoot = document.getElementById("modal_window");
 
-  useEffect(() => {
-    document.body.appendChild(root);
-  }, []);
+class Modal extends React.Component {
+  element: HTMLDivElement;
 
-  const destroy = () => {
-    if (context.toggleSignInModal) context.toggleSignInModal(false);
-    if (context.toggleSignUpModal) context.toggleSignUpModal(false);
-    document.body.removeChild(root);
-  };
+  constructor(props: PropsWithChildren<ReactNode>) {
+    super(props);
 
-  return ReactDOM.createPortal(
-    <div className="modal_window">
-      <button
-        type="button"
-        className="modal_window__close_button"
-        onClick={() => {
-          window.location.assign("/");
-          destroy();
-        }}
-        aria-label="Close modal"
-      >
-        <img src={closeImg} alt="Close modal" />
-      </button>
-      {props.children}
-    </div>,
-    root
-  );
-};
+    this.element = document.createElement("div");
+    this.element.classList.add("modal");
+  }
+
+  componentDidMount() {
+    modalRoot?.appendChild(this.element);
+    modalRoot?.classList.add("active");
+  }
+
+  componentWillUnmount() {
+    modalRoot?.classList.remove("active");
+    modalRoot?.removeChild(this.element);
+  }
+
+  render() {
+    const ctx = this.context;
+    return createPortal(
+      <>
+        <button
+          type="button"
+          className="close_button"
+          onClick={() => {
+            ctx.toggleSignInModal(false);
+            ctx.toggleSignUpModal(false);
+            if (!ctx.username) window.location.assign("/"); // bad practice
+          }}
+          aria-label="Close modal"
+        >
+          <img src={closeImg} alt="Close modal" />
+        </button>
+        {this.props.children}
+      </>,
+      this.element
+    );
+  }
+}
+Modal.contextType = Context;
+
+// const Modal = (props: PropsWithChildren<ReactNode>) => {
+//   const context = useContext<Partial<IContextType>>(Context);
+//   const root = document.createElement("div");
+
+//   useEffect(() => {
+//     document.body.appendChild(root);
+//   }, []);
+
+//   const destroy = () => {
+//     if (context.toggleSignInModal) context.toggleSignInModal(false);
+//     if (context.toggleSignUpModal) context.toggleSignUpModal(false);
+//     document.body.removeChild(root);
+//   };
+
+//   return ReactDOM.createPortal(
+//     <div className="modal_window">
+//       <button
+//         type="button"
+//         className="modal_window__close_button"
+//         onClick={() => {
+//           window.location.assign("/");
+//           destroy();
+//         }}
+//         aria-label="Close modal"
+//       >
+//         <img src={closeImg} alt="Close modal" />
+//       </button>
+//       {props.children}
+//     </div>,
+//     root
+//   );
+// };
 
 export default Modal;

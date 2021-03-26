@@ -1,10 +1,8 @@
 type IContextType = {
-  isSignInOpen: boolean;
-  toggleSignInModal: (mode: boolean) => void;
-  isSignUpOpen: boolean;
-  toggleSignUpModal: (mode: boolean) => void;
-  username: string | null;
-  setNickname: (nick: string | null) => void;
+  toggleSignInModal: (flag: boolean) => void;
+  toggleSignUpModal: (flag: boolean) => void;
+  username?: string;
+  setNickname: (nick?: string) => void;
 };
 
 export default IContextType;
