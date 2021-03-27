@@ -5,12 +5,14 @@ async function signup(
 ): Promise<{ username?: string; errorMessage?: string }> {
   if (firstPassword !== secondPassword) return { errorMessage: "Password mismatch!" };
 
+  const password = firstPassword;
+
   const response = await fetch("http://localhost:3000/register", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
-    body: JSON.stringify({ login, firstPassword }),
+    body: JSON.stringify({ login, password }),
   });
 
   if (response.ok) {

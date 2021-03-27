@@ -4,6 +4,7 @@ import { FormEvent, useContext, useState } from "react";
 
 import Context from "@/api/context";
 import IContextType from "@/api/context.d";
+import Input from "@/elements/input";
 
 const SignInModal = () => {
   const context = useContext<Partial<IContextType>>(Context);
@@ -34,14 +35,16 @@ const SignInModal = () => {
     <Modal>
       <form onSubmit={handleSubmit}>
         <h2>Authorization</h2>
-        <label htmlFor="login">
-          Login
-          <input type="text" id="login" value={login} onChange={handleChange} required minLength={6} />
-        </label>
-        <label htmlFor="password">
-          password
-          <input type="password" id="password" value={password} onChange={handleChange} required minLength={6} />
-        </label>
+        <Input label="Login" type="text" id="login" minLength={6} handleChange={handleChange} value={login} />
+        <Input
+          label="Password"
+          type="password"
+          id="password"
+          minLength={6}
+          handleChange={handleChange}
+          value={password}
+        />
+
         <button type="submit" className="modal_button">
           Submit
         </button>

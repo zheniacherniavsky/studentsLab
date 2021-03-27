@@ -44,12 +44,14 @@ app
   .put("/register", async (req, res) => {
     try {
       const { login, password } = req.body;
+      console.log(login);
       res.setHeader("Content-Type", "application/json");
 
       let data = fs.readFileSync("./server/accounts.json");
       const { accounts } = JSON.parse(data);
       /* eslint-disable-next-line */
       for (const user of accounts) {
+        console.log(user.login);
         if (user.login === login) {
           return res.status(400).json({ message: "A user with this login already exists!" });
         }
@@ -63,6 +65,7 @@ app
       fs.writeFileSync("./server/accounts.json", data);
       return res.status(201).json({ message: "Account has been created." });
     } catch (e) {
+      console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
   })
