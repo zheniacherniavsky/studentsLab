@@ -73,7 +73,9 @@ const SignUpModal = () => {
             minLength={6}
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="modal_button">
+          Submit
+        </button>
       </form>
     </Modal>
   );

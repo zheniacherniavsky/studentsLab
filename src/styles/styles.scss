@@ -29,3 +29,37 @@ a {
     color: $navbar_activetext;
   }
 }
+
+input {
+  background: $lightblack;
+  outline: none;
+  border: 2px solid $basicColor;
+  color: $basicColor;
+  padding: 0 7px;
+  font-size: 16px;
+
+  &:focus {
+    border: 2px solid $navbar_tilebottom;
+    color: $navbar_activetext;
+  }
+}
+
+.modal_button {
+  width: 250px;
+  height: 50px;
+  background: $lightblack;
+  color: $basicColor;
+  border: 2px solid $basicColor;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+
+  &:hover,
+  &:focus {
+    border: 1px solid $navbar_tilebottom;
+  }
+
+  &:active {
+    background: $background;
+  }
+}

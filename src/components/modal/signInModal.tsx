@@ -42,7 +42,9 @@ const SignInModal = () => {
           password
           <input type="password" id="password" value={password} onChange={handleChange} required minLength={6} />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="modal_button">
+          Submit
+        </button>
       </form>
     </Modal>
   );
