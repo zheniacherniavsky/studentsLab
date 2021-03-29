@@ -13,19 +13,8 @@
       height: 50px;
       display: flex;
       border-radius: 20px;
-      font-family: "Roboto", sans-serif;
-      font-weight: bold;
       padding: 20px;
-      background: $lightblack;
-      border: 1px solid $navbar_activetext;
-      color: $navbar_activetext;
       font-size: 19px;
-    }
-
-    input:active,
-    input:focus {
-      border: 2px solid $navbar_activetext;
-      outline: none;
     }
 
     // LOADER
