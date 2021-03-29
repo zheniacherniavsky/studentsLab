@@ -5,6 +5,9 @@ import "@/components/navbar.scss";
 import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 
+import Swal from "sweetalert2/src/sweetalert2";
+import { SweetAlertResult } from "sweetalert2";
+
 const NavBar = ({ title }: { title: string }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
@@ -73,8 +76,17 @@ const NavBar = ({ title }: { title: string }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      if (setNickname) setNickname(undefined);
-                      redirect("/");
+                      Swal.fire({
+                        title: "Do you want to exit?",
+                        showDenyButton: true,
+                        confirmButtonText: `Yes`,
+                        icon: "question",
+                      }).then((result: SweetAlertResult) => {
+                        if (result.isConfirmed) {
+                          if (setNickname) setNickname(undefined);
+                          redirect("/");
+                        }
+                      });
                     }}
                   >
                     Log out

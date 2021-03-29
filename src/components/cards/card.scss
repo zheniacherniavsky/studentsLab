@@ -73,31 +73,7 @@
     &_btn {
       width: 120px;
       font-size: 16px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: $lightblack;
-      color: $basicColor;
       font-weight: bold;
-      border: 1px solid $navbar_tilebottom;
-      border-radius: 20px;
-
-      &:active {
-        background: $lightblack;
-        border: 2px solid $navbar_tilebottom;
-        outline: none;
-      }
-
-      &:focus {
-        background: $lightblack;
-        outline: none;
-      }
-
-      &:hover {
-        background-color: $background;
-        box-shadow: 0px 0px 5px $navbar_tilebottom;
-      }
     }
   }
 
