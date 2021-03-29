@@ -6,6 +6,8 @@ import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 import Input from "@/elements/input";
 
+import Swal from "sweetalert2/src/sweetalert2";
+
 const SignInModal = () => {
   const context = useContext<Partial<IContextType>>(Context);
 
@@ -25,7 +27,11 @@ const SignInModal = () => {
       if (context.setNickname) context.setNickname(username);
       if (context.toggleSignInModal) context.toggleSignInModal(false);
     } else {
-      alert(errorMessage);
+      Swal.fire({
+        title: "Ooops...",
+        text: errorMessage,
+        icon: "error",
+      });
       setLogin("");
       setPassword("");
     }

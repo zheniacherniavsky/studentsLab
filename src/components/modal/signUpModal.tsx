@@ -7,6 +7,8 @@ import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 import Input from "@/elements/input";
 
+import Swal from "sweetalert2/src/sweetalert2";
+
 const SignUpModal = () => {
   const context = useContext<Partial<IContextType>>(Context);
   const history = useHistory();
@@ -38,7 +40,11 @@ const SignUpModal = () => {
       if (context.toggleSignUpModal) context.toggleSignUpModal(false);
       redirect("/profile");
     } else {
-      alert(errorMessage);
+      Swal.fire({
+        title: "Ooops...",
+        text: errorMessage,
+        icon: "error",
+      });
       setFirstPassword("");
       setSecondPassword("");
     }
