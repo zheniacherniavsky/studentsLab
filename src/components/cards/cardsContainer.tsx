@@ -1,40 +1,23 @@
 import IProduct from "@/api/product";
 import Card from "@/components/cards/card";
-import "@/components/cards/cardsContainer.scss";
+import "./cardsContainer.scss";
 
 interface ICardsProps {
+  title: string;
   data: Array<IProduct>;
-  type: string;
-  count: number;
 }
 
-const CardsContainer = (props: ICardsProps) => {
-  let title;
-
-  if (props.data.length !== 0) {
-    switch (props.type) {
-      case "search":
-        title = "Search results";
-        break;
-      case "top":
-        title = `Top ${props.count} products`;
-        break;
-      default:
-        break;
-    }
-    return (
-      <div className="cards_container">
-        <h2 className="cards_container__title">{title}</h2>
-        <div className="cards_container__content">
-          {props.data.map((item: IProduct) => (
-            <Card product={item} key={item.name} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return <></>;
-};
+const CardsContainer = (props: ICardsProps) => (
+  <div className="cards_container">
+    <h2>{props.title}</h2>
+    <div className="content">
+      {props.data.length !== 0 ? (
+        props.data.map((item) => <Card product={item} key={item.name} />)
+      ) : (
+        <h4>No results were found for your search...</h4>
+      )}
+    </div>
+  </div>
+);
 
 export default CardsContainer;

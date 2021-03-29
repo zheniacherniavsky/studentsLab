@@ -1,4 +1,4 @@
-import "@/components/cards/card.scss";
+import "./card.scss";
 import IProduct from "@/api/product";
 
 const Card = ({ product: p }: { product: IProduct }) => (

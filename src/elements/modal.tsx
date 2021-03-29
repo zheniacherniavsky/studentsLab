@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from "react";
 import { createPortal } from "react-dom";
-import "@/elements/modal.scss";
+import "./modal.scss";
 import Context from "@/api/context";
 import closeImg from "@/assets/images/close.svg";
 

@@ -4,14 +4,14 @@
   border-radius: 60px;
   margin: 30px 30px;
 
-  h1 {
+  h2 {
     cursor: default;
     margin: 20px;
     padding: 10px 20px;
     border-bottom: 1px solid $basicColor;
   }
 
-  &__tiles {
+  .tiles {
     cursor: default;
     display: flex;
     align-items: center;
@@ -42,6 +42,10 @@
         width: 80px;
         margin-top: 30px;
         filter: contrast(0);
+      }
+
+      span {
+        margin: 20px;
       }
 
       &:hover {

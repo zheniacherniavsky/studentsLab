@@ -1,32 +1,18 @@
 import { FormEvent } from "react";
 
-const Input = ({
-  label,
-  type,
-  id,
-  minLength,
-  handleChange,
-  value,
-}: {
+interface TextInputProps {
   label: string;
   type: string;
   id: string;
-  minLength: number;
   handleChange: (event: FormEvent<HTMLInputElement>) => void;
   value: string;
-}) => (
-  <label htmlFor={id}>
-    {label}
-    <input
-      type={type}
-      id={id}
-      className="modal_input"
-      required
-      minLength={minLength}
-      onChange={handleChange}
-      value={value}
-    />
+}
+
+const TextInput = (props: TextInputProps) => (
+  <label htmlFor={props.id}>
+    <span>{props.label}</span>
+    <input type={props.type} id={props.id} className="modal_input" onChange={props.handleChange} value={props.value} />
   </label>
 );
 
-export default Input;
+export default TextInput;

@@ -22,38 +22,41 @@ const Loading = ({ hook }: { hook: boolean }) => {
 
 const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
+  const [searchDataVisibility, showSearchData] = useState(false);
   const [topProducts, loadTopProducts] = useState([]);
   const [loading, updateLoading] = useState(false);
 
   const topProductsCount = 5; // how much top product we want see on home page
 
   useEffect(() => {
-    const preload = async () => loadTopProducts((await getRecentlyAddedProducts(topProductsCount)) as never[]); // ?
+    const preload = async () => loadTopProducts(await getRecentlyAddedProducts(topProductsCount));
 
     preload();
   }, []);
 
+  const handleChange = async (event) => {
+    if (event.target.value !== "")
+      debounce(async () => {
+        updateLoading(true);
+        setTimeout(async () => {
+          updateSearchData(await getData());
+          updateLoading(false);
+          showSearchData(true);
+        }, 299);
+      }, 300)();
+    else showSearchData(false);
+  };
+
   return (
-    <>
-      <div className="homepage_container">
-        <div className="homepage_container__search">
-          <Loading hook={loading} />
-          <input
-            onChange={debounce(async () => {
-              updateLoading(true);
-              updateSearchData(await getData());
-              updateLoading(false);
-            }, 300)}
-            type="text"
-            placeholder="Search"
-            id="search_input"
-          />
-        </div>
-        <CardsContainer type="search" data={searchData} />
-        <Categories />
-        <CardsContainer type="top" data={topProducts} count={topProductsCount} />
+    <div className="homepage_container">
+      <div className="homepage_container__search">
+        <Loading hook={loading} />
+        <input onChange={handleChange} type="text" placeholder="Search" id="search_input" />
       </div>
-    </>
+      {searchDataVisibility ? <CardsContainer title="Search results" data={searchData} /> : null}
+      <Categories />
+      <CardsContainer title="Top products" data={topProducts} />
+    </div>
   );
 };
 export default HomePage;

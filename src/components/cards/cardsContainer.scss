@@ -4,13 +4,14 @@
   border-radius: 60px;
   margin: 30px 30px;
 
-  &__title {
+  h2 {
     cursor: default;
     margin: 20px;
     padding: 10px 20px;
     border-bottom: 1px solid $basicColor;
   }
-  &__content {
+
+  .content {
     display: flex;
     align-items: center;
     justify-content: center;
