@@ -4,23 +4,17 @@ import IProduct from "@/api/product";
 const Card = ({ product: p }: { product: IProduct }) => (
   <div className="card_container">
     <div className="front">
-      <img className="card_container__image" src={p.image} alt="Product" />
-      <div className="card_container__frontinfo">
-        <p className="card_container__frontinfo_title">{p.name}</p>
-        <p className="card_container__frontinfo_age">
-          <span>{p.age}+</span>
-        </p>
+      <img src={p.image} alt="Product" />
+      <div>
+        <span className="title">{p.name}</span>
+        <span className="ageLimit">{p.price} RUB</span>
       </div>
     </div>
     <div className="back">
-      <div className="card_container__shortdescription">{p.shortdescription}</div>
-      <div className="card_container__backinfo">
-        <p className="card_container__backinfo_price">
-          Price: <span>{p.price}</span>
-        </p>
-        <button type="button" className="card_container__backinfo_btn">
-          Show game
-        </button>
+      <p>{p.shortdescription}</p>
+      <div>
+        <span>{p.age}+</span>
+        <button type="button">Show game</button>
       </div>
     </div>
   </div>
