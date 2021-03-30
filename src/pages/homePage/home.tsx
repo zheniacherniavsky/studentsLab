@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, SetStateAction } from "react";
 // import debounce from "debounce";
 import debounce from "@/api/debounse";
 import getData from "@/api/apiSearchData";
@@ -26,15 +26,16 @@ const HomePage = () => {
   const [topProducts, loadTopProducts] = useState([]);
   const [loading, updateLoading] = useState(false);
 
-  const topProductsCount = 5; // how much top product we want see on home page
+  const topProductsCount = 4; // how much top product we want see on home page
 
   useEffect(() => {
-    const preload = async () => loadTopProducts(await getRecentlyAddedProducts(topProductsCount));
+    const preload = async () =>
+      loadTopProducts((await getRecentlyAddedProducts(topProductsCount)) as SetStateAction<never[]>);
 
     preload();
   }, []);
 
-  const handleChange = async (event) => {
+  const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value !== "")
       debounce(async () => {
         updateLoading(true);

@@ -7,8 +7,6 @@ import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 import TextInput from "@/elements/input";
 
-import Swal from "sweetalert2/src/sweetalert2";
-
 const SignUpModal = () => {
   const context = useContext<Partial<IContextType>>(Context);
   const history = useHistory();
@@ -60,11 +58,7 @@ const SignUpModal = () => {
         if (context.toggleSignUpModal) context.toggleSignUpModal(false);
         redirect("/profile");
       } else {
-        Swal.fire({
-          title: "Ooops...",
-          text: errorMessage,
-          icon: "error",
-        });
+        setError(errorMessage as string);
         setFirstPassword("");
         setSecondPassword("");
       }
@@ -72,7 +66,7 @@ const SignUpModal = () => {
   };
 
   return (
-    <Modal>
+    <Modal showExitButtom>
       <form onSubmit={handleSubmit}>
         <h2>Registration</h2>
         <p>{errorValidate}</p>

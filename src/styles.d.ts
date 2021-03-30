@@ -17,5 +17,3 @@ declare module "*.svg" {
   const content: string;
   export default content;
 }
-
-declare module "sweetalert2/src/sweetalert2";

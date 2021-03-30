@@ -135,7 +135,7 @@
       border-radius: 20px;
 
       h2 {
-        margin-top: 0;
+        margin: 0;
       }
 
       p {
@@ -161,6 +161,29 @@
         margin: auto;
         margin-top: 40px;
         font-weight: bold;
+      }
+    }
+
+    .container {
+      background: $lightblack;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      border-radius: 20px;
+      h2 {
+        margin: 0;
+      }
+
+      .buttons_container {
+        margin-top: 15px;
+        display: flex;
+        width: 250px;
+        justify-content: space-around;
+        button {
+          width: 100px;
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import "./modal.scss";
 import Context from "@/api/context";
@@ -6,10 +6,15 @@ import closeImg from "@/assets/images/close.svg";
 
 const modalRoot = document.getElementById("modal_window");
 
-class Modal extends React.Component {
+type PropsType = {
+  children: ReactNode;
+  showExitButtom: boolean;
+};
+
+class Modal extends React.Component<PropsType> {
   element: HTMLDivElement;
 
-  constructor(props: PropsWithChildren<ReactNode>) {
+  constructor(props: PropsType) {
     super(props);
 
     this.element = document.createElement("div");
@@ -30,18 +35,21 @@ class Modal extends React.Component {
     const ctx = this.context;
     return createPortal(
       <>
-        <button
-          type="button"
-          className="close_button"
-          onClick={() => {
-            ctx.toggleSignInModal(false);
-            ctx.toggleSignUpModal(false);
-            if (!ctx.username) window.location.assign("/"); // bad practice
-          }}
-          aria-label="Close modal"
-        >
-          <img src={closeImg} alt="Close modal" />
-        </button>
+        {this.props.showExitButtom ? (
+          <button
+            type="button"
+            className="close_button"
+            onClick={() => {
+              ctx.toggleSignInModal(false);
+              ctx.toggleSignUpModal(false);
+              if (!ctx.username) window.location.assign("/"); // bad practice
+            }}
+            aria-label="Close modal"
+          >
+            <img src={closeImg} alt="Close modal" />
+          </button>
+        ) : null}
+
         {this.props.children}
       </>,
       this.element

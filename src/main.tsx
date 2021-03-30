@@ -17,11 +17,18 @@ import "@/styles/pages.scss";
 import SignInModal from "./components/modal/signInModal";
 import SignUpModal from "./components/modal/signUpModal";
 import PrivateRoute from "./elements/privateRoute";
+import InfoModal from "./components/modal/infoModal";
 
 interface IMyComponentState {
   username?: string;
   showSignInModal: boolean;
   showSignUpModal: boolean;
+
+  showInfoModal: boolean;
+  infoModalHeader?: string;
+  infoModalText?: string;
+  infoModalType?: string;
+  infoModalCallback?: () => void;
 }
 
 class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentState> {
@@ -31,6 +38,12 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
       username: undefined,
       showSignInModal: false,
       showSignUpModal: false,
+
+      showInfoModal: false,
+      infoModalHeader: undefined,
+      infoModalText: undefined,
+      infoModalType: undefined,
+      infoModalCallback: undefined,
     };
   }
 
@@ -44,6 +57,31 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
 
   setNickname = (nick?: string) => {
     this.setState({ username: nick });
+  };
+
+  toggleInfoModal = (flag: boolean) => {
+    this.setState({
+      showInfoModal: flag,
+    });
+
+    if (flag === false) {
+      this.setState({
+        infoModalHeader: undefined,
+        infoModalText: undefined,
+        infoModalType: undefined,
+        infoModalCallback: undefined,
+      });
+    }
+  };
+
+  showInfoModal = (header?: string, text?: string, type?: string, callback?: () => void) => {
+    this.setState({
+      infoModalHeader: header,
+      infoModalText: text,
+      infoModalType: type,
+      infoModalCallback: callback,
+    });
+    this.toggleInfoModal(true);
   };
 
   toggleSignInModal = (flag: boolean) => {
@@ -65,6 +103,12 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
           value={{
             toggleSignInModal: this.toggleSignInModal,
             toggleSignUpModal: this.toggleSignUpModal,
+            toggleInfoModal: this.toggleInfoModal,
+            showInfoModal: this.showInfoModal,
+            infoModalHeader: this.state.infoModalHeader,
+            infoModalText: this.state.infoModalText,
+            infoModalType: this.state.infoModalType,
+            infoModalCallback: this.state.infoModalCallback,
             // profile details
             username: this.state.username,
             setNickname: this.setNickname,
@@ -73,6 +117,7 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
           <BrowserRouter>
             {this.state.showSignInModal ? <SignInModal /> : null}
             {this.state.showSignUpModal ? <SignUpModal /> : null}
+            {this.state.showInfoModal ? <InfoModal /> : null}
             <header>
               <NavBar title="Game Store" />
             </header>
