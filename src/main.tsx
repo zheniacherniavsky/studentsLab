@@ -16,6 +16,7 @@ import "@/styles/styles.scss";
 import "@/styles/pages.scss";
 import SignInModal from "./components/modal/signInModal";
 import SignUpModal from "./components/modal/signUpModal";
+import PrivateRoute from "./elements/privateRoute";
 
 interface IMyComponentState {
   username?: string;
@@ -57,11 +58,6 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
     });
   };
 
-  authChecker = (component: JSX.Element) => component;
-
-  // if (this.state.username) return component;
-  // return <SignInModal WillRenderPage={component} />;
-
   render() {
     return (
       <>
@@ -85,21 +81,21 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
                 <Route path="/" exact>
                   <HomePage />
                 </Route>
-                <Route path="/about" exact>
-                  {this.state.username ? <AboutPage /> : <SignInModal />}
-                </Route>
-                <Route path="/pc" exact>
-                  {this.state.username ? <ProductPage /> : <SignInModal />}
-                </Route>
-                <Route path="/profile" exact>
-                  {this.state.username ? <ProfilePage /> : <SignInModal />}
-                </Route>
-                <Route path="/playstationfive" exact>
-                  {this.state.username ? <ProductPage /> : <SignInModal />}
-                </Route>
-                <Route path="/xboxone" exact>
-                  {this.state.username ? <ProductPage /> : <SignInModal />}
-                </Route>
+                <PrivateRoute path="/about" exact>
+                  <AboutPage />
+                </PrivateRoute>
+                <PrivateRoute path="/pc" exact>
+                  <ProductPage />
+                </PrivateRoute>
+                <PrivateRoute path="/profile" exact>
+                  <ProfilePage />
+                </PrivateRoute>
+                <PrivateRoute path="/playstationfive" exact>
+                  <ProductPage />
+                </PrivateRoute>
+                <PrivateRoute path="/xboxone" exact>
+                  <ProductPage />
+                </PrivateRoute>
                 <Redirect to="/" />
               </Switch>
             </div>
