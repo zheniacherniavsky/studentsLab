@@ -1,12 +1,17 @@
-import Context from "@/api/context";
 import SignInModal from "@/components/modal/signInModal";
-import { ReactNode, useContext } from "react";
+import useTypedSelector from "@/hooks/useTypedSelector";
+import { ReactNode } from "react";
 import { Route } from "react-router-dom";
 
-export default function PrivateRoute({ children, ...rest }: { children: ReactNode; path: string; exact: boolean }) {
-  const context = useContext(Context);
+interface PrivateRouteProps {
+  children: ReactNode;
+  path: string;
+  exact: boolean;
+}
 
-  if (context.username) {
+const PrivateRoute = ({ children, ...rest }: PrivateRouteProps) => {
+  const { username } = useTypedSelector((state) => state.user);
+  if (username) {
     return <Route {...rest} render={() => children} />;
   }
   return (
@@ -14,4 +19,6 @@ export default function PrivateRoute({ children, ...rest }: { children: ReactNod
       <SignInModal />
     </Route>
   );
-}
+};
+
+export default PrivateRoute;

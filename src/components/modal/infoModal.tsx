@@ -1,35 +1,36 @@
-import Context from "@/api/context";
-import IContextType from "@/api/context.d";
 import Modal from "@/elements/modal";
-import { useContext } from "react";
+import useActions from "@/hooks/useActions";
+import useTypedSelector from "@/hooks/useTypedSelector";
 
 export default function InfoModal() {
-  const context = useContext<Partial<IContextType>>(Context);
+  const { infoModalHeader, infoModalText, infoModalType, infoModalCallback } = useTypedSelector((state) => state.modal);
+
+  const { closeInfoModal } = useActions();
 
   return (
     <Modal showExitButtom={false}>
       <div className="container">
-        <h2>{context.infoModalHeader}</h2>
-        <p>{context.infoModalText}</p>
-        {context.infoModalType === "alert" ? (
+        <h2>{infoModalHeader}</h2>
+        <p>{infoModalText}</p>
+        {infoModalType === "alert" ? (
           <button
             type="button"
             className="modal_button"
             onClick={() => {
-              if (context.toggleInfoModal) context.toggleInfoModal(false);
+              closeInfoModal();
             }}
           >
             Ok
           </button>
         ) : null}
-        {context.infoModalType === "prompt" ? (
+        {infoModalType === "prompt" ? (
           <div className="buttons_container">
             <button
               type="button"
               className="modal_button"
               onClick={() => {
-                if (context.infoModalCallback) context.infoModalCallback();
-                if (context.toggleInfoModal) context.toggleInfoModal(false);
+                if (infoModalCallback) infoModalCallback();
+                closeInfoModal();
               }}
             >
               Yes
@@ -38,7 +39,7 @@ export default function InfoModal() {
               type="button"
               className="modal_button"
               onClick={() => {
-                if (context.toggleInfoModal) context.toggleInfoModal(false);
+                closeInfoModal();
               }}
             >
               Cancel
