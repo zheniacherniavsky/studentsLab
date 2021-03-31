@@ -6,8 +6,12 @@ import Context from "@/api/context";
 import IContextType from "@/api/context.d";
 import TextInput from "@/elements/input";
 
+import { changeUsernameAsync } from "@/redux/actions/user";
+import { connect, useDispatch } from "react-redux";
+
 const SignInModal = () => {
   const context = useContext<Partial<IContextType>>(Context);
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +38,8 @@ const SignInModal = () => {
     if (lengthValidate() === true) {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signin(login, password);
       if (username) {
-        if (context.setNickname) context.setNickname(username);
+        // if (context.setNickname) context.setNickname(username);
+        dispatch(changeUsernameAsync(username));
         if (context.toggleSignInModal) context.toggleSignInModal(false);
       } else {
         setError(errorMessage as string);
@@ -60,4 +65,8 @@ const SignInModal = () => {
   );
 };
 
-export default SignInModal;
+const mapDispatchToProps = {
+  changeUsernameAsync,
+};
+
+export default connect(null, mapDispatchToProps)(SignInModal);

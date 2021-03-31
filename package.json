@@ -105,6 +105,8 @@
     "webpack-mock-server": "^1.0.5"
   },
   "dependencies": {
+    "@types/react-redux": "^7.1.16",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "core-js": "^3.9.1",
@@ -112,7 +114,10 @@
     "express": "^4.17.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

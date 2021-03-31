@@ -4,17 +4,23 @@ import { useContext, useState } from "react";
 import "./navbar.scss";
 import Context from "@/api/context";
 import IContextType from "@/api/context.d";
+import useTypedSelector from "@/hooks/useTypedSelector";
+import useActions from "@/hooks/useActions";
 
 const NavBar = ({ title }: { title: string }) => {
+  // Product drop down menu
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
-  const { toggleSignInModal, toggleSignUpModal, username, showInfoModal, setNickname } = useContext<
-    Partial<IContextType>
-  >(Context);
+  // context
+  const { toggleSignInModal, toggleSignUpModal, showInfoModal } = useContext<Partial<IContextType>>(Context);
 
+  // redux
+  const { username } = useTypedSelector((state) => state.user);
+  const { clearUsername } = useActions();
+
+  // routes
   const history = useHistory();
-
   const redirect = (path: string) => {
     history.push(path);
   };
@@ -65,7 +71,7 @@ const NavBar = ({ title }: { title: string }) => {
               <h3>About</h3>
             </NavLink>
           </li>
-          {username ? (
+          {username !== null ? (
             <>
               <li>
                 <NavLink to="/profile" activeClassName="active">
@@ -78,7 +84,7 @@ const NavBar = ({ title }: { title: string }) => {
                   onClick={() => {
                     if (showInfoModal)
                       showInfoModal("Exit", "Do you want to exit?", "prompt", () => {
-                        if (setNickname) setNickname(undefined);
+                        clearUsername();
                         redirect("/");
                       });
                   }}
