@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Context from "@/api/context";
 import Footer from "@/components/footer";
@@ -8,6 +8,7 @@ import NavBar from "@/components/navbar";
 import AboutPage from "@/pages/aboutPage";
 import HomePage from "@/pages/homePage/home";
 import ProductPage from "@/pages/productPage";
+import { connect } from "react-redux";
 import ProfilePage from "./pages/profilePage";
 
 // Styles
@@ -17,33 +18,15 @@ import SignInModal from "./components/modal/signInModal";
 import SignUpModal from "./components/modal/signUpModal";
 import PrivateRoute from "./elements/privateRoute";
 import InfoModal from "./components/modal/infoModal";
+import StateType from "./types/state";
 
-interface IMyComponentState {
+interface IAppProps {
   showSignInModal: boolean;
   showSignUpModal: boolean;
-
   showInfoModal: boolean;
-  infoModalHeader?: string;
-  infoModalText?: string;
-  infoModalType?: string;
-  infoModalCallback?: () => void;
 }
 
-class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentState> {
-  constructor(props: PropsWithChildren<ReactNode>) {
-    super(props);
-    this.state = {
-      showSignInModal: false,
-      showSignUpModal: false,
-
-      showInfoModal: false,
-      infoModalHeader: undefined,
-      infoModalText: undefined,
-      infoModalType: undefined,
-      infoModalCallback: undefined,
-    };
-  }
-
+class App extends React.Component<IAppProps> {
   componentDidCatch(error: Error) {
     /* modal window with error in future */
     alert(error); // is it simple alert?
@@ -52,62 +35,14 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
     window.location.assign("/");
   }
 
-  toggleInfoModal = (flag: boolean) => {
-    this.setState({
-      showInfoModal: flag,
-    });
-
-    if (flag === false) {
-      this.setState({
-        infoModalHeader: undefined,
-        infoModalText: undefined,
-        infoModalType: undefined,
-        infoModalCallback: undefined,
-      });
-    }
-  };
-
-  showInfoModal = (header?: string, text?: string, type?: string, callback?: () => void) => {
-    this.setState({
-      infoModalHeader: header,
-      infoModalText: text,
-      infoModalType: type,
-      infoModalCallback: callback,
-    });
-    this.toggleInfoModal(true);
-  };
-
-  toggleSignInModal = (flag: boolean) => {
-    this.setState({
-      showSignInModal: flag,
-    });
-  };
-
-  toggleSignUpModal = (flag: boolean) => {
-    this.setState({
-      showSignUpModal: flag,
-    });
-  };
-
   render() {
     return (
       <>
-        <Context.Provider
-          value={{
-            toggleSignInModal: this.toggleSignInModal,
-            toggleSignUpModal: this.toggleSignUpModal,
-            toggleInfoModal: this.toggleInfoModal,
-            showInfoModal: this.showInfoModal,
-            infoModalHeader: this.state.infoModalHeader,
-            infoModalText: this.state.infoModalText,
-            infoModalType: this.state.infoModalType,
-            infoModalCallback: this.state.infoModalCallback,
-          }}
-        >
+        <Context.Provider value={{}}>
           <BrowserRouter>
-            {this.state.showSignInModal ? <SignInModal /> : null}
-            {this.state.showSignUpModal ? <SignUpModal /> : null}
-            {this.state.showInfoModal ? <InfoModal /> : null}
+            {this.props.showSignInModal ? <SignInModal /> : null}
+            {this.props.showSignUpModal ? <SignUpModal /> : null}
+            {this.props.showInfoModal ? <InfoModal /> : null}
             <header>
               <NavBar title="Game Store" />
             </header>
@@ -144,4 +79,10 @@ class App extends React.Component<PropsWithChildren<ReactNode>, IMyComponentStat
   }
 }
 
-export default App;
+const mapStateToProps = (state: StateType) => ({
+  showSignInModal: state.modal.showSignInModal,
+  showSignUpModal: state.modal.showSignUpModal,
+  showInfoModal: state.modal.showInfoModal,
+});
+
+export default connect(mapStateToProps, null)(App);

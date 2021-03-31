@@ -1,14 +1,13 @@
 import Modal from "@/elements/modal";
 import signup from "@/api/apiSignup";
-import React, { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import Context from "@/api/context";
-import IContextType from "@/api/context.d";
 import TextInput from "@/elements/input";
+import useActions from "@/hooks/useActions";
 
 const SignUpModal = () => {
-  const context = useContext<Partial<IContextType>>(Context);
+  const { changeUsernameAsync, toggleSignUpModalAsync } = useActions();
   const history = useHistory();
 
   const redirect = (path: string) => {
@@ -54,8 +53,8 @@ const SignUpModal = () => {
         secondPassword
       );
       if (username) {
-        if (context.setNickname) context.setNickname(username);
-        if (context.toggleSignUpModal) context.toggleSignUpModal(false);
+        changeUsernameAsync(username);
+        toggleSignUpModalAsync(false);
         redirect("/profile");
       } else {
         setError(errorMessage as string);

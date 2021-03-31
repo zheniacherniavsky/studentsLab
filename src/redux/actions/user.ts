@@ -1,11 +1,11 @@
-import { UserActionTypes } from "@/types/user";
+import { UserAction, UserActionTypes } from "@/types/user";
 import { Dispatch } from "redux";
 
-export const changeUsernameAsync = (username: string) => async (dispatch: Dispatch) => {
+export const changeUsernameAsync = (username: string) => async (dispatch: Dispatch<UserAction>) => {
   try {
     dispatch({ type: UserActionTypes.CHANGE_USERNAME, payload: username });
   } catch (e) {
-    dispatch({ type: UserActionTypes.CHANGE_USERNAME_ERROR });
+    dispatch({ type: UserActionTypes.CHANGE_USERNAME_ERROR, payload: null });
   }
 };
 

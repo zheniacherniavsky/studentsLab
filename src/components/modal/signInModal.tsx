@@ -1,17 +1,12 @@
 import Modal from "@/elements/modal";
 import signin from "@/api/apiSignin";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 
-import Context from "@/api/context";
-import IContextType from "@/api/context.d";
 import TextInput from "@/elements/input";
-
-import { changeUsernameAsync } from "@/redux/actions/user";
-import { connect, useDispatch } from "react-redux";
+import useActions from "@/hooks/useActions";
 
 const SignInModal = () => {
-  const context = useContext<Partial<IContextType>>(Context);
-  const dispatch = useDispatch();
+  const { changeUsernameAsync, toggleSignInModalAsync } = useActions();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -38,9 +33,8 @@ const SignInModal = () => {
     if (lengthValidate() === true) {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signin(login, password);
       if (username) {
-        // if (context.setNickname) context.setNickname(username);
-        dispatch(changeUsernameAsync(username));
-        if (context.toggleSignInModal) context.toggleSignInModal(false);
+        changeUsernameAsync(username);
+        toggleSignInModalAsync(false);
       } else {
         setError(errorMessage as string);
         setLogin("");
@@ -65,8 +59,4 @@ const SignInModal = () => {
   );
 };
 
-const mapDispatchToProps = {
-  changeUsernameAsync,
-};
-
-export default connect(null, mapDispatchToProps)(SignInModal);
+export default SignInModal;

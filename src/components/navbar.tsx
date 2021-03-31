@@ -1,9 +1,7 @@
 import { Link, NavLink, useHistory } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import "./navbar.scss";
-import Context from "@/api/context";
-import IContextType from "@/api/context.d";
 import useTypedSelector from "@/hooks/useTypedSelector";
 import useActions from "@/hooks/useActions";
 
@@ -12,12 +10,9 @@ const NavBar = ({ title }: { title: string }) => {
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
 
-  // context
-  const { toggleSignInModal, toggleSignUpModal, showInfoModal } = useContext<Partial<IContextType>>(Context);
-
   // redux
   const { username } = useTypedSelector((state) => state.user);
-  const { clearUsername } = useActions();
+  const { clearUsername, toggleSignInModal, toggleSignUpModal, showInfoModal } = useActions();
 
   // routes
   const history = useHistory();
@@ -82,11 +77,10 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    if (showInfoModal)
-                      showInfoModal("Exit", "Do you want to exit?", "prompt", () => {
-                        clearUsername();
-                        redirect("/");
-                      });
+                    showInfoModal("Exit", "Do you want to exit?", "prompt", () => {
+                      clearUsername();
+                      redirect("/");
+                    });
                   }}
                 >
                   <h3>Log out</h3>
@@ -99,7 +93,7 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    if (toggleSignInModal) toggleSignInModal(true);
+                    toggleSignInModal(true);
                   }}
                 >
                   <h3>Sign In</h3>
@@ -109,7 +103,7 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    if (toggleSignUpModal) toggleSignUpModal(true);
+                    toggleSignUpModal(true);
                   }}
                 >
                   <h3>Sign Up</h3>

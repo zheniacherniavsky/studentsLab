@@ -1,14 +1,17 @@
 import React, { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import "./modal.scss";
-import Context from "@/api/context";
+import { toggleSignInModal } from "@/redux/actions/modal";
 import closeImg from "@/assets/images/close.svg";
+import { connect } from "react-redux";
+import StateType from "@/types/state";
 
 const modalRoot = document.getElementById("modal_window");
 
 type PropsType = {
   children: ReactNode;
   showExitButtom: boolean;
+  username: string | null;
 };
 
 class Modal extends React.Component<PropsType> {
@@ -32,7 +35,6 @@ class Modal extends React.Component<PropsType> {
   }
 
   render() {
-    const ctx = this.context;
     return createPortal(
       <>
         {this.props.showExitButtom ? (
@@ -40,9 +42,9 @@ class Modal extends React.Component<PropsType> {
             type="button"
             className="close_button"
             onClick={() => {
-              ctx.toggleSignInModal(false);
-              ctx.toggleSignUpModal(false);
-              if (!ctx.username) window.location.assign("/"); // bad practice
+              toggleSignInModal(false);
+              // ctx.toggleSignUpModal(false);
+              if (!this.props.username) window.location.assign("/"); // bad practice
             }}
             aria-label="Close modal"
           >
@@ -56,39 +58,13 @@ class Modal extends React.Component<PropsType> {
     );
   }
 }
-Modal.contextType = Context;
 
-// const Modal = (props: PropsWithChildren<ReactNode>) => {
-//   const context = useContext<Partial<IContextType>>(Context);
-//   const root = document.createElement("div");
+const mapStateToProps = (state: StateType) => ({
+  username: state.user.username,
+});
 
-//   useEffect(() => {
-//     document.body.appendChild(root);
-//   }, []);
+const mapDispatchToProps = {
+  toggleSignInModal,
+};
 
-//   const destroy = () => {
-//     if (context.toggleSignInModal) context.toggleSignInModal(false);
-//     if (context.toggleSignUpModal) context.toggleSignUpModal(false);
-//     document.body.removeChild(root);
-//   };
-
-//   return ReactDOM.createPortal(
-//     <div className="modal_window">
-//       <button
-//         type="button"
-//         className="modal_window__close_button"
-//         onClick={() => {
-//           window.location.assign("/");
-//           destroy();
-//         }}
-//         aria-label="Close modal"
-//       >
-//         <img src={closeImg} alt="Close modal" />
-//       </button>
-//       {props.children}
-//     </div>,
-//     root
-//   );
-// };
-
-export default Modal;
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);
