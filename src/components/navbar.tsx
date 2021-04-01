@@ -4,11 +4,17 @@ import { useState } from "react";
 import "./navbar.scss";
 import useTypedSelector from "@/hooks/useTypedSelector";
 import useActions from "@/hooks/useActions";
+import SignInModal from "./modal/signInModal";
+import SignUpModal from "./modal/signUpModal";
+import { InfoModal, InfoModalProps } from "./modal/infoModal";
 
 const NavBar = ({ title }: { title: string }) => {
   // Product drop down menu
   const [menuIsActive, toggleMenu] = useState(false);
   const [productsDropDownIsActive, togglePDD] = useState(false);
+  const [showSignInModal, toggleSignInModal] = useState(false);
+  const [showSignUpModal, toggleSignUpModal] = useState(false);
+  const [showInfoModal, toggleInfoModal] = useState(false);
 
   // redux
   const { username } = useTypedSelector((state) => state.user);
@@ -20,8 +26,27 @@ const NavBar = ({ title }: { title: string }) => {
     history.push(path);
   };
 
+  const InfoModalProps: InfoModalProps = {
+    infoModalHeader: "Exit",
+    infoModalText: "Do you want to exit?",
+    infoModalType: "prompt",
+    infoModalCallback: () => {
+      redux.clearUsername();
+      redirect("/");
+    },
+    closeInfoModalCallback: () => toggleInfoModal(false),
+  };
+
   return (
     <div className="navbar_container">
+      {showSignInModal ? (
+        <SignInModal
+          closeCallbackSuccess={() => toggleSignInModal(false)}
+          closeCallback={() => toggleSignInModal(false)}
+        />
+      ) : null}
+      {showSignUpModal ? <SignUpModal closeCallback={() => toggleSignUpModal(false)} /> : null}
+      {showInfoModal ? <InfoModal {...InfoModalProps} /> : null}
       <div className="navbar_container__title">
         <Link to="/">
           <h1>{title}</h1>
@@ -74,15 +99,7 @@ const NavBar = ({ title }: { title: string }) => {
                 </NavLink>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    redux.showInfoModal("Exit", "Do you want to exit?", "prompt", () => {
-                      redux.clearUsername(); // reduxClearUsername
-                      redirect("/");
-                    });
-                  }}
-                >
+                <button type="button" onClick={() => toggleInfoModal(true)}>
                   <h3>Log out</h3>
                 </button>
               </li>
@@ -93,7 +110,7 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    redux.toggleSignInModal(true);
+                    toggleSignInModal(true);
                   }}
                 >
                   <h3>Sign In</h3>
@@ -103,7 +120,7 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    redux.toggleSignUpModal(true);
+                    toggleSignUpModal(true);
                   }}
                 >
                   <h3>Sign Up</h3>

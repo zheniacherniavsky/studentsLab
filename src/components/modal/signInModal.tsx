@@ -5,8 +5,14 @@ import { FormEvent, useState } from "react";
 import TextInput from "@/elements/input";
 import useActions from "@/hooks/useActions";
 
-const SignInModal = () => {
-  const { changeUsernameAsync, toggleSignInModalAsync } = useActions();
+const SignInModal = ({
+  closeCallback,
+  closeCallbackSuccess,
+}: {
+  closeCallbackSuccess: () => void;
+  closeCallback: () => void;
+}) => {
+  const { changeUsernameAsync } = useActions();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +40,7 @@ const SignInModal = () => {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signin(login, password);
       if (username) {
         changeUsernameAsync(username);
-        toggleSignInModalAsync(false);
+        closeCallbackSuccess();
       } else {
         setError(errorMessage as string);
         setLogin("");
@@ -44,7 +50,7 @@ const SignInModal = () => {
   };
 
   return (
-    <Modal showExitButtom>
+    <Modal showExitButtom closeCallback={closeCallback}>
       <form onSubmit={handleSubmit}>
         <h2>Authorization</h2>
         <p>{errorValidate}</p>

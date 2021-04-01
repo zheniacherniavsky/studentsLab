@@ -1,12 +1,22 @@
 import Modal from "@/elements/modal";
-import useActions from "@/hooks/useActions";
-import useTypedSelector from "@/hooks/useTypedSelector";
 
-export default function InfoModal() {
-  const { infoModalHeader, infoModalText, infoModalType, infoModalCallback } = useTypedSelector((state) => state.modal);
+// TODO: components for modals
 
-  const { closeInfoModal } = useActions();
+export interface InfoModalProps {
+  infoModalHeader: string;
+  infoModalText: string;
+  infoModalType: string;
+  infoModalCallback: () => void;
+  closeInfoModalCallback: () => void;
+}
 
+export function InfoModal({
+  infoModalHeader,
+  infoModalText,
+  infoModalType,
+  infoModalCallback,
+  closeInfoModalCallback,
+}: InfoModalProps) {
   return (
     <Modal showExitButtom={false}>
       <div className="container">
@@ -17,7 +27,7 @@ export default function InfoModal() {
             type="button"
             className="modal_button"
             onClick={() => {
-              closeInfoModal();
+              closeInfoModalCallback();
             }}
           >
             Ok
@@ -30,7 +40,7 @@ export default function InfoModal() {
               className="modal_button"
               onClick={() => {
                 if (infoModalCallback) infoModalCallback();
-                closeInfoModal();
+                closeInfoModalCallback();
               }}
             >
               Yes
@@ -39,7 +49,7 @@ export default function InfoModal() {
               type="button"
               className="modal_button"
               onClick={() => {
-                closeInfoModal();
+                closeInfoModalCallback();
               }}
             >
               Cancel

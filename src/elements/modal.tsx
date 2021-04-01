@@ -5,17 +5,14 @@ import closeImg from "@/assets/images/close.svg";
 
 import { connect } from "react-redux";
 import StateType from "@/types/state";
-import { toggleSignInModal, toggleSignUpModal } from "@/redux/actions/modal";
-import { ModalActionTypes } from "@/types/modal";
 
 const modalRoot = document.getElementById("modal_window");
 
 type PropsType = {
   children: ReactNode;
-  showExitButtom: boolean;
-  username: string | null;
-  toggleSignInModal: (flag: boolean) => { type: ModalActionTypes; payload: boolean };
-  toggleSignUpModal: (flag: boolean) => { type: ModalActionTypes; payload: boolean };
+  showExitButtom?: boolean;
+  username?: string | null;
+  closeCallback?: () => void;
 };
 
 class Modal extends React.Component<PropsType> {
@@ -43,9 +40,7 @@ class Modal extends React.Component<PropsType> {
             type="button"
             className="close_button"
             onClick={() => {
-              this.props.toggleSignInModal(false);
-              this.props.toggleSignUpModal(false);
-              if (!this.props.username) window.location.assign("/"); // bad practive
+              if (this.props.closeCallback) this.props.closeCallback();
             }}
             aria-label="Close modal"
           >
@@ -64,9 +59,4 @@ const mapStateToProps = (state: StateType) => ({
   username: state.user.username,
 });
 
-const mapDispatchToProps = {
-  toggleSignInModal,
-  toggleSignUpModal,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, null)(Modal);

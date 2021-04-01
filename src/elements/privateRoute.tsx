@@ -1,7 +1,7 @@
 import SignInModal from "@/components/modal/signInModal";
 import useTypedSelector from "@/hooks/useTypedSelector";
-import { ReactNode } from "react";
-import { Route } from "react-router-dom";
+import { ReactNode, useState } from "react";
+import { Route, useHistory } from "react-router-dom";
 
 interface PrivateRouteProps {
   children: ReactNode;
@@ -10,13 +10,29 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ children, ...rest }: PrivateRouteProps) => {
+  const [ShowSignInModal, toggleSignInModal] = useState(true);
+
+  const history = useHistory();
+  const redirect = (path: string) => {
+    history.push(path);
+  };
+
   const { username } = useTypedSelector((state) => state.user);
+
   if (username) {
     return <Route {...rest} render={() => children} />;
   }
   return (
     <Route {...rest}>
-      <SignInModal />
+      {ShowSignInModal ? (
+        <SignInModal
+          closeCallback={() => {
+            toggleSignInModal(false);
+            redirect("/");
+          }}
+          closeCallbackSuccess={() => toggleSignInModal(false)}
+        />
+      ) : null}
     </Route>
   );
 };

@@ -7,17 +7,12 @@ import NavBar from "@/components/navbar";
 import AboutPage from "@/pages/aboutPage";
 import HomePage from "@/pages/homePage/home";
 import ProductPage from "@/pages/productPage";
-import { connect } from "react-redux";
 import ProfilePage from "./pages/profilePage";
 
 // Styles
 import "@/styles/styles.scss";
 import "@/styles/pages.scss";
-import SignInModal from "./components/modal/signInModal";
-import SignUpModal from "./components/modal/signUpModal";
 import PrivateRoute from "./elements/privateRoute";
-import InfoModal from "./components/modal/infoModal";
-import StateType from "./types/state";
 
 interface IAppProps {
   showSignInModal: boolean;
@@ -37,9 +32,8 @@ class App extends React.Component<IAppProps> {
   render() {
     return (
       <BrowserRouter>
-        {this.props.showSignInModal ? <SignInModal /> : null}
-        {this.props.showSignUpModal ? <SignUpModal /> : null}
-        {this.props.showInfoModal ? <InfoModal /> : null}
+        {/* {this.props.showSignUpModal ? <SignUpModal /> : null}
+        {this.props.showInfoModal ? <InfoModal /> : null} */}
         <header>
           <NavBar title="Game Store" />
         </header>
@@ -74,10 +68,4 @@ class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = (state: StateType) => ({
-  showSignInModal: state.modal.showSignInModal,
-  showSignUpModal: state.modal.showSignUpModal,
-  showInfoModal: state.modal.showInfoModal,
-});
-
-export default connect(mapStateToProps, null)(App);
+export default App;

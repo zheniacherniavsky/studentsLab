@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 import TextInput from "@/elements/input";
 import useActions from "@/hooks/useActions";
 
-const SignUpModal = () => {
-  const { changeUsernameAsync, toggleSignUpModalAsync } = useActions();
+const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
+  const { changeUsernameAsync } = useActions();
   const history = useHistory();
 
   const redirect = (path: string) => {
@@ -54,7 +54,7 @@ const SignUpModal = () => {
       );
       if (username) {
         changeUsernameAsync(username);
-        toggleSignUpModalAsync(false);
+        closeCallback();
         redirect("/profile");
       } else {
         setError(errorMessage as string);
@@ -65,7 +65,7 @@ const SignUpModal = () => {
   };
 
   return (
-    <Modal showExitButtom>
+    <Modal showExitButtom closeCallback={closeCallback}>
       <form onSubmit={handleSubmit}>
         <h2>Registration</h2>
         <p>{errorValidate}</p>
