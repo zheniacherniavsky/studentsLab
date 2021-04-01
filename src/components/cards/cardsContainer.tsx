@@ -8,7 +8,7 @@ interface ICardsProps {
 }
 
 const CardsContainer = (props: ICardsProps) => (
-  <div className="cards_container">
+  <div className="cards_container page_content_container">
     <h2>{props.title}</h2>
     <div className="content">
       {props.data.length !== 0 ? (

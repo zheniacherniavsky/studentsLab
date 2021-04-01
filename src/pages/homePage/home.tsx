@@ -11,6 +11,8 @@ import CardsContainer from "@/components/cards/cardsContainer";
 
 import "@/pages/homePage/home.scss";
 import "@/pages/homePage/categories.scss";
+import "@/pages/pages.scss";
+
 import Categories from "./categories";
 
 const Loading = ({ hook }: { hook: boolean }) => {
