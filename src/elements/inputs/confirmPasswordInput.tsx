@@ -1,19 +1,21 @@
-import React, { FormEvent } from "react";
+import { FormEvent } from "react";
 
 interface TextInputProps {
   label: string;
   type: string;
   id: string;
-  handleChange: React.Dispatch<React.SetStateAction<string>>;
   value: string;
+  firstPassword: string;
   errorDispatch: React.Dispatch<React.SetStateAction<string>>;
+  handleChange: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const LoginInput = (props: TextInputProps) => {
+const ConfirmPasswordInput = (props: TextInputProps) => {
   const validate = (event: FormEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     props.handleChange(value);
-    if (value.length < 6) props.errorDispatch("Min length of login is 6 symbols!");
+    if (value.length < 6) props.errorDispatch("Min length of password is 6 symbols!");
+    else if (value !== props.firstPassword) props.errorDispatch("Passwords mismatch!");
     else props.errorDispatch("");
   };
 
@@ -25,4 +27,4 @@ const LoginInput = (props: TextInputProps) => {
   );
 };
 
-export default LoginInput;
+export default ConfirmPasswordInput;

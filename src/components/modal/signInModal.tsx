@@ -17,27 +17,20 @@ const SignInModal = ({
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [errorValidate, setError] = useState("");
 
-  const handleChange = (event: FormEvent<HTMLInputElement>) => {
-    const t = event.currentTarget;
-    if (t.id === "login") setLogin(t.value);
-    if (t.id === "password") setPassword(t.value);
-  };
+  const [loginError, setLoginError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  const lengthValidate = () => {
-    if (login.length < 6 || password.length < 6) {
-      setError("Min length of login and password is 6 symbols!");
-      return false;
-    }
-    return true;
-  };
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    setError("");
+    const validationErrorMessage =
+      loginError || //
+      passwordError ||
+      "";
 
-    if (lengthValidate() === true) {
+    if (!validationErrorMessage) {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signin(login, password);
       if (username) {
         changeUsernameAsync(username);
@@ -47,16 +40,30 @@ const SignInModal = ({
         setLogin("");
         setPassword("");
       }
-    }
+    } else setError(validationErrorMessage);
   };
 
   return (
     <Modal showExitButtom closeCallback={closeCallback}>
       <form onSubmit={handleSubmit}>
         <h2>Authorization</h2>
-        <p>{errorValidate}</p>
-        <LoginInput label="Login" type="text" id="login" handleChange={handleChange} value={login} />
-        <PasswordInput label="Password" type="password" id="password" handleChange={handleChange} value={password} />
+        <p>{error}</p>
+        <LoginInput
+          label="Login"
+          type="text"
+          id="login"
+          handleChange={setLogin}
+          value={login}
+          errorDispatch={setLoginError}
+        />
+        <PasswordInput
+          label="Password"
+          type="password"
+          id="password"
+          handleChange={setPassword}
+          value={password}
+          errorDispatch={setPasswordError}
+        />
 
         <button type="submit" className="modal_button">
           Submit

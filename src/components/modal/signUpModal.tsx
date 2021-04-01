@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import LoginInput from "@/elements/inputs/loginInput";
 import PasswordInput from "@/elements/inputs/passwordInput";
+import ConfirmPasswordInput from "@/elements/inputs/confirmPasswordInput";
 import useActions from "@/hooks/useActions";
 
 const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
@@ -17,41 +18,26 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
 
   const [login, setLogin] = useState("");
   const [firstPassword, setFirstPassword] = useState("");
-  const [secondPassword, setSecondPassword] = useState("");
-  const [errorValidate, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleChange = (event: FormEvent<HTMLInputElement>) => {
-    const t = event.currentTarget;
-    if (t.id === "login") setLogin(t.value);
-    if (t.id === "firstPassword") setFirstPassword(t.value);
-    if (t.id === "secondPassword") setSecondPassword(t.value);
-  };
+  const [loginError, setLoginError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const lengthValidate = () => {
-    if (login.length < 6 || firstPassword.length < 6) {
-      setError("Min length of login and password is 6 symbols!");
-      return false;
-    }
-    return true;
-  };
-
-  const passwordsValidate = () => {
-    if (firstPassword === secondPassword) return true;
-    setError("Passwords mismatch!");
-    setFirstPassword("");
-    setSecondPassword("");
-    return false;
-  };
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    setError("");
+    const validationErrorMessage =
+      loginError || //
+      passwordError ||
+      confirmPasswordError ||
+      "";
 
-    if (lengthValidate() === true && passwordsValidate() === true) {
+    if (!validationErrorMessage) {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup(
         login,
-        firstPassword,
-        secondPassword
+        firstPassword
       );
       if (username) {
         changeUsernameAsync(username);
@@ -60,30 +46,40 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
       } else {
         setError(errorMessage as string);
         setFirstPassword("");
-        setSecondPassword("");
+        setConfirmPassword("");
       }
-    }
+    } else setError(validationErrorMessage);
   };
 
   return (
     <Modal showExitButtom closeCallback={closeCallback}>
       <form onSubmit={handleSubmit}>
         <h2>Registration</h2>
-        <p>{errorValidate}</p>
-        <LoginInput label="Login" type="text" id="login" handleChange={handleChange} value={login} />
+        <p>{error}</p>
+        <LoginInput
+          label="Login"
+          type="text"
+          id="login"
+          handleChange={setLogin}
+          value={login}
+          errorDispatch={setLoginError}
+        />
         <PasswordInput
           label="Password"
           type="password"
           id="firstPassword"
-          handleChange={handleChange}
+          handleChange={setFirstPassword}
           value={firstPassword}
+          errorDispatch={setPasswordError}
         />
-        <PasswordInput
+        <ConfirmPasswordInput
           label="Repeat password"
           type="password"
           id="secondPassword"
-          handleChange={handleChange}
-          value={secondPassword}
+          handleChange={setConfirmPassword}
+          value={confirmPassword}
+          firstPassword={firstPassword}
+          errorDispatch={setConfirmPasswordError}
         />
         <button type="submit" className="modal_button">
           Submit

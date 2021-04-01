@@ -1,12 +1,4 @@
-async function signup(
-  login: string,
-  firstPassword: string,
-  secondPassword: string
-): Promise<{ username?: string; errorMessage?: string }> {
-  if (firstPassword !== secondPassword) return { errorMessage: "Password mismatch!" };
-
-  const password = firstPassword;
-
+async function signup(login: string, password: string): Promise<{ username?: string; errorMessage?: string }> {
   const response = await fetch("http://localhost:3000/register", {
     method: "PUT",
     headers: {
