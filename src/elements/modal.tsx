@@ -1,70 +1,61 @@
-import React, { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "./modal.scss";
-import { toggleSignInModal } from "@/redux/actions/modal";
 import closeImg from "@/assets/images/close.svg";
-import { connect } from "react-redux";
-import StateType from "@/types/state";
+import { useHistory } from "react-router-dom";
+import useActions from "@/hooks/useActions";
+import useTypedSelector from "@/hooks/useTypedSelector";
 
 const modalRoot = document.getElementById("modal_window");
 
 type PropsType = {
   children: ReactNode;
   showExitButtom: boolean;
-  username: string | null;
 };
 
-class Modal extends React.Component<PropsType> {
-  element: HTMLDivElement;
+const Modal = (props: PropsType) => {
+  const element: HTMLDivElement = document.createElement("div");
+  element.classList.add("modal");
 
-  constructor(props: PropsType) {
-    super(props);
+  const history = useHistory();
+  const redirect = (path: string) => {
+    history.push(path);
+  };
 
-    this.element = document.createElement("div");
-    this.element.classList.add("modal");
-  }
+  const { username } = useTypedSelector((state) => state.user);
+  const redux = useActions();
 
-  componentDidMount() {
-    modalRoot?.appendChild(this.element);
-    modalRoot?.classList.add("active");
-  }
+  useEffect(() => {
+    modalRoot?.appendChild(element);
+    modalRoot?.classList.add("active"); // change
 
-  componentWillUnmount() {
-    modalRoot?.classList.remove("active");
-    modalRoot?.removeChild(this.element);
-  }
+    return () => {
+      modalRoot?.classList.remove("active");
+      modalRoot?.removeChild(element); // change
+    };
+  }, []);
 
-  render() {
-    return createPortal(
-      <>
-        {this.props.showExitButtom ? (
-          <button
-            type="button"
-            className="close_button"
-            onClick={() => {
-              toggleSignInModal(false);
-              // ctx.toggleSignUpModal(false);
-              if (!this.props.username) window.location.assign("/"); // bad practice
-            }}
-            aria-label="Close modal"
-          >
-            <img src={closeImg} alt="Close modal" />
-          </button>
-        ) : null}
+  return createPortal(
+    <>
+      {props.showExitButtom ? (
+        <button
+          type="button"
+          className="close_button"
+          onClick={() => {
+            redux.toggleSignInModal(false);
+            redux.toggleSignUpModal(false);
+            if (!username) redirect("/");
+          }}
+          aria-label="Close modal"
+        >
+          <img src={closeImg} alt="Close modal" />
+        </button>
+      ) : null}
 
-        {this.props.children}
-      </>,
-      this.element
-    );
-  }
-}
-
-const mapStateToProps = (state: StateType) => ({
-  username: state.user.username,
-});
-
-const mapDispatchToProps = {
-  toggleSignInModal,
+      {props.children}
+    </>,
+    element
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default Modal;

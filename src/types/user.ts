@@ -18,4 +18,6 @@ interface ClearUsername {
   payload: null;
 }
 
-export type UserAction = ChangeUsernameAsync | ClearUsername;
+export type UserAction =
+  | ChangeUsernameAsync //
+  | ClearUsername;

@@ -40,4 +40,8 @@ interface ShowInfoModal {
   };
 }
 
-export type ModalAction = ToggleSignInModal | ToggleSignUpModal | CloseInfoModal | ShowInfoModal;
+export type ModalAction =
+  | ToggleSignInModal //
+  | ToggleSignUpModal
+  | CloseInfoModal
+  | ShowInfoModal;

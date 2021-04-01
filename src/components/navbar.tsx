@@ -12,7 +12,7 @@ const NavBar = ({ title }: { title: string }) => {
 
   // redux
   const { username } = useTypedSelector((state) => state.user);
-  const { clearUsername, toggleSignInModal, toggleSignUpModal, showInfoModal } = useActions();
+  const redux = useActions();
 
   // routes
   const history = useHistory();
@@ -77,8 +77,8 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    showInfoModal("Exit", "Do you want to exit?", "prompt", () => {
-                      clearUsername();
+                    redux.showInfoModal("Exit", "Do you want to exit?", "prompt", () => {
+                      redux.clearUsername(); // reduxClearUsername
                       redirect("/");
                     });
                   }}
@@ -93,7 +93,7 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    toggleSignInModal(true);
+                    redux.toggleSignInModal(true);
                   }}
                 >
                   <h3>Sign In</h3>
@@ -103,7 +103,7 @@ const NavBar = ({ title }: { title: string }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    toggleSignUpModal(true);
+                    redux.toggleSignUpModal(true);
                   }}
                 >
                   <h3>Sign Up</h3>
