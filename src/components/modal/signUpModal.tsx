@@ -3,7 +3,8 @@ import signup from "@/api/apiSignup";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import TextInput from "@/elements/input";
+import LoginInput from "@/elements/inputs/loginInput";
+import PasswordInput from "@/elements/inputs/passwordInput";
 import useActions from "@/hooks/useActions";
 
 const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
@@ -69,15 +70,15 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
       <form onSubmit={handleSubmit}>
         <h2>Registration</h2>
         <p>{errorValidate}</p>
-        <TextInput label="Login" type="text" id="login" handleChange={handleChange} value={login} />
-        <TextInput
+        <LoginInput label="Login" type="text" id="login" handleChange={handleChange} value={login} />
+        <PasswordInput
           label="Password"
           type="password"
           id="firstPassword"
           handleChange={handleChange}
           value={firstPassword}
         />
-        <TextInput
+        <PasswordInput
           label="Repeat password"
           type="password"
           id="secondPassword"

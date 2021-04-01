@@ -8,11 +8,11 @@ interface TextInputProps {
   value: string;
 }
 
-const TextInput = (props: TextInputProps) => (
+const LoginInput = (props: TextInputProps) => (
   <label htmlFor={props.id}>
     <span>{props.label}</span>
     <input type={props.type} id={props.id} className="modal_input" onChange={props.handleChange} value={props.value} />
   </label>
 );
 
-export default TextInput;
+export default LoginInput;

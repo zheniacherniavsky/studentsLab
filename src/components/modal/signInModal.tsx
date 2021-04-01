@@ -2,7 +2,8 @@ import Modal from "@/elements/modal";
 import signin from "@/api/apiSignin";
 import { FormEvent, useState } from "react";
 
-import TextInput from "@/elements/input";
+import LoginInput from "@/elements/inputs/loginInput";
+import PasswordInput from "@/elements/inputs/passwordInput";
 import useActions from "@/hooks/useActions";
 
 const SignInModal = ({
@@ -54,8 +55,8 @@ const SignInModal = ({
       <form onSubmit={handleSubmit}>
         <h2>Authorization</h2>
         <p>{errorValidate}</p>
-        <TextInput label="Login" type="text" id="login" handleChange={handleChange} value={login} />
-        <TextInput label="Password" type="password" id="password" handleChange={handleChange} value={password} />
+        <LoginInput label="Login" type="text" id="login" handleChange={handleChange} value={login} />
+        <PasswordInput label="Password" type="password" id="password" handleChange={handleChange} value={password} />
 
         <button type="submit" className="modal_button">
           Submit
