@@ -14,15 +14,24 @@ const ConfirmPasswordInput = (props: TextInputProps) => {
   const validate = (event: FormEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     props.handleChange(value);
-    if (value.length < 6) props.errorDispatch("Min length of password is 6 symbols!");
-    else if (value !== props.firstPassword) props.errorDispatch("Passwords mismatch!");
-    else props.errorDispatch("");
+    if (value.length < 6) {
+      props.errorDispatch("Min length of password is 6 symbols!");
+    } else if (value !== props.firstPassword) props.errorDispatch("Passwords mismatch!");
+    else {
+      props.errorDispatch("");
+    }
   };
 
   return (
     <label htmlFor={props.id}>
       <span>{props.label}</span>
-      <input type={props.type} id={props.id} className="modal_input" onChange={validate} value={props.value} />
+      <input
+        type={props.type}
+        id={props.id}
+        className={props.value.length < 6 ? "" : "trueValidation"}
+        onChange={validate}
+        value={props.value}
+      />
     </label>
   );
 };
