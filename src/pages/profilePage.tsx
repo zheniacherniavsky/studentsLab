@@ -4,10 +4,18 @@ import noPhotoImage from "@/assets/images/no-photo.png";
 import { useEffect, useState } from "react";
 import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
-import { GetProfile, GetProfileResponseType } from "@/api/apiGetProfile";
+import getProfile from "@/api/apiGetProfile";
+import saveProfile from "@/api/apiSaveProfile";
+import { InfoModal, InfoModalProps, InfoType } from "@/components/modal/infoModal";
 
 // FIXME: change name of username state
 // TODO: Refactor progect architecture
+
+type ProfileType = {
+  avatar: string;
+  username: string;
+  description: string;
+};
 
 const ProfilePage = () => {
   const { username: login } = useTypedSelector((state) => state.user);
@@ -17,10 +25,13 @@ const ProfilePage = () => {
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
 
+  const [showInfoModalSuccess, toggleInfoModalSuccess] = useState(false);
+  const [showInfoModalFailed, toggleInfoModalFailed] = useState(false);
+
   const updateData = async () => {
-    let profile: GetProfileResponseType;
+    let profile: ProfileType;
     if (login !== null) {
-      profile = await GetProfile(login);
+      profile = await getProfile(login);
       setUsername(profile.username);
       setDescription(profile.description);
     }
@@ -30,49 +41,75 @@ const ProfilePage = () => {
     updateData();
   }, []);
 
+  const InfoModalSuccessProps: InfoModalProps = {
+    infoModalHeader: "Success!",
+    infoModalText: "All data has been saved.",
+    infoModalType: InfoType.ALERT,
+    infoModalCallback: () => null,
+    closeInfoModalCallback: () => toggleInfoModalSuccess(false),
+  };
+
+  const InfoModalFailedProps: InfoModalProps = {
+    infoModalHeader: "Failed!",
+    infoModalText: "Try again later.",
+    infoModalType: InfoType.ALERT,
+    infoModalCallback: () => null,
+    closeInfoModalCallback: () => toggleInfoModalFailed(false),
+  };
+
   return (
-    <div className="profilepage page_content_container">
-      <h2>{login} profile page</h2>
-      <div className="information">
-        <div className="avatar">
-          <img src={noPhotoImage} alt="Empty profile" />
-          <button type="button" onClick={() => alert("This feature is currently disabled.")}>
-            Change profile image
-          </button>
-        </div>
-        <div className="data">
-          <TextInput
-            label="Username"
-            id="login"
-            value={username}
-            maxLength={30}
-            handleChange={setUsername}
-            errorDispatch={setUsernameError}
-          />
-          <span className="error">{usernameError}</span>
-          <Textarea
-            label="Profile description"
-            id="description"
-            value={description}
-            maxLength={200}
-            handleChange={setDescription}
-            errorDispatch={setDescriptionError}
-          />
-          <span className="error">{descriptionError}</span>
-        </div>
-        <div className="buttons">
-          <button
-            type="button"
-            onClick={() => {
-              updateData();
-            }}
-          >
-            Save profile
-          </button>
-          <button type="button">Change password</button>
+    <>
+      {showInfoModalSuccess ? <InfoModal {...InfoModalSuccessProps} /> : null}
+      {showInfoModalFailed ? <InfoModal {...InfoModalFailedProps} /> : null}
+      <div className="profilepage page_content_container">
+        <h2>{login} profile page</h2>
+        <div className="information">
+          <div className="avatar">
+            <img src={noPhotoImage} alt="Empty profile" />
+            <button type="button" onClick={() => alert("This feature is currently disabled.")}>
+              Change profile image
+            </button>
+          </div>
+          <div className="data">
+            <TextInput
+              label="Username"
+              id="login"
+              value={username}
+              maxLength={30}
+              handleChange={setUsername}
+              errorDispatch={setUsernameError}
+            />
+            <span className="error">{usernameError}</span>
+            <Textarea
+              label="Profile description"
+              id="description"
+              value={description}
+              maxLength={200}
+              handleChange={setDescription}
+              errorDispatch={setDescriptionError}
+            />
+            <span className="error">{descriptionError}</span>
+          </div>
+          <div className="buttons">
+            <button
+              type="button"
+              onClick={async () => {
+                if (login) {
+                  const error = await saveProfile(login, username, description);
+                  if (!error) {
+                    updateData();
+                    toggleInfoModalSuccess(true);
+                  } else toggleInfoModalFailed(true);
+                }
+              }}
+            >
+              Save profile
+            </button>
+            <button type="button">Change password</button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

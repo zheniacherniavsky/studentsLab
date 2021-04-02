@@ -1,13 +1,1 @@
-{
-  "accounts": [
-    {
-      "login": "zhenia",
-      "password": "$2a$12$8agPL2k680Awsa6FU0EXruBCn/w6oj3HXDY2HD27USfn2A7/q4q/W",
-      "profile": {
-        "avatar": "",
-        "username": "Geshka",
-        "description": "i can make form without <form />. please call me."
-      }
-    }
-  ]
-}
+{"accounts":[{"login":"zhenia","password":"$2a$12$8agPL2k680Awsa6FU0EXruBCn/w6oj3HXDY2HD27USfn2A7/q4q/W","profile":{"avatar":"","username":"geshka","description":"i can make form without <form />. please call me."}}]}

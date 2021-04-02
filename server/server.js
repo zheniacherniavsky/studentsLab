@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
@@ -89,7 +90,7 @@ app
     }
   })
 
-  .get("/profile/:login", (req, res) => {
+  .get("/getprofile/:login", (req, res) => {
     try {
       const accountsData = fs.readFileSync("./server/accounts.json");
       const { accounts } = JSON.parse(accountsData);
@@ -100,6 +101,29 @@ app
       return res.status(404).json({ message: "Profile not found!" });
     } catch (e) {
       console.log(e);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .post("/saveprofile", async (req, res) => {
+    try {
+      const { login, username, description } = req.body;
+
+      let data = fs.readFileSync("./server/accounts.json");
+      const { accounts } = JSON.parse(data);
+      // eslint-disable-next-line consistent-return
+      accounts.forEach((account) => {
+        if (account.login === login) {
+          account.profile.username = username;
+          account.profile.description = description;
+          data = JSON.stringify({ accounts });
+          fs.writeFileSync("./server/accounts.json", data);
+          return res.status(200).json({ message: "Profile data was changed." });
+        }
+      });
+      return res.status(404).json({ message: "Account not found!" });
+    } catch (e) {
+      console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
   });
