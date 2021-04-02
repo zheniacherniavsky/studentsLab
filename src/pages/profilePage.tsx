@@ -6,7 +6,8 @@ import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
 import { GetProfile, GetProfileResponseType } from "@/api/apiGetProfile";
 
-// FIXME: change name of username state;
+// FIXME: change name of username state
+// TODO: Refactor progect architecture
 
 const ProfilePage = () => {
   const { username: login } = useTypedSelector((state) => state.user);

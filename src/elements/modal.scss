@@ -1,6 +1,7 @@
 #modal_window {
   // this div is a child
   .modal {
+    z-index: 100;
     position: fixed;
     background: rgba($color: black, $alpha: 0.5);
     top: 0;
