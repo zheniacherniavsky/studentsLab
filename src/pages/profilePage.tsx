@@ -1,21 +1,37 @@
 import useTypedSelector from "@/hooks/useTypedSelector";
 import "./profilePage.scss";
 import noPhotoImage from "@/assets/images/no-photo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
+import { GetProfile, GetProfileResponseType } from "@/api/apiGetProfile";
+
+// FIXME: change name of username state;
 
 const ProfilePage = () => {
-  const { username } = useTypedSelector((state) => state.user);
-  const [newUsername, setNewUsername] = useState("");
-  const [newUsernameError, setNewUsernameError] = useState("");
+  const { username: login } = useTypedSelector((state) => state.user);
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
 
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
 
+  const updateData = async () => {
+    let profile: GetProfileResponseType;
+    if (login !== null) {
+      profile = await GetProfile(login);
+      setUsername(profile.username);
+      setDescription(profile.description);
+    }
+  };
+
+  useEffect(() => {
+    updateData();
+  }, []);
+
   return (
     <div className="profilepage page_content_container">
-      <h2>{username} profile page</h2>
+      <h2>{login} profile page</h2>
       <div className="information">
         <div className="avatar">
           <img src={noPhotoImage} alt="Empty profile" />
@@ -27,12 +43,12 @@ const ProfilePage = () => {
           <TextInput
             label="Username"
             id="login"
-            value={newUsername}
+            value={username}
             maxLength={30}
-            handleChange={setNewUsername}
-            errorDispatch={setNewUsernameError}
+            handleChange={setUsername}
+            errorDispatch={setUsernameError}
           />
-          <span className="error">{newUsernameError}</span>
+          <span className="error">{usernameError}</span>
           <Textarea
             label="Profile description"
             id="description"
@@ -44,7 +60,14 @@ const ProfilePage = () => {
           <span className="error">{descriptionError}</span>
         </div>
         <div className="buttons">
-          <button type="button">Save profile</button>
+          <button
+            type="button"
+            onClick={() => {
+              updateData();
+            }}
+          >
+            Save profile
+          </button>
           <button type="button">Change password</button>
         </div>
       </div>

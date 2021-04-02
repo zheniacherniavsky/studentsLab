@@ -59,7 +59,15 @@ app
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      accounts.push({ login, password: hashedPassword });
+      accounts.push({
+        login,
+        password: hashedPassword,
+        profile: {
+          avatar: "",
+          username: "",
+          description: "",
+        },
+      });
       data = JSON.stringify({ accounts });
 
       fs.writeFileSync("./server/accounts.json", data);
@@ -77,6 +85,21 @@ app
       res.setHeader("Content-Type", "application/json");
       return res.send(JSON.stringify(products));
     } catch (e) {
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .get("/profile/:login", (req, res) => {
+    try {
+      const accountsData = fs.readFileSync("./server/accounts.json");
+      const { accounts } = JSON.parse(accountsData);
+      // eslint-disable-next-line consistent-return
+      accounts.forEach((account) => {
+        if (account.login === req.params.login) return res.send(JSON.stringify(account.profile));
+      });
+      return res.status(404).json({ message: "Profile not found!" });
+    } catch (e) {
+      console.log(e);
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
   });
