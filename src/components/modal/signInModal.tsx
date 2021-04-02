@@ -30,7 +30,7 @@ const SignInModal = ({
       passwordError ||
       "";
 
-    if (!validationErrorMessage) {
+    if (!validationErrorMessage && login && password) {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signin(login, password);
       if (username) {
         changeUsernameAsync(username);
@@ -40,7 +40,7 @@ const SignInModal = ({
         setLogin("");
         setPassword("");
       }
-    } else setError(validationErrorMessage);
+    } else setError(validationErrorMessage || "Fill in all the fields!");
   };
 
   return (

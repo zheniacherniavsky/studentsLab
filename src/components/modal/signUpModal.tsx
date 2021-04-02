@@ -34,7 +34,7 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
       confirmPasswordError ||
       "";
 
-    if (!validationErrorMessage) {
+    if (!validationErrorMessage && login && firstPassword && confirmPassword) {
       const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup(
         login,
         firstPassword
@@ -48,7 +48,7 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
         setFirstPassword("");
         setConfirmPassword("");
       }
-    } else setError(validationErrorMessage);
+    } else setError(validationErrorMessage || "Fill in all the fields!");
   };
 
   return (
