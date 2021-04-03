@@ -48,6 +48,7 @@ module.exports = function (_env, argv) {
       errors: true,
       errorDetails: true,
     },
+    target: "web",
     // entryPoint for webpack; it can be object with key-value pairs for multibuild (https://webpack.js.org/concepts/entry-points/)
     entry: isNeedFixReactIE // troubleshooting: use this if you support IE and react
       ? [
@@ -55,9 +56,9 @@ module.exports = function (_env, argv) {
           "core-js/es/set",
           "react",
           isPackageExists("react-dom") && "react-dom",
-          path.resolve(srcPath, "main.jsx"),
+          path.resolve(srcPath, "main.tsx"),
         ].filter((v) => v)
-      : path.resolve(srcPath, "main.jsx"),
+      : path.resolve(srcPath, "main.tsx"),
 
     output: {
       path: destPath,

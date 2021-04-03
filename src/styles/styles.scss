@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #080808;
+  color: #e3e3e3;
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  background: rgba($navbar_tilebottom, 0.5);
+  border-radius: 10px;
+  color: $basicColor;
+
+  &:focus,
+  &:hover {
+    background: rgba($navbar_tilebottomlight, 0.8);
+    transition: 0.1s;
+  }
+
+  &:active {
+    background: $navbar_tilebottom;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $navbar_text;
+
+  &:hover {
+    color: $navbar_activetext;
+  }
+}
+
+input,
+textarea {
+  background: rgba($lightblack, 0.5);
+  outline: none;
+  border: 1px solid $basicColor;
+  font-family: "Roboto", sans-serif;
+  color: $basicColor;
+  padding: 0 12px;
+  border-radius: 10px;
+
+  &:focus {
+    border: 1px solid $navbar_tilebottom;
+    color: $navbar_activetext;
+    background: rgba($lightblack, 0.8);
+    transition: 0.2s;
+  }
+}
+
+.modal_button {
+  width: 250px;
+  height: 50px;
+  font-size: 18px;
+}

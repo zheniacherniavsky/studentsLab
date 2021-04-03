@@ -1,0 +1,50 @@
+.categories_container {
+  .tiles {
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: inline;
+
+    .category {
+      margin: 31px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      width: 300px;
+      height: 200px;
+      border-bottom: 8px solid $basicColor;
+      border-left: 1px solid $basicColor;
+      border-right: 1px solid $basicColor;
+      border-top: 1px solid $basicColor;
+      border-radius: 15px;
+
+      background: $lightblack;
+
+      font-size: 20px;
+
+      img {
+        width: 80px;
+        margin-top: 30px;
+        filter: contrast(0);
+      }
+
+      span {
+        margin: 20px;
+      }
+
+      &:hover {
+        border-bottom: 8px solid $navbar_tilebottom;
+
+        border-left: 1px solid $navbar_tilebottom;
+        border-right: 1px solid $navbar_tilebottom;
+        border-top: 1px solid $navbar_tilebottom;
+
+        transition: 0.2s;
+      }
+    }
+  }
+}

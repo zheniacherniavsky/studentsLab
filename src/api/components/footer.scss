@@ -1,0 +1,44 @@
+.footer_container {
+  background: $lightblack;
+  padding-bottom: 50px;
+  &__label {
+    display: block;
+    margin: 0;
+    padding: 30px;
+    text-align: center;
+    font-size: 28px;
+  }
+
+  &__info {
+    display: flex;
+    @media (min-width: 820px) {
+      justify-content: space-evenly;
+    }
+    @media (max-width: 820px) {
+      flex-direction: column;
+      &__contacts,
+      &__icons {
+        padding: 30px 0;
+      }
+    }
+    padding: 0 20px;
+    &__contacts {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid $navbar_tilebottom;
+
+      p {
+        margin: 5px;
+      }
+    }
+
+    &__icons {
+      display: flex;
+      border-bottom: 1px solid $navbar_tilebottom;
+      img {
+        height: 30px;
+        margin: 5px;
+      }
+    }
+  }
+}

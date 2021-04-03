@@ -1,0 +1,13 @@
+.cards_container {
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: inline;
+
+    .card_container {
+      margin: 31px;
+    }
+  }
+}

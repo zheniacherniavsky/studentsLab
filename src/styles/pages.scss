@@ -1,0 +1,19 @@
+.pages_container {
+  padding: 10px;
+  min-height: 80vh;
+  background: $background url("@/api/assets/images/background1.jpg") no-repeat center fixed;
+}
+
+.page_content_container {
+  padding: 10px;
+  background: rgba($lightblack, 0.4);
+  border-radius: 60px;
+  margin: 30px;
+
+  h2 {
+    cursor: default;
+    margin: 20px;
+    padding: 10px 20px;
+    border-bottom: 1px solid $basicColor;
+  }
+}
