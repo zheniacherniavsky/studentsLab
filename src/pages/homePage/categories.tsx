@@ -12,7 +12,7 @@ const Category = ({ name, image }: { name: string; image: string }) => (
 );
 
 const Categories = () => (
-  <div className="categories_container">
+  <div className="categories_container page_content_container">
     <h2>Categories</h2>
     <div className="tiles">
       <Link to="/pc">

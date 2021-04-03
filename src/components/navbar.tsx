@@ -6,7 +6,7 @@ import useTypedSelector from "@/hooks/useTypedSelector";
 import useActions from "@/hooks/useActions";
 import SignInModal from "./modal/signInModal";
 import SignUpModal from "./modal/signUpModal";
-import { InfoModal, InfoModalProps } from "./modal/infoModal";
+import { InfoModal, InfoModalProps, InfoType } from "./modal/infoModal";
 
 const NavBar = ({ title }: { title: string }) => {
   // Product drop down menu
@@ -29,7 +29,7 @@ const NavBar = ({ title }: { title: string }) => {
   const InfoModalProps: InfoModalProps = {
     infoModalHeader: "Exit",
     infoModalText: "Do you want to exit?",
-    infoModalType: "prompt",
+    infoModalType: InfoType.PROMPT,
     infoModalCallback: () => {
       redux.clearUsername();
       redirect("/");

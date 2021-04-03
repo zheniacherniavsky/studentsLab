@@ -1,0 +1,72 @@
+.profilepage {
+  .information {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: inline;
+
+    button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .avatar {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      img {
+        margin-bottom: 10px;
+        width: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+    }
+
+    .data {
+      width: 300px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        span {
+          font-size: 18px;
+        }
+
+        input {
+          margin: 10px 0 0 0;
+          height: 40px;
+          font-size: 16px;
+        }
+        textarea {
+          margin: 10px 0 0 0;
+          font-size: 16px;
+          padding-top: 9px;
+          height: 144px;
+          // Safary browser dont support resize: none option
+          max-height: 144px;
+          max-width: 274px;
+          min-height: 144px;
+          min-width: 274px;
+        }
+      }
+
+      span.error {
+        color: red;
+        font-size: 12px;
+        padding: 5px;
+      }
+    }
+
+    .buttons {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

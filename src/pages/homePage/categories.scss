@@ -1,16 +1,4 @@
 .categories_container {
-  padding: 20px;
-  background: rgba($lightblack, 0.3);
-  border-radius: 60px;
-  margin: 30px 30px;
-
-  h2 {
-    cursor: default;
-    margin: 20px;
-    padding: 10px 20px;
-    border-bottom: 1px solid $basicColor;
-  }
-
   .tiles {
     cursor: default;
     display: flex;
