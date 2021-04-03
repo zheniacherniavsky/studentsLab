@@ -7,6 +7,7 @@ import Textarea from "@/elements/inputs/textarea";
 import getProfile from "@/api/apiGetProfile";
 import saveProfile from "@/api/apiSaveProfile";
 import { InfoModal, InfoModalProps, InfoType } from "@/components/modal/infoModal";
+import ChangePasswordModal from "@/components/modal/changePasswordModal";
 
 // FIXME: change name of username state
 // TODO: Refactor progect architecture
@@ -27,6 +28,7 @@ const ProfilePage = () => {
 
   const [showInfoModalSuccess, toggleInfoModalSuccess] = useState(false);
   const [showInfoModalFailed, toggleInfoModalFailed] = useState(false);
+  const [showChangePasswordModal, toggleChangePasswordModal] = useState(false);
 
   const updateData = async () => {
     let profile: ProfileType;
@@ -61,6 +63,7 @@ const ProfilePage = () => {
     <>
       {showInfoModalSuccess ? <InfoModal {...InfoModalSuccessProps} /> : null}
       {showInfoModalFailed ? <InfoModal {...InfoModalFailedProps} /> : null}
+      {showChangePasswordModal ? <ChangePasswordModal closeCallback={() => toggleChangePasswordModal(false)} /> : null}
       <div className="profilepage page_content_container">
         <h2>{login} profile page</h2>
         <div className="information">
@@ -96,6 +99,7 @@ const ProfilePage = () => {
               onClick={async () => {
                 if (login) {
                   const error = await saveProfile(login, username, description);
+                  console.log(error);
                   if (!error) {
                     updateData();
                     toggleInfoModalSuccess(true);
@@ -105,7 +109,9 @@ const ProfilePage = () => {
             >
               Save profile
             </button>
-            <button type="button">Change password</button>
+            <button type="button" onClick={() => toggleChangePasswordModal(true)}>
+              Change password
+            </button>
           </div>
         </div>
       </div>
