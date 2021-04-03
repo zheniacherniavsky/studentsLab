@@ -1,5 +1,5 @@
-import SignInModal from "@/components/modal/signInModal";
-import useTypedSelector from "@/hooks/useTypedSelector";
+import SignInModal from "@/api/components/modal/signInModal";
+import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import { ReactNode, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
 

@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Footer from "@/components/footer";
-import NavBar from "@/components/navbar";
+import Footer from "@/api/components/footer";
+import NavBar from "@/api/components/navbar";
 
 // Pages
-import AboutPage from "@/pages/aboutPage";
-import HomePage from "@/pages/homePage/home";
-import ProductPage from "@/pages/productPage";
-import ProfilePage from "./pages/profilePage";
+import AboutPage from "@/api/components/pages/aboutPage";
+import HomePage from "@/api/components/pages/homePage/home";
+import ProductPage from "@/api/components/pages/productPage";
+import ProfilePage from "@/api/components/pages/profilePage";
 
 // Styles
 import "@/styles/styles.scss";

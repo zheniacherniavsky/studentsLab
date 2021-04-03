@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import LoginInput from "@/elements/inputs/loginInput";
 import PasswordInput from "@/elements/inputs/passwordInput";
 import ConfirmPasswordInput from "@/elements/inputs/confirmPasswordInput";
-import useActions from "@/hooks/useActions";
+import useActions from "@/helpers/hooks/useActions";
 
 const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
   const { changeUsernameAsync } = useActions();

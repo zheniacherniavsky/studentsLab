@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 
 import PasswordInput from "@/elements/inputs/passwordInput";
 import ConfirmPasswordInput from "@/elements/inputs/confirmPasswordInput";
-import useTypedSelector from "@/hooks/useTypedSelector";
+import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import changePassword from "@/api/apiChangePassword";
 import { InfoModal, InfoModalProps, InfoType } from "./infoModal";
 

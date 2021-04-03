@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import "./modal.scss";
-import closeImg from "@/assets/images/close.svg";
+import closeImg from "@/api/assets/images/close.svg";
 
 import { connect } from "react-redux";
 import StateType from "@/types/state";

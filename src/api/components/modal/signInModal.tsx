@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 
 import LoginInput from "@/elements/inputs/loginInput";
 import PasswordInput from "@/elements/inputs/passwordInput";
-import useActions from "@/hooks/useActions";
+import useActions from "@/helpers/hooks/useActions";
 
 const SignInModal = ({
   closeCallback,

@@ -2,8 +2,8 @@ import { Link, NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 
 import "./navbar.scss";
-import useTypedSelector from "@/hooks/useTypedSelector";
-import useActions from "@/hooks/useActions";
+import useTypedSelector from "@/helpers/hooks/useTypedSelector";
+import useActions from "@/helpers/hooks/useActions";
 import SignInModal from "./modal/signInModal";
 import SignUpModal from "./modal/signUpModal";
 import { InfoModal, InfoModalProps, InfoType } from "./modal/infoModal";

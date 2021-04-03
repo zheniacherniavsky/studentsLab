@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import pcImage from "@/assets/images/Categories/computer.svg";
-import playstationImage from "@/assets/images/Categories/playstation.svg";
-import xboxImage from "@/assets/images/Categories/xbox.svg";
+import pcImage from "@/api/assets/images/Categories/computer.svg";
+import playstationImage from "@/api/assets/images/Categories/playstation.svg";
+import xboxImage from "@/api/assets/images/Categories/xbox.svg";
 
 const Category = ({ name, image }: { name: string; image: string }) => (
   <div className="category">
