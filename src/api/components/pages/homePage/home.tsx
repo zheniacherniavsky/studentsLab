@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, SetStateAction } from "react";
 // import debounce from "debounce";
-import debounce from "@/helpers/debounse";
+import debounce from "@/helpers/debounce";
 import getData from "@/api/apiSearchData";
 import getRecentlyAddedProducts from "@/api/getTopProducts";
 import loadingImage from "@/api/assets/images/loading.svg";

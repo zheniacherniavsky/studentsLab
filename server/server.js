@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-param-reassign */
 const express = require("express");
 const bcrypt = require("bcryptjs");
@@ -7,6 +8,8 @@ const fs = require("fs");
 
 const app = express();
 const port = 3000;
+
+// TODO: BodyParser depricated
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "10mb" }));

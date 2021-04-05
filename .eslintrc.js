@@ -26,7 +26,6 @@ module.exports = {
   rules: {
     "no-shadow": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-var-requires": 0,
     "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
     // "import/no-extraneous-dependencies": ["error", { devDependencies: true }], // debounce should be listed.... error
     "@typescript-eslint/no-use-before-define": "error",

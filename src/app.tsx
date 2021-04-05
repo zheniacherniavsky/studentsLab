@@ -32,8 +32,6 @@ class App extends React.Component<IAppProps> {
   render() {
     return (
       <BrowserRouter>
-        {/* {this.props.showSignUpModal ? <SignUpModal /> : null}
-        {this.props.showInfoModal ? <InfoModal /> : null} */}
         <header>
           <NavBar title="Game Store" />
         </header>

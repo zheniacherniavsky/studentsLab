@@ -26,7 +26,7 @@ const TextInput = (props: TextInputProps) => {
       <input
         id={props.id}
         type="text"
-        className={props.value.length === props.maxLength ? "falseValidation" : ""}
+        className={props.value.length === props.maxLength ? "falseValidation" : ""} // todo: invalid
         onChange={validate}
         value={props.value}
       />

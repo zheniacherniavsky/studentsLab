@@ -14,7 +14,7 @@ const ConfirmPasswordInput = (props: TextInputProps) => {
   const validate = (event: FormEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     props.handleChange(value);
-    if (value.length < 6) {
+    if (!value || value.length < 6) {
       props.errorDispatch("Min length of password is 6 symbols!");
     } else if (value !== props.firstPassword) props.errorDispatch("Passwords mismatch!");
     else {
