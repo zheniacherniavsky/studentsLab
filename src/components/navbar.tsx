@@ -68,17 +68,17 @@ const NavBar = ({ title }: { title: string }) => {
               {productsDropDownIsActive && (
                 <ul className={productsDropDownIsActive ? "dropdown visible" : "dropdown"}>
                   <li>
-                    <NavLink exact to="/pc" activeClassName="active">
+                    <NavLink exact to="/products/pc" activeClassName="active">
                       <h3>PC</h3>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to="/playstationfive" activeClassName="active">
+                    <NavLink exact to="/products/playstationfive" activeClassName="active">
                       <h3>Playstation 5</h3>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to="/xboxone" activeClassName="active">
+                    <NavLink exact to="/products/xboxone" activeClassName="active">
                       <h3>XBox One</h3>
                     </NavLink>
                   </li>

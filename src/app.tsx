@@ -43,16 +43,10 @@ class App extends React.Component<IAppProps> {
             <PrivateRoute path="/about" exact>
               <AboutPage />
             </PrivateRoute>
-            <PrivateRoute path="/pc" exact>
-              <ProductPage />
-            </PrivateRoute>
             <PrivateRoute path="/profile" exact>
               <ProfilePage />
             </PrivateRoute>
-            <PrivateRoute path="/playstationfive" exact>
-              <ProductPage />
-            </PrivateRoute>
-            <PrivateRoute path="/xboxone" exact>
+            <PrivateRoute path="/products/:platform" exact>
               <ProductPage />
             </PrivateRoute>
             <Redirect to="/" />
