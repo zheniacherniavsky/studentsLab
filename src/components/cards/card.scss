@@ -51,6 +51,27 @@
         font-weight: bold;
       }
     }
+
+    .rating {
+      margin-left: 10px;
+      display: inline-block;
+      font-size: 0;
+
+      span {
+        padding: 0;
+        font-size: 20px;
+        line-height: 1;
+        color: lightgrey;
+
+        &:before {
+          content: "★";
+        }
+
+        &.active {
+          color: rgb(255, 232, 100);
+        }
+      }
+    }
   }
 
   .back {

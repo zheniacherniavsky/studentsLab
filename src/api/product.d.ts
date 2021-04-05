@@ -6,5 +6,6 @@ export default interface IProduct {
   platform: string[];
   shortdescription: string;
   image: string;
+  rating: number;
   date: string;
 }

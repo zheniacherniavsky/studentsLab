@@ -15,13 +15,13 @@ const Categories = () => (
   <div className="categories_container page_content_container">
     <h2>Categories</h2>
     <div className="tiles">
-      <Link to="/pc">
+      <Link to="/products/pc">
         <Category name="PC" image={pcImage} />
       </Link>
-      <Link to="/playstationfive">
+      <Link to="/products/playstationfive">
         <Category name="Playstation 5" image={playstationImage} />
       </Link>
-      <Link to="/xboxone">
+      <Link to="/products/xboxone">
         <Category name="XBox One" image={xboxImage} />
       </Link>
     </div>
