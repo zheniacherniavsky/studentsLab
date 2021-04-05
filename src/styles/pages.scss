@@ -1,12 +1,12 @@
 .pages_container {
   padding: 10px;
   min-height: 80vh;
-  background: $background url("@/api/assets/images/background1.jpg") no-repeat center fixed;
+  background: $background url("@/assets/images/background1.jpg") no-repeat center fixed;
 }
 
 .page_content_container {
   padding: 10px;
-  background: rgba($lightblack, 0.4);
+  background: rgba($lightblack, 0.6);
   border-radius: 60px;
   margin: 30px;
 

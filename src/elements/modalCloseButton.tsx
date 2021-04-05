@@ -1,4 +1,4 @@
-import closeImg from "@/api/assets/images/close.svg";
+import closeImg from "@/assets/images/close.svg";
 
 export default function ModalCloseButton({ closeCallback }: { closeCallback: () => void }) {
   return (

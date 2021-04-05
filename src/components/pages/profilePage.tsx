@@ -1,13 +1,13 @@
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import "./profilePage.scss";
-import noPhotoImage from "@/api/assets/images/no-photo.png";
+import noPhotoImage from "@/assets/images/no-photo.png";
 import { useEffect, useState } from "react";
 import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
 import getProfile from "@/api/apiGetProfile";
 import saveProfile from "@/api/apiSaveProfile";
-import { InfoModal, InfoModalProps, InfoType } from "@/api/components/modal/infoModal";
-import ChangePasswordModal from "@/api/components/modal/changePasswordModal";
+import { InfoModal, InfoModalProps, InfoType } from "@/components/modal/infoModal";
+import ChangePasswordModal from "@/components/modal/changePasswordModal";
 
 // FIXME: change name of username state
 // TODO: Refactor progect architecture

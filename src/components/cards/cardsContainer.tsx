@@ -1,5 +1,5 @@
 import IProduct from "@/api/product";
-import Card from "@/api/components/cards/card";
+import Card from "@/components/cards/card";
 import "./cardsContainer.scss";
 
 interface ICardsProps {

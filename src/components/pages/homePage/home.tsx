@@ -2,15 +2,15 @@ import { useState, useEffect, ChangeEvent, SetStateAction } from "react";
 // import debounce from "debounce";
 import debounce from "@/helpers/debounce";
 import getData from "@/api/apiSearchData";
-import getRecentlyAddedProducts from "@/api/getTopProducts";
-import loadingImage from "@/api/assets/images/loading.svg";
+import getRecentlyAddedProducts from "@/api/apiGetTopProducts";
+import loadingImage from "@/assets/images/loading.svg";
 
 // categories
-import CardsContainer from "@/api/components/cards/cardsContainer";
+import CardsContainer from "@/components/cards/cardsContainer";
 // import Card from "@/Components/Cards/card";
 
-import "@/api/components/pages/homePage/home.scss";
-import "@/api/components/pages/homePage/categories.scss";
+import "@/components/pages/homePage/home.scss";
+import "@/components/pages/homePage/categories.scss";
 
 import Categories from "./categories";
 
