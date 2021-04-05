@@ -7,6 +7,7 @@ import LoginInput from "@/elements/inputs/loginInput";
 import PasswordInput from "@/elements/inputs/passwordInput";
 import ConfirmPasswordInput from "@/elements/inputs/confirmPasswordInput";
 import useActions from "@/helpers/hooks/useActions";
+import ModalCloseButton from "@/elements/modalCloseButton";
 
 const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
   const { changeUsernameAsync } = useActions();
@@ -52,9 +53,12 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
   };
 
   return (
-    <Modal showExitButtom closeCallback={closeCallback}>
+    <Modal>
       <form onSubmit={handleSubmit}>
-        <h2>Registration</h2>
+        <div className="head">
+          <h2>Registration</h2>
+          <ModalCloseButton closeCallback={closeCallback} />
+        </div>
         <p>{error}</p>
         <LoginInput
           label="Login"

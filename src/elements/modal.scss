@@ -1,9 +1,12 @@
 #modal_window {
+  h2 {
+    margin: 0;
+  }
   // this div is a child
   .modal {
     z-index: 100;
     position: fixed;
-    background: rgba($color: black, $alpha: 0.5);
+    background: rgba($color: black, $alpha: 0.8);
     top: 0;
     left: 0;
     right: 0;
@@ -13,98 +16,91 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
 
-    .close_button {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      width: 75px;
-      height: 75px;
-      background: rgba($color: #000000, $alpha: 0);
+  // style for form
+  form {
+    background: $lightblack;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-      img {
-        filter: invert(0.5);
-        width: 75px;
+    border-radius: 20px;
 
-        &:hover {
-          filter: invert(1);
-          transform: rotateZ(90deg);
-          transition: 0.2s ease-in;
-        }
-      }
-    }
-
-    // style for form
-    form {
-      background: $lightblack;
-      padding: 40px;
+    .head {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
 
-      border-radius: 20px;
-
-      h2 {
+      button.close_button {
         margin: 0;
-      }
+        background: rgba($color: #000000, $alpha: 0);
+        width: 50px;
 
-      p {
-        color: rgb(255, 0, 0);
-      }
-
-      label {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 0;
-        font-size: 20px;
-
-        input {
-          width: 300px;
-          margin-left: 100px;
-          height: 45px;
-          font-size: 20px;
-
-          &.trueValidation {
-            border: 1px solid #2bc94f;
+        img {
+          filter: invert(0.5);
+          width: 50px;
+          &:hover {
+            filter: invert(1);
+            transform: rotateZ(90deg);
+            transition: 0.2s ease-in;
           }
         }
       }
+    }
 
-      button {
-        margin: auto;
-        margin-top: 40px;
-        font-weight: bold;
+    p {
+      color: rgb(255, 0, 0);
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      font-size: 20px;
+
+      input {
+        width: 300px;
+        margin-left: 100px;
+        height: 45px;
+        font-size: 20px;
+
+        &.trueValidation {
+          border: 1px solid #2bc94f;
+        }
       }
     }
 
-    // for informational blocks
-    .container {
-      background: $lightblack;
-      min-width: 250px;
-      border-radius: 20px;
-      padding: 40px;
+    button {
+      margin: auto;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+  }
+  // for informational blocks
+  .container {
+    background: $lightblack;
+    min-width: 250px;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 30px;
+    }
+
+    .buttons_container {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-around;
+      width: 100%;
 
-      h2 {
-        margin: 0;
-      }
-
-      p {
-        margin: 30px;
-      }
-
-      .buttons_container {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-
-        button {
-          width: 100px;
-        }
+      button {
+        width: 100px;
       }
     }
   }

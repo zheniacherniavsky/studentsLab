@@ -1,4 +1,5 @@
 import Modal from "@/elements/modal";
+import ModalCloseButton from "@/elements/modalCloseButton";
 import signin from "@/api/apiSignin";
 import { FormEvent, useState } from "react";
 
@@ -44,9 +45,12 @@ const SignInModal = ({
   };
 
   return (
-    <Modal showExitButtom closeCallback={closeCallback}>
+    <Modal>
       <form onSubmit={handleSubmit}>
-        <h2>Authorization</h2>
+        <div className="head">
+          <h2>Authorization</h2>
+          <ModalCloseButton closeCallback={closeCallback} />
+        </div>
         <p>{error}</p>
         <LoginInput
           label="Login"

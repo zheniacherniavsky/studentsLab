@@ -5,6 +5,7 @@ import PasswordInput from "@/elements/inputs/passwordInput";
 import ConfirmPasswordInput from "@/elements/inputs/confirmPasswordInput";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import changePassword from "@/api/apiChangePassword";
+import ModalCloseButton from "@/elements/modalCloseButton";
 import { InfoModal, InfoModalProps, InfoType } from "./infoModal";
 
 const ChangePasswordModal = ({ closeCallback }: { closeCallback: () => void }) => {
@@ -53,10 +54,13 @@ const ChangePasswordModal = ({ closeCallback }: { closeCallback: () => void }) =
   };
 
   return (
-    <Modal showExitButtom closeCallback={closeCallback}>
+    <Modal>
       {infoModalSuccess ? <InfoModal {...InfoModalSuccessProps} /> : null}
       <form onSubmit={handleSubmit}>
-        <h2>Change password</h2>
+        <div className="head">
+          <h2>Change password</h2>
+          <ModalCloseButton closeCallback={closeCallback} />
+        </div>
         <p>{error}</p>
         <PasswordInput
           label="Password"
