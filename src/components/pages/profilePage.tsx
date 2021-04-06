@@ -10,7 +10,6 @@ import { InfoModal, InfoModalProps, InfoType } from "@/components/modal/infoModa
 import ChangePasswordModal from "@/components/modal/changePasswordModal";
 
 // FIXME: change name of username state
-// TODO: Refactor progect architecture
 
 type ProfileType = {
   avatar: string;

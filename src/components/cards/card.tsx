@@ -13,7 +13,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
         <img src={p.image} alt="Product" />
         <div>
           <span className="title">{p.name}</span>
-          <span className="ageLimit">{p.price} RUB</span>
+          <span className="ageLimit">{p.price}$</span>
         </div>
         <div className="rating">{rating}</div>
       </div>

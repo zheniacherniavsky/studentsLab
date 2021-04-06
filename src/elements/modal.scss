@@ -6,7 +6,7 @@
   .modal {
     z-index: 100;
     position: fixed;
-    background: rgba($color: black, $alpha: 0.8);
+    background: rgba($color: black, $alpha: 0.7);
     top: 0;
     left: 0;
     right: 0;
@@ -26,6 +26,7 @@
     flex-direction: column;
     justify-content: center;
 
+    border-bottom: 2px solid $basicColor;
     border-radius: 20px;
 
     .head {
@@ -89,6 +90,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-bottom: 2px solid $basicColor;
 
     p {
       margin: 30px;

@@ -49,9 +49,20 @@
         }
       }
     }
+    .searchButton {
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        font-size: 18px;
+        padding: 15px 80px;
+      }
+    }
   }
-  .products {
+  .product {
     width: 80%;
-    min-width: 600px;
+    min-width: 800px;
   }
 }

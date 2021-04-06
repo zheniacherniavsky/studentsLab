@@ -1,4 +1,4 @@
-function debounce(func: () => unknown, wait: number) {
+function debounce(func: () => void, wait: number) {
   let timeout: ReturnType<typeof setTimeout>;
   return () => {
     clearTimeout(timeout);

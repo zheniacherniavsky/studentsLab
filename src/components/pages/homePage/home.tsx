@@ -14,14 +14,14 @@ import "@/components/pages/homePage/categories.scss";
 
 import Categories from "./categories";
 
-const Loading = ({ hook }: { hook: boolean }) => {
+export const Loading = ({ hook }: { hook: boolean }) => {
   if (hook) {
     return <img src={loadingImage} alt="loading" />;
   }
   return null;
 };
 
-const HomePage = () => {
+export const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
   const [searchDataVisibility, showSearchData] = useState(false);
   const [topProducts, loadTopProducts] = useState([]);
@@ -37,16 +37,15 @@ const HomePage = () => {
   }, []);
 
   const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value !== "")
+    showSearchData(false);
+    if (event.target.value !== "") {
+      updateLoading(true);
       debounce(async () => {
-        updateLoading(true);
-        setTimeout(async () => {
-          updateSearchData(await getData());
-          updateLoading(false);
-          showSearchData(true);
-        }, 299);
+        updateSearchData(await getData());
+        updateLoading(false);
+        if (event.target.value !== "") showSearchData(true);
       }, 300)();
-    else showSearchData(false);
+    }
   };
 
   return (
@@ -55,10 +54,9 @@ const HomePage = () => {
         <Loading hook={loading} />
         <input onChange={handleChange} type="text" placeholder="Search" id="search_input" />
       </div>
-      {searchDataVisibility ? <CardsContainer title="Search results" data={searchData} /> : null}
+      {searchDataVisibility ? <CardsContainer class="" title="Search results" data={searchData} /> : null}
       <Categories />
-      <CardsContainer title="Top products" data={topProducts} />
+      <CardsContainer class="" title="Top products" data={topProducts} />
     </div>
   );
 };
-export default HomePage;

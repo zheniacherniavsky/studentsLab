@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-param-reassign */
 const express = require("express");
@@ -8,8 +9,6 @@ const fs = require("fs");
 
 const app = express();
 const port = 3000;
-
-// TODO: BodyParser depricated
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "10mb" }));
@@ -26,7 +25,6 @@ app
       const { accounts } = JSON.parse(data);
       let currentUser;
 
-      /* eslint-disable-next-line */
       for (const user of accounts) {
         if (user.login === login) {
           currentUser = user;
@@ -54,7 +52,6 @@ app
 
       let data = fs.readFileSync("./server/accounts.json");
       const { accounts } = JSON.parse(data);
-      /* eslint-disable-next-line */
       for (const user of accounts) {
         console.log(user.login);
         if (user.login === login) {
@@ -83,7 +80,7 @@ app
     }
   })
 
-  .get("/products", (req, res) => {
+  .get("/products", async (req, res) => {
     try {
       console.log("get products operation.");
       const data = fs.readFileSync("./server/data.json");
@@ -100,7 +97,6 @@ app
       console.log("getprofile operation.");
       const accountsData = fs.readFileSync("./server/accounts.json");
       const { accounts } = JSON.parse(accountsData);
-      /* eslint-disable-next-line */
       for (const account of accounts) {
         if (account.login === req.params.login) return res.send(JSON.stringify(account.profile));
       }
@@ -119,7 +115,6 @@ app
       let data = fs.readFileSync("./server/accounts.json");
       const { accounts } = JSON.parse(data);
       let user;
-      /* eslint-disable-next-line */
       for (const account of accounts) {
         if (account.login === login) {
           user = account;
@@ -148,7 +143,6 @@ app
       let data = fs.readFileSync("./server/accounts.json");
       const { accounts } = JSON.parse(data);
       let user;
-      /* eslint-disable-next-line */
       for (const account of accounts) {
         if (account.login === login) {
           user = account;
@@ -170,8 +164,60 @@ app
       console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
-  });
+  })
 
+  .get("/sortedProducts/:type/:criteria/:genre/:age/:searchName", async (req, res) => {
+    try {
+      const { type, criteria, genre, age, searchName } = req.params;
+      console.log(type, criteria, genre, age, searchName);
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+      res.setHeader("Content-Type", "application/json");
+
+      const sortedProducts = [];
+      for (const product of products) {
+        let valid = true;
+        if (genre !== "all genres") {
+          if (product.category.toLowerCase() !== genre) valid = false;
+        }
+        if (product.age < Number(age)) valid = false;
+        if (searchName !== "__emptyName__" && !product.name.toLowerCase().includes(searchName.toLowerCase()))
+          valid = false;
+        if (valid) sortedProducts.push(product);
+      }
+
+      switch (criteria) {
+        case "price":
+          if (type === "ascending") sortedProducts.sort((a, b) => a.price - b.price);
+          if (type === "descending") sortedProducts.sort((a, b) => b.price - a.price);
+          break;
+        case "name":
+          if (type === "ascending")
+            sortedProducts.sort((a, b) => {
+              if (a.name[0] < b.name[0]) return -1;
+              return 1;
+            });
+          if (type === "descending")
+            sortedProducts.sort((a, b) => {
+              if (a.name[0] > b.name[0]) return -1;
+              return 1;
+            });
+          break;
+        case "rating":
+          if (type === "ascending") sortedProducts.sort((a, b) => a.rating - b.rating);
+          if (type === "descending") sortedProducts.sort((a, b) => b.rating - a.rating);
+          break;
+        default:
+          break;
+      }
+
+      return res.send(JSON.stringify(sortedProducts));
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  });
 app.listen(port, () => {
   console.log(`server listening at http://localhost:${port}`);
 });

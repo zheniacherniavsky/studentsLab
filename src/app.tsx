@@ -5,7 +5,7 @@ import NavBar from "@/components/navbar";
 
 // Pages
 import AboutPage from "@/components/pages/aboutPage";
-import HomePage from "@/components/pages/homePage/home";
+import { HomePage } from "@/components/pages/homePage/home";
 import ProductPage from "@/components/pages/productPage";
 import ProfilePage from "@/components/pages/profilePage";
 
