@@ -61,8 +61,22 @@
       border-top-right-radius: 15px;
     }
 
+    .platforms {
+      position: absolute;
+      top: 0;
+      background: rgba($color: $lightblack, $alpha: 0.8);
+      border-top-left-radius: 14px;
+      img {
+        height: 20px;
+        width: 20px;
+        border-radius: 0;
+        margin: 3px 4px;
+        filter: invert(0.8);
+      }
+    }
+
     // container for title and age limit
-    div {
+    .info {
       display: flex;
       justify-content: space-between;
       align-items: center;

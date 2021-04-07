@@ -1,6 +1,10 @@
 import "./card.scss";
 import IProduct from "@/api/product";
 
+import psPlatformImage from "@/assets/images/Platforms/ps.png";
+import xboxPlatformImage from "@/assets/images/Platforms/xbox.png";
+import pcPlatformImage from "@/assets/images/Platforms/pc.png";
+
 const Card = ({ product: p }: { product: IProduct }) => {
   const rating = [];
   for (let i = 1; i <= 5; i++) {
@@ -11,7 +15,12 @@ const Card = ({ product: p }: { product: IProduct }) => {
     <div className="card_container">
       <div className="front">
         <img src={p.image} alt="Product" />
-        <div>
+        <div className="platforms">
+          {p.platform.includes("pc") ? <img src={pcPlatformImage} alt="PC" /> : null}
+          {p.platform.includes("playstationfive") ? <img src={psPlatformImage} alt="Playstation" /> : null}
+          {p.platform.includes("xboxone") ? <img src={xboxPlatformImage} alt="XBox" /> : null}
+        </div>
+        <div className="info">
           <span className="title">{p.name}</span>
           <span className="ageLimit">{p.price}$</span>
         </div>
