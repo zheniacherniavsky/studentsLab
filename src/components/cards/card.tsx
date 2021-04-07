@@ -8,7 +8,7 @@ import pcPlatformImage from "@/assets/images/Platforms/pc.png";
 const Card = ({ product: p }: { product: IProduct }) => {
   const rating = [];
   for (let i = 1; i <= 5; i++) {
-    rating.push(i <= p.rating ? <span className="active" /> : <span />);
+    rating.push(i <= p.rating ? <span key={p.name + i} className="active" /> : <span key={p.name + i} />);
   }
 
   return (
