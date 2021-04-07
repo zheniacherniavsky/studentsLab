@@ -166,10 +166,10 @@ app
     }
   })
 
-  .get("/sortedProducts/:type/:criteria/:genre/:age/:searchName", (req, res) => {
+  .get("/sortedProducts/:platform/:type/:criteria/:genre/:age/:searchName", (req, res) => {
     try {
-      const { type, criteria, genre, age, searchName } = req.params;
-      console.log(type, criteria, genre, age, searchName);
+      const { platform, type, criteria, genre, age, searchName } = req.params;
+      console.log(platform, type, criteria, genre, age, searchName);
 
       const data = fs.readFileSync("./server/data.json");
       const { products } = JSON.parse(data);
@@ -184,6 +184,7 @@ app
         if (product.age < Number(age)) valid = false;
         if (searchName !== "__emptyName__" && !product.name.toLowerCase().includes(searchName.toLowerCase()))
           valid = false;
+        if (!product.platform.includes(platform)) valid = false;
         if (valid) sortedProducts.push(product);
       }
 

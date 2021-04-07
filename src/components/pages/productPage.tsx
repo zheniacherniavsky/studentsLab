@@ -3,52 +3,50 @@ import IProduct from "@/api/product";
 import { BoxRadioInput } from "@/elements/inputs/radioInput";
 import SelectInput from "@/elements/inputs/selectInput";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CardsContainer from "@/components/cards/cardsContainer";
 import "./productPage.scss";
 import { Loading } from "@/components/pages/homePage/home";
 import debounce from "@/helpers/debounce";
 
 export default function ProductPage() {
-  const { platform } = useParams<{ platform: string }>(); // taking platform from url
-
-  // setting header by platform
-  let header;
-  switch (platform) {
-    case "playstationfive":
-      header = "PlayStation 5";
-      break;
-    case "pc":
-      header = "PC";
-      break;
-    case "xboxone":
-      header = "XBox One";
-      break;
-    default:
-      console.warn("You dont have this url param on product url. Configure switch case in ProductPage.tsx");
-      useHistory().push("/products/pc");
-      break;
-  }
-
-  const [products, updateProducts] = useState<IProduct[]>([]);
-  const [loading, toggleLoading] = useState(false);
-
   // sort params
+  const { platform } = useParams<{ platform: string }>(); // taking platform from url
+  const [header, setHeader] = useState("");
   const [searchName, setSearchName] = useState("");
   const [criteria, setCriteria] = useState("name");
   const [type, setType] = useState("ascending");
   const [genre, setGenre] = useState("all genres");
   const [age, setAge] = useState("0");
 
-  const loadProducts = (search: string) => {
-    getProducts(search, criteria, type, genre, age).then((result: IProduct[]) => {
+  const [products, updateProducts] = useState<IProduct[]>([]);
+
+  const loadProducts = (search: string, platform: string) => {
+    console.log("UPDATED PRODUCTS");
+    getProducts(search, platform, criteria, type, genre, age).then((result: IProduct[]) => {
       updateProducts(result);
     });
   };
 
+  const [loading, toggleLoading] = useState(false);
+
   useEffect(() => {
-    loadProducts(searchName);
-  }, []);
+    loadProducts(searchName, platform);
+    switch (platform) {
+      case "pc":
+        setHeader("PC");
+        break;
+      case "playstationfive":
+        setHeader("Playstation 5");
+        break;
+      case "xboxone":
+        setHeader("XBox One");
+        break;
+      default:
+        console.warn(`${platform} url param is not exist.`);
+        break;
+    }
+  }, [platform, criteria, type, genre, age]); // dependencies
 
   const handleChange = (event: FormEvent<HTMLSelectElement> | FormEvent<HTMLInputElement>) => {
     const { name, value, id } = event.currentTarget;
@@ -80,7 +78,7 @@ export default function ProductPage() {
     setSearchName(event.target.value);
     toggleLoading(true);
     debounce(() => {
-      loadProducts(event.target.value);
+      loadProducts(event.target.value, platform);
       toggleLoading(false);
     }, 300)();
   };
@@ -134,11 +132,6 @@ export default function ProductPage() {
         <div className="options">
           <h3>Age</h3>
           <BoxRadioInput groupName="age" handleChange={handleChange} titles={["All ages", "3+", "6+", "12+", "18+"]} />
-        </div>
-        <div className="searchButton">
-          <button type="button" onClick={() => loadProducts(searchName)}>
-            Search
-          </button>
         </div>
       </div>
     </>
