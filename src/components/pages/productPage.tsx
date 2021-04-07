@@ -76,7 +76,7 @@ export default function ProductPage() {
     }
   };
 
-  const handleSearch = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchName(event.target.value);
     toggleLoading(true);
     debounce(() => {

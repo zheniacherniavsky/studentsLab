@@ -12,7 +12,7 @@ module.exports = {
       jsx: true,
     },
   },
-  extends: ["airbnb", "prettier", "plugin:@typescript-eslint/recommended"],
+  extends: ["eslint:recommended", "airbnb", "prettier", "plugin:@typescript-eslint/recommended"],
   env: {
     es6: true,
     node: true,
@@ -25,6 +25,7 @@ module.exports = {
   plugins: ["json", "prettier", "import", "@typescript-eslint"],
   rules: {
     "no-shadow": "off",
+    "require-await": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
     // "import/no-extraneous-dependencies": ["error", { devDependencies: true }], // debounce should be listed.... error

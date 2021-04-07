@@ -36,7 +36,7 @@ export const HomePage = () => {
     preload();
   }, []);
 
-  const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     showSearchData(false);
     if (event.target.value !== "") {
       updateLoading(true);

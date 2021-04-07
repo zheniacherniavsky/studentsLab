@@ -80,7 +80,7 @@ app
     }
   })
 
-  .get("/products", async (req, res) => {
+  .get("/products", (req, res) => {
     try {
       console.log("get products operation.");
       const data = fs.readFileSync("./server/data.json");
@@ -107,7 +107,7 @@ app
     }
   })
 
-  .post("/saveprofile", async (req, res) => {
+  .post("/saveprofile", (req, res) => {
     try {
       console.log("saveprofile operation.");
       const { login, username, description } = req.body;
@@ -166,7 +166,7 @@ app
     }
   })
 
-  .get("/sortedProducts/:type/:criteria/:genre/:age/:searchName", async (req, res) => {
+  .get("/sortedProducts/:type/:criteria/:genre/:age/:searchName", (req, res) => {
     try {
       const { type, criteria, genre, age, searchName } = req.params;
       console.log(type, criteria, genre, age, searchName);
