@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action: UserAction): UserState => {
     case UserActionTypes.CLEAR_USERNAME:
       return { username: action.payload };
     default:
-      return state;
+      return state; // console.warn
   }
 };
 

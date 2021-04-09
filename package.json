@@ -11,8 +11,9 @@
     "build-prod": "webpack --mode production --config webpack.prod.js",
     "build-prod-withMap": "webpack --mode production --config webpack.prod.js --sourceMap",
     "build-dev": "webpack --mode development --config webpack.dev.js",
-    "lint": "npm run lint-code && npm run lint-styles",
-    "lint-code": "eslint --fix --cache ./**/*.{js,jsx,ts,tsx,json}",
+    "lint": "npm run lint-es && npm run lint-styles && npm run lint-ts",
+    "lint-ts": "tsc --skipLibCheck --incremental --noEmit",
+    "lint-es": "eslint --fix --cache ./**/*.{js,jsx,ts,tsx,json}",
     "lint-styles": "stylelint --fix --cache ./**/*.{css,scss,less}",
     "lint-md": "markdownlint --fix **/*.md --ignore node_modules"
   },

@@ -53,7 +53,7 @@ export function InfoModal({
   closeInfoModalCallback,
 }: InfoModalProps) {
   return (
-    <Modal showExitButtom={false}>
+    <Modal>
       <div className="container">
         <h2>{infoModalHeader}</h2>
         <p>{infoModalText}</p>
