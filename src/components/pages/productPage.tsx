@@ -2,12 +2,13 @@ import getProducts from "@/api/apiGetProducts";
 import IProduct from "@/api/product";
 import { BoxRadioInput } from "@/elements/inputs/radioInput";
 import SelectInput from "@/elements/inputs/selectInput";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardsContainer from "@/components/cards/cardsContainer";
 import "./productPage.scss";
 import Loading from "@/elements/loading";
-import debounce from "@/helpers/debounce";
+import "@/components/pages/homePage/home.scss";
+import SearchInput from "@/elements/searchInput";
 
 export default function ProductPage() {
   // sort params
@@ -20,18 +21,19 @@ export default function ProductPage() {
   const [age, setAge] = useState("0");
 
   const [products, updateProducts] = useState<IProduct[]>([]);
+  const [productsLoading, toggleProductsLoading] = useState(false);
 
-  const loadProducts = (search: string, platform: string) => {
-    console.log("UPDATED PRODUCTS");
+  const loadProducts = (search: string) => {
+    toggleProductsLoading(true);
     getProducts(search, platform, criteria, type, genre, age).then((result: IProduct[]) => {
       updateProducts(result);
+      toggleProductsLoading(false);
     });
   };
 
-  const [loading, toggleLoading] = useState(false);
-
   useEffect(() => {
-    loadProducts(searchName, platform);
+    updateProducts([]);
+    loadProducts(searchName);
     switch (platform) {
       case "pc":
         setHeader("PC");
@@ -48,15 +50,6 @@ export default function ProductPage() {
     }
   }, [platform, criteria, type, genre, age]); // dependencies
 
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchName(event.target.value);
-    toggleLoading(true);
-    debounce(() => {
-      loadProducts(event.target.value, platform);
-      toggleLoading(false);
-    }, 300)();
-  };
-
   return (
     <>
       <div className="menu page_content_container">
@@ -67,14 +60,14 @@ export default function ProductPage() {
             header="Criteria"
             name="sortName"
             value={criteria}
-            handleChange={(e: FormEvent<HTMLSelectElement>) => setCriteria(e.currentTarget.value)}
+            handleChange={(e) => setCriteria(e.currentTarget.value)}
             options={["Name", "Rating", "Price"]}
           />
           <SelectInput
             header="Type"
             name="sortType"
             value={type}
-            handleChange={(e: FormEvent<HTMLSelectElement>) => setType(e.currentTarget.value)}
+            handleChange={(e) => setType(e.currentTarget.value)}
             options={["Ascending", "Descending"]}
           />
         </div>
@@ -83,7 +76,7 @@ export default function ProductPage() {
           <h3>Genres</h3>
           <BoxRadioInput
             groupName="genre"
-            handleChange={(e: FormEvent<HTMLInputElement>) => setGenre(e.currentTarget.id)}
+            handleChange={(e) => setGenre(e.currentTarget.id)}
             titles={["All genres", "Shooter", "Arcade", "Survive"]}
           />
         </div>
@@ -92,7 +85,7 @@ export default function ProductPage() {
           <h3>Age</h3>
           <BoxRadioInput
             groupName="age"
-            handleChange={(e: FormEvent<HTMLInputElement>) => {
+            handleChange={(e) => {
               const { id } = e.currentTarget;
               if (id === "all ages") setAge("0");
               else if (id.includes("+")) setAge(id.substring(0, id.length - 1));
@@ -102,18 +95,12 @@ export default function ProductPage() {
         </div>
       </div>
       <div className="product">
-        <div className="homepage_container__search">
-          <Loading hook={loading} className="" />
-          <input
-            type="text"
-            placeholder="Search"
-            name="searchInput"
-            value={searchName}
-            onChange={handleSearch}
-            id="search_input"
-          />
-        </div>
-        <CardsContainer class="" title="Products" data={products} />
+        <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
+        {!productsLoading ? (
+          <CardsContainer class="" title="Products" data={products} />
+        ) : (
+          <Loading hook className="loadingPage" />
+        )}
       </div>
     </>
   );

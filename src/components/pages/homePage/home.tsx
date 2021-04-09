@@ -1,6 +1,5 @@
-import { useState, useEffect, ChangeEvent, SetStateAction } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 // import debounce from "debounce";
-import debounce from "@/helpers/debounce";
 import getData from "@/api/apiSearchData";
 import getRecentlyAddedProducts from "@/api/apiGetTopProducts";
 import Loading from "@/elements/loading";
@@ -9,47 +8,50 @@ import Loading from "@/elements/loading";
 import CardsContainer from "@/components/cards/cardsContainer";
 // import Card from "@/Components/Cards/card";
 
-import "@/components/pages/homePage/home.scss";
 import "@/components/pages/homePage/categories.scss";
 
+import SearchInput from "@/elements/searchInput";
 import Categories from "./categories";
 
 const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
   const [searchDataVisibility, showSearchData] = useState(false);
   const [topProducts, loadTopProducts] = useState([]);
-  const [loading, updateLoading] = useState(false);
 
-  const topProductsCount = 4; // how much top product we want see on home page
+  const [searchValue, setSearchValue] = useState("");
+
+  const [productsLoading, toggleProductsLoading] = useState(false);
+
+  const topProductsCount = 3; // how much top product we want see on home page
+
+  // FIXME: in useEffect i need cancel preload operation at unmounting
 
   useEffect(() => {
-    const preload = async () =>
+    const preload = async () => {
+      toggleProductsLoading(true);
       loadTopProducts((await getRecentlyAddedProducts(topProductsCount)) as SetStateAction<never[]>);
+      toggleProductsLoading(false);
+    };
 
     preload();
   }, []);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    showSearchData(false);
-    if (event.target.value !== "") {
-      updateLoading(true);
-      debounce(async () => {
-        updateSearchData(await getData());
-        updateLoading(false);
-        if (event.target.value !== "") showSearchData(true);
-      }, 300)();
-    }
+  const loadProducts = async (search: string) => {
+    updateSearchData(await getData(search));
+    if (search !== "") showSearchData(true);
+    else showSearchData(false);
   };
 
   return (
     <div className="homepage_container">
-      <div className="homepage_container__search">
-        <Loading hook={loading} className="" />
-        <input onChange={handleChange} type="text" placeholder="Search" id="search_input" />
-      </div>
+      <SearchInput value={searchValue} handleChange={setSearchValue} callback={loadProducts} showLoading />
       {searchDataVisibility ? <CardsContainer class="" title="Search results" data={searchData} /> : null}
       <Categories />
-      <CardsContainer class="" title="Top products" data={topProducts} />
+      {!productsLoading ? (
+        <CardsContainer class="" title="Top products" data={topProducts} />
+      ) : (
+        <Loading hook className="loadingPage" />
+      )}
     </div>
   );
 };

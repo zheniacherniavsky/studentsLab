@@ -80,13 +80,16 @@ app
     }
   })
 
-  .get("/products", (req, res) => {
+  .get("/products", async (req, res) => {
     try {
-      console.log("get products operation.");
-      const data = fs.readFileSync("./server/data.json");
-      const { products } = JSON.parse(data);
-      res.setHeader("Content-Type", "application/json");
-      return res.send(JSON.stringify(products));
+      await setTimeout(() => {
+        console.log("get products operation.");
+        const data = fs.readFileSync("./server/data.json");
+        const { products } = JSON.parse(data);
+        res.setHeader("Content-Type", "application/json");
+        res.send(JSON.stringify(products));
+      }, 1000);
+      return res.status(200);
     } catch (e) {
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
@@ -166,54 +169,57 @@ app
     }
   })
 
-  .get("/sortedProducts/:platform/:type/:criteria/:genre/:age/:searchName", (req, res) => {
+  .get("/sortedProducts/:platform/:type/:criteria/:genre/:age/:searchName", async (req, res) => {
     try {
-      const { platform, type, criteria, genre, age, searchName } = req.params;
-      console.log(platform, type, criteria, genre, age, searchName);
+      await setTimeout(() => {
+        const { platform, type, criteria, genre, age, searchName } = req.params;
+        console.log(platform, type, criteria, genre, age, searchName);
 
-      const data = fs.readFileSync("./server/data.json");
-      const { products } = JSON.parse(data);
-      res.setHeader("Content-Type", "application/json");
+        const data = fs.readFileSync("./server/data.json");
+        const { products } = JSON.parse(data);
+        res.setHeader("Content-Type", "application/json");
 
-      const sortedProducts = [];
-      for (const product of products) {
-        let valid = true;
-        if (genre !== "all genres") {
-          if (product.category.toLowerCase() !== genre) valid = false;
+        const sortedProducts = [];
+        for (const product of products) {
+          let valid = true;
+          if (genre !== "all genres") {
+            if (product.category.toLowerCase() !== genre) valid = false;
+          }
+          if (product.age < Number(age)) valid = false;
+          if (searchName !== "__emptyName__" && !product.name.toLowerCase().includes(searchName.toLowerCase()))
+            valid = false;
+          if (!product.platform.includes(platform)) valid = false;
+          if (valid) sortedProducts.push(product);
         }
-        if (product.age < Number(age)) valid = false;
-        if (searchName !== "__emptyName__" && !product.name.toLowerCase().includes(searchName.toLowerCase()))
-          valid = false;
-        if (!product.platform.includes(platform)) valid = false;
-        if (valid) sortedProducts.push(product);
-      }
 
-      switch (criteria) {
-        case "price":
-          if (type === "ascending") sortedProducts.sort((a, b) => a.price - b.price);
-          if (type === "descending") sortedProducts.sort((a, b) => b.price - a.price);
-          break;
-        case "name":
-          if (type === "ascending")
-            sortedProducts.sort((a, b) => {
-              if (a.name[0] < b.name[0]) return -1;
-              return 1;
-            });
-          if (type === "descending")
-            sortedProducts.sort((a, b) => {
-              if (a.name[0] > b.name[0]) return -1;
-              return 1;
-            });
-          break;
-        case "rating":
-          if (type === "ascending") sortedProducts.sort((a, b) => a.rating - b.rating);
-          if (type === "descending") sortedProducts.sort((a, b) => b.rating - a.rating);
-          break;
-        default:
-          break;
-      }
+        switch (criteria) {
+          case "price":
+            if (type === "ascending") sortedProducts.sort((a, b) => a.price - b.price);
+            if (type === "descending") sortedProducts.sort((a, b) => b.price - a.price);
+            break;
+          case "name":
+            if (type === "ascending")
+              sortedProducts.sort((a, b) => {
+                if (a.name[0] < b.name[0]) return -1;
+                return 1;
+              });
+            if (type === "descending")
+              sortedProducts.sort((a, b) => {
+                if (a.name[0] > b.name[0]) return -1;
+                return 1;
+              });
+            break;
+          case "rating":
+            if (type === "ascending") sortedProducts.sort((a, b) => a.rating - b.rating);
+            if (type === "descending") sortedProducts.sort((a, b) => b.rating - a.rating);
+            break;
+          default:
+            break;
+        }
 
-      return res.send(JSON.stringify(sortedProducts));
+        res.send(JSON.stringify(sortedProducts));
+      }, 1000);
+      return res.status(200);
     } catch (e) {
       console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });
