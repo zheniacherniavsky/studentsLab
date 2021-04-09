@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import pcImage from "@/api/assets/images/Categories/computer.svg";
-import playstationImage from "@/api/assets/images/Categories/playstation.svg";
-import xboxImage from "@/api/assets/images/Categories/xbox.svg";
+import pcImage from "@/assets/images/Categories/computer.svg";
+import playstationImage from "@/assets/images/Categories/playstation.svg";
+import xboxImage from "@/assets/images/Categories/xbox.svg";
 
 const Category = ({ name, image }: { name: string; image: string }) => (
   <div className="category">
@@ -15,13 +15,13 @@ const Categories = () => (
   <div className="categories_container page_content_container">
     <h2>Categories</h2>
     <div className="tiles">
-      <Link to="/pc">
+      <Link to="/products/pc">
         <Category name="PC" image={pcImage} />
       </Link>
-      <Link to="/playstationfive">
+      <Link to="/products/playstationfive">
         <Category name="Playstation 5" image={playstationImage} />
       </Link>
-      <Link to="/xboxone">
+      <Link to="/products/xboxone">
         <Category name="XBox One" image={xboxImage} />
       </Link>
     </div>

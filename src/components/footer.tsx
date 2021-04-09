@@ -1,6 +1,6 @@
-import rockstarLogo from "@/api/assets/images/rockstarGamesLogo.svg";
-import epicgamesLogo from "@/api/assets/images/epicGamesLogo.svg";
-import riotGamesLogo from "@/api/assets/images/riotGames.svg";
+import rockstarLogo from "@/assets/images/rockstarGamesLogo.svg";
+import epicgamesLogo from "@/assets/images/epicGamesLogo.svg";
+import riotGamesLogo from "@/assets/images/riotGames.svg";
 
 import "./footer.scss";
 

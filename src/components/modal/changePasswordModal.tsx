@@ -1,50 +1,52 @@
 import Modal from "@/elements/modal";
-import signup from "@/api/apiSignup";
 import { FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
 
-import LoginInput from "@/elements/inputs/loginInput";
 import PasswordInput from "@/elements/inputs/passwordInput";
 import ConfirmPasswordInput from "@/elements/inputs/confirmPasswordInput";
-import useActions from "@/helpers/hooks/useActions";
+import useTypedSelector from "@/helpers/hooks/useTypedSelector";
+import changePassword from "@/api/apiChangePassword";
+import ModalCloseButton from "@/elements/modalCloseButton";
+import { InfoModal, InfoModalProps, InfoType } from "./infoModal";
 
-const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
-  const { changeUsernameAsync } = useActions();
-  const history = useHistory();
+const ChangePasswordModal = ({ closeCallback }: { closeCallback: () => void }) => {
+  const { username: login } = useTypedSelector((state) => state.user);
 
-  const redirect = (path: string) => {
-    history.push(path);
-  };
-
-  const [login, setLogin] = useState("");
   const [firstPassword, setFirstPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [loginError, setLoginError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
+  const [infoModalSuccess, toggleInfoModalSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  const InfoModalSuccessProps: InfoModalProps = {
+    infoModalHeader: "Success!",
+    infoModalText: "Password has been changed.",
+    infoModalType: InfoType.ALERT,
+    infoModalCallback: () => null,
+    closeInfoModalCallback: () => {
+      toggleInfoModalSuccess(false);
+      closeCallback();
+    },
+  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const validationErrorMessage =
-      loginError || //
-      passwordError ||
+      passwordError || //
       confirmPasswordError ||
       "";
 
-    if (!validationErrorMessage && login && firstPassword && confirmPassword) {
-      const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup(
-        login,
-        firstPassword
-      );
-      if (username) {
-        changeUsernameAsync(username);
-        closeCallback();
-        redirect("/profile");
+    if (!validationErrorMessage && firstPassword && confirmPassword) {
+      // change password api
+      const error = await changePassword(login as string, firstPassword);
+
+      console.log(error);
+      if (!error) {
+        toggleInfoModalSuccess(true);
       } else {
-        setError(errorMessage as string);
+        setError(error);
         setFirstPassword("");
         setConfirmPassword("");
       }
@@ -52,18 +54,14 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
   };
 
   return (
-    <Modal showExitButtom closeCallback={closeCallback}>
+    <Modal>
+      {infoModalSuccess ? <InfoModal {...InfoModalSuccessProps} /> : null}
       <form onSubmit={handleSubmit}>
-        <h2>Registration</h2>
+        <div className="head">
+          <h2>Change password</h2>
+          <ModalCloseButton closeCallback={closeCallback} />
+        </div>
         <p>{error}</p>
-        <LoginInput
-          label="Login"
-          type="text"
-          id="login"
-          handleChange={setLogin}
-          value={login}
-          errorDispatch={setLoginError}
-        />
         <PasswordInput
           label="Password"
           type="password"
@@ -89,4 +87,4 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
   );
 };
 
-export default SignUpModal;
+export default ChangePasswordModal;
