@@ -3,7 +3,7 @@ import { useState, useEffect, ChangeEvent, SetStateAction } from "react";
 import debounce from "@/helpers/debounce";
 import getData from "@/api/apiSearchData";
 import getRecentlyAddedProducts from "@/api/apiGetTopProducts";
-import loadingImage from "@/assets/images/loading.svg";
+import Loading from "@/elements/loading";
 
 // categories
 import CardsContainer from "@/components/cards/cardsContainer";
@@ -14,14 +14,7 @@ import "@/components/pages/homePage/categories.scss";
 
 import Categories from "./categories";
 
-export const Loading = ({ hook }: { hook: boolean }) => {
-  if (hook) {
-    return <img src={loadingImage} alt="loading" />;
-  }
-  return null;
-};
-
-export const HomePage = () => {
+const HomePage = () => {
   const [searchData, updateSearchData] = useState([]);
   const [searchDataVisibility, showSearchData] = useState(false);
   const [topProducts, loadTopProducts] = useState([]);
@@ -51,7 +44,7 @@ export const HomePage = () => {
   return (
     <div className="homepage_container">
       <div className="homepage_container__search">
-        <Loading hook={loading} />
+        <Loading hook={loading} className="" />
         <input onChange={handleChange} type="text" placeholder="Search" id="search_input" />
       </div>
       {searchDataVisibility ? <CardsContainer class="" title="Search results" data={searchData} /> : null}
@@ -60,3 +53,5 @@ export const HomePage = () => {
     </div>
   );
 };
+
+export default HomePage;

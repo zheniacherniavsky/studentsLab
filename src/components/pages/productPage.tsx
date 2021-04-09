@@ -6,7 +6,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardsContainer from "@/components/cards/cardsContainer";
 import "./productPage.scss";
-import { Loading } from "@/components/pages/homePage/home";
+import Loading from "@/elements/loading";
 import debounce from "@/helpers/debounce";
 
 export default function ProductPage() {
@@ -43,36 +43,10 @@ export default function ProductPage() {
         setHeader("XBox One");
         break;
       default:
-        console.warn(`${platform} url param is not exist.`);
+        console.error(`${platform} url param is not exist.`);
         break;
     }
   }, [platform, criteria, type, genre, age]); // dependencies
-
-  const handleChange = (event: FormEvent<HTMLSelectElement> | FormEvent<HTMLInputElement>) => {
-    const { name, value, id } = event.currentTarget;
-
-    switch (name) {
-      case "searchInput":
-        setSearchName(value);
-        break;
-      case "sortName":
-        setCriteria(value);
-        break;
-      case "sortType":
-        setType(value);
-        break;
-      case "genre":
-        setGenre(id); // id cause it's radio button
-        break;
-      case "age":
-        if (id === "all ages") setAge("0");
-        else if (id.includes("+")) setAge(id.substring(0, id.length - 1));
-        break;
-      default:
-        console.warn("productPage.tsx default case!");
-        break;
-    }
-  };
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchName(event.target.value);
@@ -85,9 +59,51 @@ export default function ProductPage() {
 
   return (
     <>
+      <div className="menu page_content_container">
+        <h2>{header}</h2>
+        <div className="options sort">
+          <h3>Sort</h3>
+          <SelectInput
+            header="Criteria"
+            name="sortName"
+            value={criteria}
+            handleChange={(e: FormEvent<HTMLSelectElement>) => setCriteria(e.currentTarget.value)}
+            options={["Name", "Rating", "Price"]}
+          />
+          <SelectInput
+            header="Type"
+            name="sortType"
+            value={type}
+            handleChange={(e: FormEvent<HTMLSelectElement>) => setType(e.currentTarget.value)}
+            options={["Ascending", "Descending"]}
+          />
+        </div>
+
+        <div className="options">
+          <h3>Genres</h3>
+          <BoxRadioInput
+            groupName="genre"
+            handleChange={(e: FormEvent<HTMLInputElement>) => setGenre(e.currentTarget.id)}
+            titles={["All genres", "Shooter", "Arcade", "Survive"]}
+          />
+        </div>
+
+        <div className="options">
+          <h3>Age</h3>
+          <BoxRadioInput
+            groupName="age"
+            handleChange={(e: FormEvent<HTMLInputElement>) => {
+              const { id } = e.currentTarget;
+              if (id === "all ages") setAge("0");
+              else if (id.includes("+")) setAge(id.substring(0, id.length - 1));
+            }}
+            titles={["All ages", "3+", "6+", "12+", "18+"]}
+          />
+        </div>
+      </div>
       <div className="product">
         <div className="homepage_container__search">
-          <Loading hook={loading} />
+          <Loading hook={loading} className="" />
           <input
             type="text"
             placeholder="Search"
@@ -98,41 +114,6 @@ export default function ProductPage() {
           />
         </div>
         <CardsContainer class="" title="Products" data={products} />
-      </div>
-
-      <div className="menu page_content_container">
-        <h2>{header}</h2>
-        <div className="options sort">
-          <h3>Sort</h3>
-          <SelectInput
-            header="Criteria"
-            name="sortName"
-            value={criteria}
-            handleChange={handleChange}
-            options={["Name", "Rating", "Price"]}
-          />
-          <SelectInput
-            header="Type"
-            name="sortType"
-            value={type}
-            handleChange={handleChange}
-            options={["Ascending", "Descending"]}
-          />
-        </div>
-
-        <div className="options">
-          <h3>Genres</h3>
-          <BoxRadioInput
-            groupName="genre"
-            handleChange={handleChange}
-            titles={["All genres", "Shooter", "Arcade", "Survive"]}
-          />
-        </div>
-
-        <div className="options">
-          <h3>Age</h3>
-          <BoxRadioInput groupName="age" handleChange={handleChange} titles={["All ages", "3+", "6+", "12+", "18+"]} />
-        </div>
       </div>
     </>
   );

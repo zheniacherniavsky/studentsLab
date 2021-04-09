@@ -3,22 +3,46 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Footer from "@/components/footer";
 import NavBar from "@/components/navbar";
 
-// Pages
-import AboutPage from "@/components/pages/aboutPage";
-import { HomePage } from "@/components/pages/homePage/home";
-import ProductPage from "@/components/pages/productPage";
-import ProfilePage from "@/components/pages/profilePage";
-
 // Styles
 import "@/styles/styles.scss";
 import "@/styles/pages.scss";
 import PrivateRoute from "./elements/privateRoute";
+import Loading from "./elements/loading";
 
 interface IAppProps {
   showSignInModal: boolean;
   showSignUpModal: boolean;
   showInfoModal: boolean;
 }
+
+const Pages = () => {
+  const AboutPage = React.lazy(() => import("@/components/pages/aboutPage"));
+  const HomePage = React.lazy(() => import("@/components/pages/homePage/home"));
+  const ProductPage = React.lazy(() => import("@/components/pages/productPage"));
+  const ProfilePage = React.lazy(() => import("@/components/pages/profilePage"));
+
+  return (
+    <div className="pages_container">
+      <React.Suspense fallback={<Loading hook className="loadingPage" />}>
+        <Switch>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <PrivateRoute path="/about" exact>
+            <AboutPage />
+          </PrivateRoute>
+          <PrivateRoute path="/profile" exact>
+            <ProfilePage />
+          </PrivateRoute>
+          <PrivateRoute path="/products/:platform" exact>
+            <ProductPage />
+          </PrivateRoute>
+          <Redirect to="/" />
+        </Switch>
+      </React.Suspense>
+    </div>
+  );
+};
 
 class App extends React.Component<IAppProps> {
   componentDidCatch(error: Error) {
@@ -35,23 +59,7 @@ class App extends React.Component<IAppProps> {
         <header>
           <NavBar title="Game Store" />
         </header>
-        <div className="pages_container">
-          <Switch>
-            <Route path="/" exact>
-              <HomePage />
-            </Route>
-            <PrivateRoute path="/about" exact>
-              <AboutPage />
-            </PrivateRoute>
-            <PrivateRoute path="/profile" exact>
-              <ProfilePage />
-            </PrivateRoute>
-            <PrivateRoute path="/products/:platform" exact>
-              <ProductPage />
-            </PrivateRoute>
-            <Redirect to="/" />
-          </Switch>
-        </div>
+        <Pages />
         <footer>
           <Footer />
         </footer>
