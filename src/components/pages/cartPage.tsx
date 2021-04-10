@@ -8,8 +8,8 @@ import "./cartPage.scss";
 
 let selectedProductsArray: Array<IProduct> = [];
 
-const Product = ({ product: p }: { product: IProduct }) => {
-  const [productAmount, setProductAmount] = useState(1);
+const Product = ({ product: p }: { product: { product: IProduct; count: number } }) => {
+  const [productAmount, setProductAmount] = useState(p.count);
   const [platform, choosePlatfrom] = useState("");
 
   const redux = useActions();
@@ -25,7 +25,7 @@ const Product = ({ product: p }: { product: IProduct }) => {
 
   const getPlatformsArray = (): string[] => {
     const platformsArray: string[] = [];
-    p.platform.forEach((platform: string) => {
+    p.product.platform.forEach((platform: string) => {
       switch (platform) {
         case "pc":
           platformsArray.push("PC");
@@ -45,13 +45,13 @@ const Product = ({ product: p }: { product: IProduct }) => {
 
   return (
     <tr>
-      <td>{p.name}</td>
+      <td>{p.product.name}</td>
       <td>
         <SelectInput
           header=""
           value={platform}
           handleChange={(e) => choosePlatfrom(e.currentTarget.value)}
-          name={`${p.name}_platform`}
+          name={`${p.product.name}_platform`}
           options={[...getPlatformsArray()]}
         />
       </td>
@@ -66,23 +66,23 @@ const Product = ({ product: p }: { product: IProduct }) => {
             const amount = Number(value);
             if (amount < 1) {
               setProductAmount(1);
-              redux.changeProductCount({ product: p, count: 1 });
+              redux.changeProductCount({ product: p.product, count: 1 });
             } else {
               setProductAmount(amount);
-              redux.changeProductCount({ product: p, count: amount });
+              redux.changeProductCount({ product: p.product, count: amount });
             }
           }}
         />
       </td>
-      <td>{(p.price * productAmount).toFixed(2)}</td>
+      <td>{(p.product.price * productAmount).toFixed(2)}</td>
       <td>
         <input
           type="checkbox"
           onChange={(e) => {
-            if (e.currentTarget.checked) selectedProductsArray.push(p);
+            if (e.currentTarget.checked) selectedProductsArray.push(p.product);
             else
               selectedProductsArray = selectedProductsArray.filter((value: IProduct) => {
-                if (value.name !== p.name) return value;
+                if (value.name !== p.product.name) return value;
                 return null;
               });
           }}
@@ -152,7 +152,7 @@ const CartPage = () => {
             <td />
           </tr>
           {products.map((p) => (
-            <Product product={p.product} key={p.product.name} />
+            <Product product={p} key={p.product.name} />
           ))}
           <tr>
             <td />
