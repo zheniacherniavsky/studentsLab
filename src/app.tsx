@@ -8,6 +8,7 @@ import "@/styles/styles.scss";
 import "@/styles/pages.scss";
 import PrivateRoute from "./elements/privateRoute";
 import Loading from "./elements/loading";
+import CartPage from "./components/pages/cartPage";
 
 interface IAppProps {
   showSignInModal: boolean;
@@ -36,6 +37,9 @@ const Pages = () => {
           </PrivateRoute>
           <PrivateRoute path="/products/:platform" exact>
             <ProductPage />
+          </PrivateRoute>
+          <PrivateRoute path="/cart" exact>
+            <CartPage />
           </PrivateRoute>
           <Redirect to="/" />
         </Switch>

@@ -69,6 +69,47 @@
             }
           }
 
+          .logoutImg {
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+              filter: invert(0.8);
+              width: 20px;
+            }
+          }
+
+          .shoppingCart {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            div {
+              display: flex;
+              justify-content: space-between;
+              width: 42px;
+              img {
+                filter: invert(0.8);
+                width: 20px;
+              }
+            }
+          }
+
+          .profileLink {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            div {
+              display: flex;
+              justify-content: space-between;
+              img {
+                filter: invert(0.8);
+                width: 20px;
+                margin-right: 5px;
+              }
+            }
+          }
+
           .dropdown {
             position: absolute;
             display: flex;
