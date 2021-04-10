@@ -9,7 +9,6 @@ import CardsContainer from "@/components/cards/cardsContainer";
 // import Card from "@/Components/Cards/card";
 
 import "@/components/pages/homePage/categories.scss";
-
 import SearchInput from "@/elements/searchInput";
 import Categories from "./categories";
 
@@ -43,7 +42,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="homepage_container">
+    <div>
       <SearchInput value={searchValue} handleChange={setSearchValue} callback={loadProducts} showLoading />
       {searchDataVisibility ? <CardsContainer class="" title="Search results" data={searchData} /> : null}
       <Categories />
