@@ -33,19 +33,6 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-
-          select {
-            background: transparent;
-            color: white;
-            padding: 5px;
-            min-width: 150px;
-
-            option {
-              background: $lightblack;
-              color: white;
-              padding: 5px;
-            }
-          }
         }
       }
     }

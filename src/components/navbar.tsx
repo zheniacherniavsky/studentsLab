@@ -4,9 +4,12 @@ import { useState } from "react";
 import "./navbar.scss";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import useActions from "@/helpers/hooks/useActions";
-import SignInModal from "./modal/signInModal";
-import SignUpModal from "./modal/signUpModal";
-import { InfoModal, InfoModalProps, InfoType } from "./modal/infoModal";
+import logoutImage from "@/assets/images/logout.png";
+import shoppingCart from "@/assets/images/shopping-cart.png";
+import profileImg from "@/assets/images/user.png";
+import { InfoModal, InfoModalProps, InfoType } from "@/components/modal/infoModal";
+import SignInModal from "@/components/modal/signInModal";
+import SignUpModal from "@/components/modal/signUpModal";
 
 const NavBar = ({ title }: { title: string }) => {
   // Product drop down menu
@@ -18,6 +21,7 @@ const NavBar = ({ title }: { title: string }) => {
 
   // redux
   const { username } = useTypedSelector((state) => state.user);
+  const { count } = useTypedSelector((state) => state.cart);
   const redux = useActions();
 
   // routes
@@ -94,13 +98,24 @@ const NavBar = ({ title }: { title: string }) => {
           {username !== null ? (
             <>
               <li>
-                <NavLink to="/profile" activeClassName="active">
-                  <h3>{username}</h3>
+                <NavLink to="/profile" activeClassName="active" className="profileLink">
+                  <div>
+                    <img src={profileImg} alt="" />
+                    <h3>{username}</h3>
+                  </div>
                 </NavLink>
               </li>
               <li>
-                <button type="button" onClick={() => toggleInfoModal(true)}>
-                  <h3>Log out</h3>
+                <NavLink to="/cart" activeClassName="active" className="shoppingCart">
+                  <div>
+                    <img src={shoppingCart} alt="Cart" />
+                    <h3>{count}</h3>
+                  </div>
+                </NavLink>
+              </li>
+              <li>
+                <button className="logoutImg" type="button" onClick={() => toggleInfoModal(true)}>
+                  <img src={logoutImage} alt="Log out" />
                 </button>
               </li>
             </>

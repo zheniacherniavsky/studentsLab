@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import CardsContainer from "@/components/cards/cardsContainer";
 import "./productPage.scss";
 import Loading from "@/elements/loading";
-import "@/components/pages/homePage/home.scss";
 import SearchInput from "@/elements/searchInput";
 
 export default function ProductPage() {
