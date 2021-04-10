@@ -1,6 +1,6 @@
 export default interface IProduct {
   name: string;
-  price: Number;
+  price: number;
   age: Number;
   category: string;
   platform: string[];

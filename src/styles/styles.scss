@@ -21,7 +21,6 @@ button {
   border-radius: 10px;
   color: $basicColor;
 
-  &:focus,
   &:hover {
     background: rgba($navbar_tilebottomlight, 0.8);
     transition: 0.1s;
@@ -42,14 +41,14 @@ a {
 }
 
 input,
-textarea {
+textarea,
+select {
   background: rgba($lightblack, 0.5);
   outline: none;
   border: 1px solid $basicColor;
   font-family: "Roboto", sans-serif;
   color: $basicColor;
   padding: 0 12px;
-  border-radius: 10px;
 
   &:focus {
     border: 1px solid $navbar_tilebottom;

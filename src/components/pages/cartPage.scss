@@ -1,0 +1,45 @@
+.cartPage {
+  width: 95%;
+
+  div {
+    display: flex;
+    width: 70%;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+
+    button {
+      padding: 15px 30px;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr {
+      height: 60px;
+      text-align: center;
+      border-bottom: 1px solid rgba($color: white, $alpha: 0.4);
+
+      &:first-child {
+        border-bottom: 1px solid white;
+      }
+
+      select {
+        padding: 5px;
+        min-width: 150px;
+      }
+      .productAmount {
+        width: 60px;
+        padding: 5px;
+        border-radius: 0px;
+      }
+
+      td button {
+        padding: 10px 20px;
+      }
+    }
+  }
+}

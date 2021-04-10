@@ -17,7 +17,7 @@ export default function SelectInput(p: SelectInputProps) {
 
   return (
     <label htmlFor={p.name}>
-      <span>{p.header}:</span>
+      <span>{p.header}</span>
       <select name={p.name} value={p.value} onChange={p.handleChange} id={p.name}>
         {optionsList}
       </select>
