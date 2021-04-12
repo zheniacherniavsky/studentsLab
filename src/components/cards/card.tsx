@@ -15,6 +15,8 @@ const Card = ({ product: p }: { product: IProduct }) => {
   const [showSignInModal, toggleSignInModal] = useState(false);
   const [editCardModal, toggleEditCardModal] = useState(false);
 
+  const [inCardClassName, setInCardClassName] = useState("");
+
   const { username, isAdmin } = useTypedSelector((state) => state.user);
 
   const rating = [];
@@ -41,7 +43,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
           product={p}
         />
       ) : null}
-      <div className="front">
+      <div className={`front ${inCardClassName}`}>
         <img src={p.image} alt="Product" />
         <div className="platforms">
           {p.platform.includes("pc") ? <img src={pcPlatformImage} alt="PC" /> : null}
@@ -54,13 +56,20 @@ const Card = ({ product: p }: { product: IProduct }) => {
         </div>
         <div className="rating">{rating}</div>
       </div>
-      <div className="back">
+      <div className={`back ${inCardClassName}`}>
         <p>{p.shortdescription}</p>
         <span>{p.age}+</span>
         <div className="buttons">
           {username && isAdmin ? (
             <>
-              <button type="button" onClick={() => redux.addProductToCart(p)}>
+              <button
+                type="button"
+                onClick={() => {
+                  redux.addProductToCart(p);
+                  setInCardClassName("inCart");
+                  setTimeout(() => setInCardClassName(""), 399);
+                }}
+              >
                 Add to cart
               </button>
               <button type="button" onClick={() => toggleEditCardModal(true)}>

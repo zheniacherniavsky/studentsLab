@@ -21,6 +21,10 @@
     backface-visibility: hidden;
     border-radius: 15px;
     background: $lightblack;
+    box-shadow: 0 0 15px $navbar_tilebottom;
+    &.inCart {
+      box-shadow: 0 0 15px lightgreen;
+    }
   }
 
   .back {
