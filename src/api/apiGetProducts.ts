@@ -1,4 +1,4 @@
-import IProduct from "./product";
+import IProduct from "./product.d";
 
 export default async function getProducts(
   searchName: string | null,

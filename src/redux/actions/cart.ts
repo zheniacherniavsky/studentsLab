@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 import { CartActionTypes } from "@/types/cart";
 
 export const addProductToCart = (product: IProduct) => ({

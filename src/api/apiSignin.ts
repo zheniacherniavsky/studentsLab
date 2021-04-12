@@ -1,4 +1,7 @@
-async function signin(login: string, password: string): Promise<{ username?: string; errorMessage?: string }> {
+async function signin(
+  login: string,
+  password: string
+): Promise<{ username?: string; errorMessage?: string; isAdmin?: boolean }> {
   const response = await fetch("http://localhost:3000/login", {
     method: "POST",
     headers: {
@@ -10,8 +13,10 @@ async function signin(login: string, password: string): Promise<{ username?: str
     }),
   });
 
+  const { isAdmin } = await response.json();
+
   if (response.ok) {
-    return { username: login };
+    return { username: login, isAdmin };
   }
   const answer = await response.json();
 

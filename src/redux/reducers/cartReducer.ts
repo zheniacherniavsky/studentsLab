@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 import { CartAction, CartActionTypes, CartState } from "@/types/cart";
 
 const initialState: CartState = {
@@ -56,7 +56,7 @@ const userReducer = (state = initialState, action: CartAction): CartState => {
     case CartActionTypes.CLEAR_CART:
       return initialState;
     default:
-      return state; // console.warn
+      return state;
   }
 };
 
