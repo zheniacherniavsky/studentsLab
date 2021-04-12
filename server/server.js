@@ -34,7 +34,7 @@ app
 
       if (currentUser) {
         const isMatch = await bcrypt.compare(password, currentUser.password);
-        if (isMatch) return res.sendStatus(200);
+        if (isMatch) return res.status(200).json({ isAdmin: currentUser.isAdmin });
       }
 
       return res.status(400).json({ message: "This account does not exist." });
@@ -64,6 +64,7 @@ app
       accounts.push({
         login,
         password: hashedPassword,
+        isAdmin: false,
         profile: {
           avatar: "",
           username: "",
@@ -220,6 +221,79 @@ app
         res.send(JSON.stringify(sortedProducts));
       }, 1000);
       return res.status(200);
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .post("/product", (req, res) => {
+    try {
+      const newProduct = req.body;
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+
+      newProduct.id = products.length;
+      products.push(newProduct);
+
+      fs.writeFileSync("./server/data.json", JSON.stringify({ products }));
+      return res.status(200).json({ product: newProduct });
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .put("/product", (req, res) => {
+    try {
+      console.log(req.body);
+
+      const { id, name, category, description, price, age, imgPath, platforms } = req.body;
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+      res.setHeader("Content-Type", "application/json");
+      const newData = [];
+      let willUpdateProduct;
+
+      for (const product of products) {
+        if (product.id === id) willUpdateProduct = product;
+        else newData.push(product);
+      }
+
+      willUpdateProduct.name = name;
+      willUpdateProduct.category = category;
+      willUpdateProduct.shortdescription = description;
+      willUpdateProduct.image = imgPath;
+      willUpdateProduct.price = price;
+      willUpdateProduct.age = age;
+      willUpdateProduct.platform = platforms;
+
+      newData.push(willUpdateProduct);
+
+      fs.writeFileSync("./server/data.json", JSON.stringify({ products: newData }));
+      return res.status(200).json({ product: willUpdateProduct });
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .delete("/product/:id", (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log(typeof id);
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+
+      const newProducts = [];
+      for (const product of products) {
+        if (product.id !== parseInt(id, 10)) newProducts.push(product);
+      }
+      fs.writeFileSync("./server/data.json", JSON.stringify({ products: newProducts }));
+      return res.send(id);
     } catch (e) {
       console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });

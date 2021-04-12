@@ -76,6 +76,7 @@ const ProfilePage = () => {
             <TextInput
               label="Username"
               id="login"
+              type="text"
               value={username}
               maxLength={30}
               handleChange={setUsername}

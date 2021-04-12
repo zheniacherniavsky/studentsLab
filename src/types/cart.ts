@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 
 export enum CartActionTypes {
   ADD_TO_CART = "ADD_TO_CART",

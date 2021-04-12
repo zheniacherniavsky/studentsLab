@@ -1,5 +1,5 @@
 import "./card.scss";
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 
 import psPlatformImage from "@/assets/images/Platforms/ps.png";
 import xboxPlatformImage from "@/assets/images/Platforms/xbox.png";
@@ -8,12 +8,17 @@ import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import SignInModal from "@/components/modal/signInModal";
 import { useState } from "react";
+import { EditCardModal, EditCardType } from "../modal/editCardModal";
 
 const Card = ({ product: p }: { product: IProduct }) => {
   const redux = useActions();
   const [showSignInModal, toggleSignInModal] = useState(false);
+  const [editCardModal, toggleEditCardModal] = useState(false);
 
-  const { username } = useTypedSelector((state) => state.user);
+  const [inCardClassName, setInCardClassName] = useState("");
+
+  const { username, isAdmin } = useTypedSelector((state) => state.user);
+  const { willUpdate } = useTypedSelector((state) => state.products);
 
   const rating = [];
   for (let i = 1; i <= 5; i++) {
@@ -30,7 +35,20 @@ const Card = ({ product: p }: { product: IProduct }) => {
           closeCallbackSuccess={() => toggleSignInModal(false)}
         />
       ) : null}
-      <div className="front">
+      {editCardModal ? (
+        <EditCardModal
+          closeCallback={() => {
+            toggleEditCardModal(false);
+          }}
+          closeCallbackSuccess={() => {
+            redux.updateProducts(!willUpdate);
+            toggleEditCardModal(false);
+          }}
+          product={p}
+          type={EditCardType.UPDATE}
+        />
+      ) : null}
+      <div className={`front ${inCardClassName}`}>
         <img src={p.image} alt="Product" />
         <div className="platforms">
           {p.platform.includes("pc") ? <img src={pcPlatformImage} alt="PC" /> : null}
@@ -43,19 +61,41 @@ const Card = ({ product: p }: { product: IProduct }) => {
         </div>
         <div className="rating">{rating}</div>
       </div>
-      <div className="back">
+      <div className={`back ${inCardClassName}`}>
         <p>{p.shortdescription}</p>
-        <div>
-          <span>{p.age}+</span>
-          <button
-            type="button"
-            onClick={() => {
-              if (username) redux.addProductToCart(p);
-              else toggleSignInModal(true);
-            }}
-          >
-            Add to cart
-          </button>
+        <span>{p.age}+</span>
+        <div className="buttons">
+          {username ? (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  redux.addProductToCart(p);
+                  setInCardClassName("inCart");
+                  setTimeout(() => setInCardClassName(""), 399);
+                }}
+              >
+                Add to cart
+              </button>
+              {isAdmin ? (
+                <button type="button" onClick={() => toggleEditCardModal(true)}>
+                  Edit
+                </button>
+              ) : null}
+            </>
+          ) : null}
+          {!username ? (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  toggleSignInModal(true);
+                }}
+              >
+                Add to cart
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
     </div>

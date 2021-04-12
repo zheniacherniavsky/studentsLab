@@ -36,6 +36,7 @@ const NavBar = ({ title }: { title: string }) => {
     infoModalType: InfoType.PROMPT,
     infoModalCallback: () => {
       redux.clearUsername();
+      redux.clearCart();
       redirect("/");
     },
     closeInfoModalCallback: () => toggleInfoModal(false),
@@ -91,9 +92,9 @@ const NavBar = ({ title }: { title: string }) => {
             </button>
           </li>
           <li>
-            <NavLink to="/about" activeClassName="active">
+            <a href="https://github.com/zheniacherniavsky/studentsLab" target="_blank" rel="noreferrer">
               <h3>About</h3>
-            </NavLink>
+            </a>
           </li>
           {username !== null ? (
             <>

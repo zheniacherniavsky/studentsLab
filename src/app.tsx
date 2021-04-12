@@ -17,7 +17,6 @@ interface IAppProps {
 }
 
 const Pages = () => {
-  const AboutPage = React.lazy(() => import("@/components/pages/aboutPage"));
   const HomePage = React.lazy(() => import("@/components/pages/homePage/home"));
   const ProductPage = React.lazy(() => import("@/components/pages/productPage"));
   const ProfilePage = React.lazy(() => import("@/components/pages/profilePage"));
@@ -29,9 +28,6 @@ const Pages = () => {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <PrivateRoute path="/about" exact>
-            <AboutPage />
-          </PrivateRoute>
           <PrivateRoute path="/profile" exact>
             <ProfilePage />
           </PrivateRoute>

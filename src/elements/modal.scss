@@ -20,14 +20,80 @@
 
   // style for form
   form {
+    max-height: 500px;
+    overflow: scroll;
     background: $lightblack;
     padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
     border-bottom: 2px solid $basicColor;
     border-radius: 20px;
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      font-size: 20px;
+
+      input {
+        width: 300px;
+        margin-left: 100px;
+        height: 45px;
+        font-size: 20px;
+
+        &.trueValidation {
+          border: 1px solid #2bc94f;
+        }
+      }
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      padding: 0px 30px 50px 30px;
+      .image {
+        width: 200px;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      .inputs {
+        margin-left: 30px;
+        label {
+          width: 420px;
+          font-size: 16px;
+          padding: 0;
+          input {
+            margin: 0;
+            font-size: 14px;
+          }
+          textarea {
+            padding-top: 10px;
+            margin: 0;
+            font-size: 14px;
+            width: 300px;
+            height: 200px;
+            min-width: 300px;
+            min-height: 200px;
+            max-width: 300px;
+            max-height: 200px;
+          }
+
+          select {
+            margin-top: 10px;
+          }
+
+          .radioButton {
+            width: 20px;
+          }
+        }
+      }
+    }
 
     .head {
       display: flex;
@@ -55,29 +121,24 @@
       color: rgb(255, 0, 0);
     }
 
-    label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      font-size: 20px;
-
-      input {
-        width: 300px;
-        margin-left: 100px;
-        height: 45px;
-        font-size: 20px;
-
-        &.trueValidation {
-          border: 1px solid #2bc94f;
-        }
-      }
-    }
-
     button {
       margin: auto;
       margin-top: 40px;
       font-weight: bold;
+    }
+
+    .buttons {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: auto;
+
+      button {
+        font-weight: bold;
+        width: 120px;
+        margin: 0;
+      }
     }
   }
   // for informational blocks

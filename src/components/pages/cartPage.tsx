@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 import SelectInput from "@/elements/inputs/selectInput";
 import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
@@ -126,7 +126,7 @@ const CartPage = () => {
 
   const buyModalProps: InfoModalProps = {
     infoModalHeader: "Please, confirm your order.",
-    infoModalText: `Sum: ${getTotalCost().toFixed(2)}`,
+    infoModalText: `Sum: ${getTotalCost().toFixed(2)} $`,
     infoModalType: InfoType.PROMPT,
     infoModalCallback: () => {
       redux.clearCart();
@@ -177,7 +177,7 @@ const CartPage = () => {
         </tbody>
       </table>
       <div>
-        <h3>Games cost: {getTotalCost().toFixed(2)}</h3>
+        <h3>Games cost: {getTotalCost().toFixed(2)} $</h3>
         <h3>Your balance: 32.98 $</h3>
         <button
           type="button"

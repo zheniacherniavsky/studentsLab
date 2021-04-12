@@ -1,5 +1,8 @@
 @media (min-width: 820px) {
   .navbar_container {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
     background-color: $lightblack;
     display: flex;
     justify-content: space-between;
@@ -12,7 +15,9 @@
       margin-right: auto;
 
       h1 {
-        margin: 14px;
+        margin: 10px;
+        margin-left: 15px;
+        font-size: 22px;
       }
       // Toggle menu btn
       .toggle_menu_btn {
@@ -31,19 +36,20 @@
 
           button {
             background-color: $lightblack;
-            font-size: 16px;
+            font-size: 14px;
           }
 
           a,
           button {
             color: $navbar_text;
             text-decoration: none;
-            padding: 20px;
+            padding: 14px;
             border-bottom: 5px solid $lightblack;
             border-radius: 0;
 
             h3 {
               margin: 0;
+              font-size: 14px;
             }
 
             &.active {
@@ -120,7 +126,7 @@
             li {
               background-color: $lightblack;
               display: flex;
-              margin-left: -27px;
+              margin-left: -14px;
 
               a {
                 width: 100%;
@@ -144,7 +150,7 @@
             }
 
             li:first-child {
-              margin-top: 25px;
+              margin-top: 19px;
             }
           }
         }
@@ -169,7 +175,7 @@
       p,
       .toggle_menu_btn {
         padding: 20px;
-        font-size: 25px;
+        font-size: 14px;
         margin: 0;
       }
       .toggle_menu_btn {
@@ -202,7 +208,7 @@
 
           .dropdownBtn {
             background-color: $lightblack;
-            font-size: 16px;
+            font-size: 14px;
           }
 
           a,
