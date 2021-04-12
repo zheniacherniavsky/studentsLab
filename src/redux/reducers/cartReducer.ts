@@ -56,7 +56,7 @@ const userReducer = (state = initialState, action: CartAction): CartState => {
     case CartActionTypes.CLEAR_CART:
       return initialState;
     default:
-      return state; // console.warn
+      return state;
   }
 };
 

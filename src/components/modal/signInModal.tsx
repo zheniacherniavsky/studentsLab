@@ -14,7 +14,7 @@ const SignInModal = ({
   closeCallbackSuccess: () => void;
   closeCallback: () => void;
 }) => {
-  const { changeUsernameAsync } = useActions();
+  const { changeUsernameAsync, setAdminStatusAsync } = useActions();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -32,9 +32,14 @@ const SignInModal = ({
       "";
 
     if (!validationErrorMessage && login && password) {
-      const { username, errorMessage }: { username?: string; errorMessage?: string } = await signin(login, password);
+      const {
+        username,
+        errorMessage,
+        isAdmin,
+      }: { username?: string; errorMessage?: string; isAdmin?: boolean } = await signin(login, password);
       if (username) {
         changeUsernameAsync(username);
+        setAdminStatusAsync(isAdmin);
         closeCallbackSuccess();
       } else {
         setError(errorMessage as string);

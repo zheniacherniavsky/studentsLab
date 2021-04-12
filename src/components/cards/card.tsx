@@ -8,12 +8,14 @@ import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import SignInModal from "@/components/modal/signInModal";
 import { useState } from "react";
+import EditCardModal from "../modal/editCardModal";
 
 const Card = ({ product: p }: { product: IProduct }) => {
   const redux = useActions();
   const [showSignInModal, toggleSignInModal] = useState(false);
+  const [editCardModal, toggleEditCardModal] = useState(false);
 
-  const { username } = useTypedSelector((state) => state.user);
+  const { username, isAdmin } = useTypedSelector((state) => state.user);
 
   const rating = [];
   for (let i = 1; i <= 5; i++) {
@@ -28,6 +30,15 @@ const Card = ({ product: p }: { product: IProduct }) => {
             toggleSignInModal(false);
           }}
           closeCallbackSuccess={() => toggleSignInModal(false)}
+        />
+      ) : null}
+      {editCardModal ? (
+        <EditCardModal
+          closeCallback={() => {
+            toggleEditCardModal(false);
+          }}
+          closeCallbackSuccess={() => toggleEditCardModal(false)}
+          product={p}
         />
       ) : null}
       <div className="front">
@@ -45,17 +56,29 @@ const Card = ({ product: p }: { product: IProduct }) => {
       </div>
       <div className="back">
         <p>{p.shortdescription}</p>
-        <div>
-          <span>{p.age}+</span>
-          <button
-            type="button"
-            onClick={() => {
-              if (username) redux.addProductToCart(p);
-              else toggleSignInModal(true);
-            }}
-          >
-            Add to cart
-          </button>
+        <span>{p.age}+</span>
+        <div className="buttons">
+          {username && isAdmin ? (
+            <>
+              <button type="button" onClick={() => redux.addProductToCart(p)}>
+                Add to cart
+              </button>
+              <button type="button" onClick={() => toggleEditCardModal(true)}>
+                Edit
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  toggleSignInModal(true);
+                }}
+              >
+                Log in
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

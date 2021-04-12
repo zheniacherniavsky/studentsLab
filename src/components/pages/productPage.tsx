@@ -94,7 +94,10 @@ export default function ProductPage() {
         </div>
       </div>
       <div className="product">
-        <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
+        <div className="search_buttons">
+          <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
+          <button type="button">Create card</button>
+        </div>
         {!productsLoading ? (
           <CardsContainer class="" title="Products" data={products} />
         ) : (

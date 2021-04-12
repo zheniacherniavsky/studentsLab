@@ -13,3 +13,11 @@ export const clearUsername = () => ({
   type: UserActionTypes.CLEAR_USERNAME,
   payload: null,
 });
+
+export const setAdminStatusAsync = (status?: boolean) => (dispatch: Dispatch<UserAction>) => {
+  try {
+    dispatch({ type: UserActionTypes.SET_ADMIN_STATUS, payload: status || false });
+  } catch (e) {
+    dispatch({ type: UserActionTypes.SET_ADMIN_STATUS, payload: false });
+  }
+};

@@ -4,6 +4,7 @@ interface TextInputProps {
   label: string;
   id: string;
   value: string;
+  type: string;
   maxLength: number;
   handleChange: React.Dispatch<React.SetStateAction<string>>;
   errorDispatch: React.Dispatch<React.SetStateAction<string>>;
@@ -25,7 +26,7 @@ const TextInput = (props: TextInputProps) => {
       <span>{props.label}</span>
       <input
         id={props.id}
-        type="text"
+        type={props.type}
         className={props.value.length === props.maxLength ? "falseValidation" : ""} // todo: invalid
         onChange={validate}
         value={props.value}

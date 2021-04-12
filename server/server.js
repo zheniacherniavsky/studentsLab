@@ -34,7 +34,7 @@ app
 
       if (currentUser) {
         const isMatch = await bcrypt.compare(password, currentUser.password);
-        if (isMatch) return res.sendStatus(200);
+        if (isMatch) return res.status(200).json({ isAdmin: currentUser.isAdmin });
       }
 
       return res.status(400).json({ message: "This account does not exist." });
@@ -64,6 +64,7 @@ app
       accounts.push({
         login,
         password: hashedPassword,
+        isAdmin: false,
         profile: {
           avatar: "",
           username: "",
