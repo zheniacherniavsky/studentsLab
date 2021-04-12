@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 import { CartAction, CartActionTypes, CartState } from "@/types/cart";
 
 const initialState: CartState = {

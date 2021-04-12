@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 
 async function getRecentlyAddedProducts(count: number) {
   const result = await fetch("http://localhost:3000/products");

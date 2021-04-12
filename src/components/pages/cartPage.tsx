@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 import SelectInput from "@/elements/inputs/selectInput";
 import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";

@@ -1,6 +1,7 @@
 {
   "products": [
     {
+      "id": 0,
       "name": "Terraria",
       "price": 4.99,
       "age": 6,
@@ -12,6 +13,7 @@
       "rating": 5
     },
     {
+      "id": 1,
       "name": "Battlefield 1",
       "price": 29.99,
       "age": 18,
@@ -23,6 +25,7 @@
       "rating": 4
     },
     {
+      "id": 2,
       "name": "Genshin Impact",
       "price": 9.99,
       "age": 14,
@@ -34,6 +37,7 @@
       "rating": 4
     },
     {
+      "id": 3,
       "name": "Minecraft",
       "price": 25.99,
       "age": 3,
@@ -45,6 +49,7 @@
       "rating": 5
     },
     {
+      "id": 4,
       "name": "Sims 4",
       "price": 19.99,
       "age": 12,
@@ -56,6 +61,7 @@
       "rating": 3
     },
     {
+      "id": 5,
       "name": "Counter Strike: Global Offensive",
       "price": 15.99,
       "age": 18,
@@ -67,6 +73,7 @@
       "rating": 2
     },
     {
+      "id": 6,
       "name": "Grand Theft Auto Five",
       "price": 24.99,
       "age": 18,

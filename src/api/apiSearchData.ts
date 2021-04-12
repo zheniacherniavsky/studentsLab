@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 
 async function getData(searchInput: string) {
   if (searchInput === (undefined || "")) return [];

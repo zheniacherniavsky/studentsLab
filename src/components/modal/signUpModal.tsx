@@ -10,7 +10,7 @@ import useActions from "@/helpers/hooks/useActions";
 import ModalCloseButton from "@/elements/modalCloseButton";
 
 const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
-  const { changeUsernameAsync } = useActions();
+  const { changeUsernameAsync, setAdminStatusAsync } = useActions();
   const history = useHistory();
 
   const redirect = (path: string) => {
@@ -36,12 +36,14 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
       "";
 
     if (!validationErrorMessage && login && firstPassword && confirmPassword) {
-      const { username, errorMessage }: { username?: string; errorMessage?: string } = await signup(
-        login,
-        firstPassword
-      );
+      const {
+        username,
+        errorMessage,
+        isAdmin,
+      }: { username?: string; errorMessage?: string; isAdmin?: boolean } = await signup(login, firstPassword);
       if (username) {
         changeUsernameAsync(username);
+        setAdminStatusAsync(isAdmin);
         closeCallback();
         redirect("/profile");
       } else {

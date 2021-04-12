@@ -20,12 +20,12 @@
 
   // style for form
   form {
+    max-height: 500px;
     overflow: scroll;
     background: $lightblack;
     padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
     border-bottom: 2px solid $basicColor;
     border-radius: 20px;
@@ -50,9 +50,9 @@
     }
 
     .content {
-      padding: 20px;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
+      padding: 0px 30px 50px 30px;
       .image {
         width: 200px;
 
@@ -86,6 +86,10 @@
 
           select {
             margin-top: 10px;
+          }
+
+          .radioButton {
+            width: 20px;
           }
         }
       }

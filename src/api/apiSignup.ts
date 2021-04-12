@@ -1,4 +1,7 @@
-async function signup(login: string, password: string): Promise<{ username?: string; errorMessage?: string }> {
+async function signup(
+  login: string,
+  password: string
+): Promise<{ username?: string; errorMessage?: string; isAdmin?: boolean }> {
   const response = await fetch("http://localhost:3000/register", {
     method: "PUT",
     headers: {
@@ -8,7 +11,7 @@ async function signup(login: string, password: string): Promise<{ username?: str
   });
 
   if (response.ok) {
-    return { username: login };
+    return { username: login, isAdmin: false };
   }
   const answer = await response.json();
   return { errorMessage: answer.message };

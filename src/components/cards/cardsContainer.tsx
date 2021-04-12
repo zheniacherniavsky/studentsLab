@@ -1,4 +1,4 @@
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 import Card from "@/components/cards/card";
 import "./cardsContainer.scss";
 

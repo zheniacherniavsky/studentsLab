@@ -1,5 +1,5 @@
 import "./card.scss";
-import IProduct from "@/api/product";
+import IProduct from "@/api/product.d";
 
 import psPlatformImage from "@/assets/images/Platforms/ps.png";
 import xboxPlatformImage from "@/assets/images/Platforms/xbox.png";
@@ -76,7 +76,20 @@ const Card = ({ product: p }: { product: IProduct }) => {
                 Edit
               </button>
             </>
-          ) : (
+          ) : null}
+          {username && !isAdmin ? (
+            <button
+              type="button"
+              onClick={() => {
+                redux.addProductToCart(p);
+                setInCardClassName("inCart");
+                setTimeout(() => setInCardClassName(""), 399);
+              }}
+            >
+              Add to cart
+            </button>
+          ) : null}
+          {!username ? (
             <>
               <button
                 type="button"
@@ -87,7 +100,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
                 Log in
               </button>
             </>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

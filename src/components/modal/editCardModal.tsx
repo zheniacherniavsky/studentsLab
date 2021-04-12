@@ -1,4 +1,5 @@
-import IProduct from "@/api/product";
+import { updateProduct } from "@/api/product";
+import IProduct from "@/api/product.d";
 import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
 import Modal from "@/elements/modal";
@@ -22,6 +23,10 @@ const EditCardModal = ({
   const [description, changeDescription] = useState(p.shortdescription);
   const [price, changePrice] = useState(p.price.toFixed(2));
   const [age, setAge] = useState(p.age.toString());
+
+  const [platformPc, togglePlatformPC] = useState(p.platform.includes("pc"));
+  const [platformPs5, togglePlatformPs5] = useState(p.platform.includes("playstationfive"));
+  const [platformXBoxOne, togglePlatformXBoxOne] = useState(p.platform.includes("xboxone"));
 
   const [imgPathError, imgPathErrorDispatch] = useState("");
   const [nameError, nameErrorDispatch] = useState("");
@@ -47,6 +52,7 @@ const EditCardModal = ({
             <img src={imgPath || noPhotoImg} alt="Product" />
           </div>
           <div className="inputs">
+            <h3>Information</h3>
             <TextInput
               id="changeName"
               type="text"
@@ -103,10 +109,51 @@ const EditCardModal = ({
               handleChange={(e) => setAge(e.currentTarget.value)}
               options={["3+", "6+", "12+", "18+"]}
             />
+            <h3>Platform</h3>
+            <label htmlFor="platform/pc">
+              <span>PC</span>
+              <input
+                className="radioButton"
+                id="platform/pc"
+                type="checkbox"
+                checked={platformPc}
+                onChange={() => togglePlatformPC(!platformPc)}
+              />
+            </label>
+            <label htmlFor="platform/ps5">
+              <span>PlayStation 5</span>
+              <input
+                className="radioButton"
+                id="platform/ps5"
+                type="checkbox"
+                checked={platformPs5}
+                onChange={() => togglePlatformPs5(!platformPs5)}
+              />
+            </label>
+            <label htmlFor="platform/xboxone">
+              <span>XBox One</span>
+              <input
+                className="radioButton"
+                id="platform/xboxone"
+                type="checkbox"
+                checked={platformXBoxOne}
+                onChange={() => togglePlatformXBoxOne(!platformXBoxOne)}
+              />
+            </label>
           </div>
         </div>
         <div className="buttons">
-          <button type="submit" className="modal_button">
+          <button
+            type="submit"
+            className="modal_button"
+            onClick={() => {
+              const platforms = [];
+              if (platformPc) platforms.push("pc");
+              if (platformPs5) platforms.push("playstationfive");
+              if (platformXBoxOne) platforms.push("xboxone");
+              updateProduct(p.id, name, category, description, parseFloat(price), parseFloat(age), imgPath, platforms);
+            }}
+          >
             Submit
           </button>
           <button type="submit" className="modal_button">
