@@ -1,4 +1,21 @@
-export const createProduct = () => null;
+import IProduct from "./product.d";
+
+export const createProduct = async (product: IProduct) => {
+  const response = await fetch("http://localhost:3000/product", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({ ...product }),
+  });
+
+  const answer = await response.json();
+
+  if (response.ok) {
+    return answer.product;
+  }
+  return { errorMessage: answer.message };
+};
 
 export const updateProduct = async (
   id: number,
@@ -10,8 +27,7 @@ export const updateProduct = async (
   imgPath: string,
   platforms: Array<string>
 ) => {
-  console.log("updateProduct", [id, name, category, description, price, age, imgPath], platforms);
-  const response = await fetch("http://localhost:3000/updateProduct", {
+  const response = await fetch("http://localhost:3000/product", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -22,9 +38,20 @@ export const updateProduct = async (
   const answer = await response.json();
 
   if (response.ok) {
-    console.log(answer.product);
+    return answer.product;
   }
   return { errorMessage: answer.message };
 };
 
-export const deleteProduct = () => null;
+export const deleteProduct = async (id: number) => {
+  const response = await fetch(`http://localhost:3000/product/${id}`, {
+    method: "DELETE",
+  });
+
+  const answer = await response.json();
+
+  if (response.ok) {
+    return true;
+  }
+  return { errorMessage: answer.message };
+};

@@ -227,7 +227,25 @@ app
     }
   })
 
-  .put("/updateProduct", (req, res) => {
+  .post("/product", (req, res) => {
+    try {
+      const newProduct = req.body;
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+
+      newProduct.id = products.length;
+      products.push(newProduct);
+
+      fs.writeFileSync("./server/data.json", JSON.stringify({ products }));
+      return res.status(200).json({ product: newProduct });
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .put("/product", (req, res) => {
     try {
       console.log(req.body);
 
@@ -256,6 +274,26 @@ app
 
       fs.writeFileSync("./server/data.json", JSON.stringify({ products: newData }));
       return res.status(200).json({ product: willUpdateProduct });
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
+  })
+
+  .delete("/product/:id", (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log(typeof id);
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+
+      const newProducts = [];
+      for (const product of products) {
+        if (product.id !== parseInt(id, 10)) newProducts.push(product);
+      }
+      fs.writeFileSync("./server/data.json", JSON.stringify({ products: newProducts }));
+      return res.send(id);
     } catch (e) {
       console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });

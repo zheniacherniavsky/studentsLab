@@ -1,4 +1,4 @@
-import { updateProduct } from "@/api/product";
+import { createProduct, deleteProduct, updateProduct } from "@/api/product";
 import IProduct from "@/api/product.d";
 import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
@@ -7,15 +7,23 @@ import ModalCloseButton from "@/elements/modalCloseButton";
 import { FormEvent, useState } from "react";
 import noPhotoImg from "@/assets/images/no-photo.png";
 import SelectInput from "@/elements/inputs/selectInput";
+import { InfoModal, InfoType } from "./infoModal";
 
-const EditCardModal = ({
+export enum EditCardType {
+  ADD,
+  UPDATE,
+}
+
+export const EditCardModal = ({
   closeCallback,
   closeCallbackSuccess,
   product: p,
+  type,
 }: {
   closeCallbackSuccess: () => void;
   closeCallback: () => void;
   product: IProduct;
+  type: EditCardType;
 }) => {
   const [imgPath, changeImgPath] = useState(p.image);
   const [name, changeName] = useState(p.name);
@@ -40,12 +48,47 @@ const EditCardModal = ({
     if (platformPc) platforms.push("pc");
     if (platformPs5) platforms.push("playstationfive");
     if (platformXBoxOne) platforms.push("xboxone");
-    await updateProduct(p.id, name, category, description, parseFloat(price), parseFloat(age), imgPath, platforms);
+    switch (type) {
+      case EditCardType.ADD:
+        await createProduct({
+          ...p,
+          name,
+          category,
+          shortdescription: description,
+          price: parseFloat(price),
+          age: parseFloat(age),
+          platform: platforms,
+          image: imgPath,
+          date: new Date().toString(),
+        });
+        break;
+      case EditCardType.UPDATE:
+        await updateProduct(p.id, name, category, description, parseFloat(price), parseFloat(age), imgPath, platforms);
+        break;
+      default:
+        break;
+    }
     closeCallbackSuccess();
   };
 
+  const [deleteInfoModal, showDeleteInfoModal] = useState(false);
+
   return (
     <Modal>
+      {deleteInfoModal ? (
+        <InfoModal
+          infoModalHeader={`Delete ${p.name}`}
+          infoModalText="You want delete this game?"
+          infoModalType={InfoType.PROMPT}
+          infoModalCallback={async () => {
+            await deleteProduct(p.id);
+            showDeleteInfoModal(false);
+            closeCallbackSuccess();
+          }}
+          closeInfoModalCallback={() => showDeleteInfoModal(false)}
+        />
+      ) : null}
+
       <form onSubmit={handleSubmit}>
         <div className="head">
           <h2>Edit Card</h2>
@@ -151,13 +194,13 @@ const EditCardModal = ({
           <button type="submit" className="modal_button">
             Submit
           </button>
-          <button type="submit" className="modal_button">
-            Delete card
-          </button>
+          {type === EditCardType.UPDATE ? (
+            <button type="button" className="modal_button" onClick={() => showDeleteInfoModal(true)}>
+              Delete card
+            </button>
+          ) : null}
         </div>
       </form>
     </Modal>
   );
 };
-
-export default EditCardModal;

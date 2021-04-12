@@ -8,7 +8,7 @@ import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import SignInModal from "@/components/modal/signInModal";
 import { useState } from "react";
-import EditCardModal from "../modal/editCardModal";
+import { EditCardModal, EditCardType } from "../modal/editCardModal";
 
 const Card = ({ product: p }: { product: IProduct }) => {
   const redux = useActions();
@@ -45,6 +45,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
             toggleEditCardModal(false);
           }}
           product={p}
+          type={EditCardType.UPDATE}
         />
       ) : null}
       <div className={`front ${inCardClassName}`}>
@@ -64,7 +65,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
         <p>{p.shortdescription}</p>
         <span>{p.age}+</span>
         <div className="buttons">
-          {username && isAdmin ? (
+          {username ? (
             <>
               <button
                 type="button"
@@ -76,22 +77,12 @@ const Card = ({ product: p }: { product: IProduct }) => {
               >
                 Add to cart
               </button>
-              <button type="button" onClick={() => toggleEditCardModal(true)}>
-                Edit
-              </button>
+              {isAdmin ? (
+                <button type="button" onClick={() => toggleEditCardModal(true)}>
+                  Edit
+                </button>
+              ) : null}
             </>
-          ) : null}
-          {username && !isAdmin ? (
-            <button
-              type="button"
-              onClick={() => {
-                redux.addProductToCart(p);
-                setInCardClassName("inCart");
-                setTimeout(() => setInCardClassName(""), 399);
-              }}
-            >
-              Add to cart
-            </button>
           ) : null}
           {!username ? (
             <>
@@ -101,7 +92,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
                   toggleSignInModal(true);
                 }}
               >
-                Log in
+                Add to cart
               </button>
             </>
           ) : null}

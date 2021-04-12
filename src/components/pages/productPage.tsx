@@ -9,6 +9,8 @@ import "./productPage.scss";
 import Loading from "@/elements/loading";
 import SearchInput from "@/elements/searchInput";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
+import useActions from "@/helpers/hooks/useActions";
+import { EditCardModal, EditCardType } from "../modal/editCardModal";
 
 export default function ProductPage() {
   // sort params
@@ -23,8 +25,11 @@ export default function ProductPage() {
   const [products, updateProducts] = useState<IProduct[]>([]);
   const [productsLoading, toggleProductsLoading] = useState(false);
 
+  const redux = useActions();
   const { isAdmin } = useTypedSelector((state) => state.user);
   const { willUpdate } = useTypedSelector((state) => state.products);
+
+  const [editCardModal, toggleEditCardModal] = useState(false);
 
   const loadProducts = (search: string) => {
     toggleProductsLoading(true);
@@ -55,6 +60,28 @@ export default function ProductPage() {
 
   return (
     <>
+      {editCardModal ? (
+        <EditCardModal
+          closeCallback={() => toggleEditCardModal(false)}
+          closeCallbackSuccess={() => {
+            redux.updateProducts(!willUpdate);
+            toggleEditCardModal(false);
+          }}
+          product={{
+            id: -1,
+            name: "",
+            shortdescription: "",
+            category: "",
+            date: "",
+            image: "",
+            age: 0,
+            platform: [],
+            price: 0,
+            rating: 5, // Rating should be based on purchases. It will not be implemented in this lab.
+          }}
+          type={EditCardType.ADD}
+        />
+      ) : null}
       <div className="menu page_content_container">
         <h2>{header}</h2>
         <div className="options sort">
@@ -100,7 +127,11 @@ export default function ProductPage() {
       <div className="product">
         <div className="search_buttons">
           <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
-          {isAdmin ? <button type="button">Create card</button> : null}
+          {isAdmin ? (
+            <button type="button" onClick={() => toggleEditCardModal(true)}>
+              Create card
+            </button>
+          ) : null}
         </div>
         {!productsLoading ? (
           <CardsContainer class="" title="Products" data={products} />
