@@ -10,5 +10,4 @@ interface UpdateProducts {
   type: ProductsActionTypes.UPDATE_PRODUCTS;
   payload: boolean;
 }
-
 export type ProductsAction = UpdateProducts;
