@@ -18,6 +18,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
   const [inCardClassName, setInCardClassName] = useState("");
 
   const { username, isAdmin } = useTypedSelector((state) => state.user);
+  const { willUpdate } = useTypedSelector((state) => state.products);
 
   const rating = [];
   for (let i = 1; i <= 5; i++) {
@@ -39,7 +40,10 @@ const Card = ({ product: p }: { product: IProduct }) => {
           closeCallback={() => {
             toggleEditCardModal(false);
           }}
-          closeCallbackSuccess={() => toggleEditCardModal(false)}
+          closeCallbackSuccess={() => {
+            redux.updateProducts(!willUpdate);
+            toggleEditCardModal(false);
+          }}
           product={p}
         />
       ) : null}

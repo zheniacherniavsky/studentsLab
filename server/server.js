@@ -225,6 +225,41 @@ app
       console.log(e.message);
       return res.status(500).json({ message: "Something went wrong. Try again!" });
     }
+  })
+
+  .put("/updateProduct", (req, res) => {
+    try {
+      console.log(req.body);
+
+      const { id, name, category, description, price, age, imgPath, platforms } = req.body;
+
+      const data = fs.readFileSync("./server/data.json");
+      const { products } = JSON.parse(data);
+      res.setHeader("Content-Type", "application/json");
+      const newData = [];
+      let willUpdateProduct;
+
+      for (const product of products) {
+        if (product.id === id) willUpdateProduct = product;
+        else newData.push(product);
+      }
+
+      willUpdateProduct.name = name;
+      willUpdateProduct.category = category;
+      willUpdateProduct.shortdescription = description;
+      willUpdateProduct.image = imgPath;
+      willUpdateProduct.price = price;
+      willUpdateProduct.age = age;
+      willUpdateProduct.platform = platforms;
+
+      newData.push(willUpdateProduct);
+
+      fs.writeFileSync("./server/data.json", JSON.stringify({ products: newData }));
+      return res.status(200).json({ product: willUpdateProduct });
+    } catch (e) {
+      console.log(e.message);
+      return res.status(500).json({ message: "Something went wrong. Try again!" });
+    }
   });
 app.listen(port, () => {
   console.log(`server listening at http://localhost:${port}`);

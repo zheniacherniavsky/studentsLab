@@ -13,18 +13,6 @@
       "rating": 5
     },
     {
-      "id": 1,
-      "name": "Battlefield 1",
-      "price": 29.99,
-      "age": 18,
-      "category": "Shooter",
-      "platform": ["pc", "playstationfive", "xboxone"],
-      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
-      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg",
-      "date": "7 March 2021",
-      "rating": 4
-    },
-    {
       "id": 2,
       "name": "Genshin Impact",
       "price": 9.99,
@@ -83,6 +71,18 @@
       "image": "https://static.gabestore.ru/product/bzWYflpfTNj2oa93U4TuZdF44hDjW2Pb.jpg",
       "date": "11 March 2021",
       "rating": 3
+    },
+    {
+      "id": 1,
+      "name": "Battlefield 3",
+      "price": 23.99,
+      "age": 18,
+      "category": "Shooter",
+      "platform": ["pc"],
+      "shortdescription": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91rO-107XmL.jpg",
+      "date": "7 March 2021",
+      "rating": 4
     }
   ]
 }

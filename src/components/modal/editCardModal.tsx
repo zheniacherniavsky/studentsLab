@@ -34,8 +34,13 @@ const EditCardModal = ({
   const [priceError, priceErrorDispatch] = useState("");
   const [descriptionError, descriptionErrorDispatch] = useState("");
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    const platforms = [];
+    if (platformPc) platforms.push("pc");
+    if (platformPs5) platforms.push("playstationfive");
+    if (platformXBoxOne) platforms.push("xboxone");
+    await updateProduct(p.id, name, category, description, parseFloat(price), parseFloat(age), imgPath, platforms);
     closeCallbackSuccess();
   };
 
@@ -143,17 +148,7 @@ const EditCardModal = ({
           </div>
         </div>
         <div className="buttons">
-          <button
-            type="submit"
-            className="modal_button"
-            onClick={() => {
-              const platforms = [];
-              if (platformPc) platforms.push("pc");
-              if (platformPs5) platforms.push("playstationfive");
-              if (platformXBoxOne) platforms.push("xboxone");
-              updateProduct(p.id, name, category, description, parseFloat(price), parseFloat(age), imgPath, platforms);
-            }}
-          >
+          <button type="submit" className="modal_button">
             Submit
           </button>
           <button type="submit" className="modal_button">

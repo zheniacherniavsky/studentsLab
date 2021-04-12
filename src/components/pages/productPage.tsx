@@ -24,6 +24,7 @@ export default function ProductPage() {
   const [productsLoading, toggleProductsLoading] = useState(false);
 
   const { isAdmin } = useTypedSelector((state) => state.user);
+  const { willUpdate } = useTypedSelector((state) => state.products);
 
   const loadProducts = (search: string) => {
     toggleProductsLoading(true);
@@ -50,7 +51,7 @@ export default function ProductPage() {
         console.error(`${platform} url param is not exist.`);
         break;
     }
-  }, [platform, criteria, type, genre, age]); // dependencies
+  }, [platform, criteria, type, genre, age, willUpdate]); // dependencies
 
   return (
     <>
