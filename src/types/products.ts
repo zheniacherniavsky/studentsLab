@@ -1,4 +1,4 @@
-export enum ProductsActionTypes {
+export const enum ProductsActionTypes {
   UPDATE_PRODUCTS = "UPDATE_PRODUCTS",
 }
 

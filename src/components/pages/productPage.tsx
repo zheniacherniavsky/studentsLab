@@ -32,6 +32,7 @@ export default function ProductPage() {
   const [editCardModal, toggleEditCardModal] = useState(false);
 
   const loadProducts = (search: string) => {
+    window.scrollTo(0, 0);
     toggleProductsLoading(true);
     getProducts(search, platform, criteria, type, genre, age).then((result: IProduct[]) => {
       updateProducts(result);
@@ -58,6 +59,7 @@ export default function ProductPage() {
     }
   }, [platform, criteria, type, genre, age, willUpdate]); // dependencies
 
+  console.warn("Test");
   return (
     <>
       {editCardModal ? (
@@ -65,7 +67,8 @@ export default function ProductPage() {
           closeCallback={() => toggleEditCardModal(false)}
           closeCallbackSuccess={() => {
             redux.updateProducts(!willUpdate);
-            toggleEditCardModal(false);
+            window.scrollTo(window.pageXOffset, 0);
+            // toggleEditCardModal(false);
           }}
           product={{
             id: -1,

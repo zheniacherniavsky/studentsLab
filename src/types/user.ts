@@ -1,4 +1,4 @@
-export enum UserActionTypes {
+export const enum UserActionTypes {
   CHANGE_USERNAME = "CHANGE_USERNAME",
   CHANGE_USERNAME_ERROR = "CHANGE_USERNAME_ERROR",
   SET_ADMIN_STATUS = "SET_ADMIN_STATUS",

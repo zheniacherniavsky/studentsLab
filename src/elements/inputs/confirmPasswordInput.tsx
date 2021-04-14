@@ -28,6 +28,7 @@ const ConfirmPasswordInput = (props: TextInputProps) => {
       <input
         type={props.type}
         id={props.id}
+        name="password"
         className={props.value.length < 6 ? "" : "trueValidation"}
         onChange={validate}
         value={props.value}

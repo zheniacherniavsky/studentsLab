@@ -63,6 +63,7 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
         </div>
         <p>{error}</p>
         <LoginInput
+          autofocus
           label="Login"
           type="text"
           id="login"

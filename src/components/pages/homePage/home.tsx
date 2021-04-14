@@ -39,6 +39,7 @@ const HomePage = () => {
   }, [willUpdate]);
 
   const loadProducts = async (search: string) => {
+    window.scrollTo(0, 0);
     updateSearchData(await getData(search));
     if (search !== "") showSearchData(true);
     else showSearchData(false);

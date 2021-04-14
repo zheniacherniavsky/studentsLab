@@ -5,11 +5,11 @@ import Textarea from "@/elements/inputs/textarea";
 import Modal from "@/elements/modal";
 import ModalCloseButton from "@/elements/modalCloseButton";
 import { FormEvent, useState } from "react";
-import noPhotoImg from "@/assets/images/no-photo.png";
+import noPhotoImg from "@/assets/images/no-photo.jpg";
 import SelectInput from "@/elements/inputs/selectInput";
 import { InfoModal, InfoType } from "./infoModal";
 
-export enum EditCardType {
+export const enum EditCardType {
   ADD,
   UPDATE,
 }
@@ -102,6 +102,7 @@ export const EditCardModal = ({
           <div className="inputs">
             <h3>Information</h3>
             <TextInput
+              autofocus
               id="changeName"
               type="text"
               label="Name"
@@ -112,6 +113,7 @@ export const EditCardModal = ({
             />
             <p>{nameError}</p>
             <TextInput
+              autofocus={false}
               id="changeCategory"
               type="text"
               label="Category"
@@ -122,6 +124,7 @@ export const EditCardModal = ({
             />
             <p>{categoryError}</p>
             <TextInput
+              autofocus={false}
               id="changePrice"
               type="number"
               label="Price"
@@ -132,6 +135,7 @@ export const EditCardModal = ({
             />
             <p>{priceError}</p>
             <TextInput
+              autofocus={false}
               id="changeImage"
               type="text"
               label="Image"

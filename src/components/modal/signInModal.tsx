@@ -58,6 +58,7 @@ const SignInModal = ({
         </div>
         <p>{error}</p>
         <LoginInput
+          autofocus
           label="Login"
           type="text"
           id="login"

@@ -8,6 +8,7 @@ import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import SignInModal from "@/components/modal/signInModal";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { EditCardModal, EditCardType } from "../modal/editCardModal";
 
 const Card = ({ product: p }: { product: IProduct }) => {
@@ -24,6 +25,8 @@ const Card = ({ product: p }: { product: IProduct }) => {
   for (let i = 1; i <= 5; i++) {
     rating.push(i <= p.rating ? <span key={p.name + i} className="active" /> : <span key={p.name + i} />);
   }
+
+  const history = useHistory();
 
   return (
     <div className="card_container">
@@ -77,7 +80,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
               >
                 Add to cart
               </button>
-              {isAdmin ? (
+              {isAdmin && history.location.pathname !== "/" ? (
                 <button type="button" onClick={() => toggleEditCardModal(true)}>
                   Edit
                 </button>

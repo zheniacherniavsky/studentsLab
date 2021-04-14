@@ -12,6 +12,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MinifyCssNames = require("mini-css-class-name/css-loader");
 const ObsoleteWebpackPlugin = require("obsolete-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const fs = require("fs");
 const path = require("path");
 const browserslist = require("browserslist");
@@ -292,7 +293,7 @@ module.exports = function (_env, argv) {
         // it adds to obsolete-plugin-script 'async' tag (for perfomance puprpose)
         async: "obsolete",
       }),
-      // optional: new BundleAnalyzerPlugin() // creates bundles-map in browser https://github.com/webpack-contrib/webpack-bundle-analyzer
+      new BundleAnalyzerPlugin(), // creates bundles-map in browser https://github.com/webpack-contrib/webpack-bundle-analyzer
     ],
   };
 
