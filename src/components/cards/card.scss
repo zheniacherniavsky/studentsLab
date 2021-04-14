@@ -60,6 +60,10 @@
   }
 
   .front {
+    &:focus {
+      box-shadow: 0 0 15px yellow;
+    }
+
     img {
       object-fit: cover;
       width: 100%;

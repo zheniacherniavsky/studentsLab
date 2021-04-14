@@ -15,7 +15,7 @@ const CardsContainer = (props: ICardsProps) => {
       <h2>{props.title}</h2>
       <div className="content">
         {props.data.length !== 0 ? (
-          props.data.map((item) => <Card product={item} key={item.name} />)
+          props.data.map((item, index) => <Card tabindex={index} product={item} key={item.name} />)
         ) : (
           <h4>No results were found for your search...</h4>
         )}

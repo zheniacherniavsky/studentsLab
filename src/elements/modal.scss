@@ -4,7 +4,7 @@
   }
   // this div is a child
   .modal {
-    z-index: 100;
+    z-index: 1000;
     position: fixed;
     background: rgba($color: black, $alpha: 0.7);
     top: 0;

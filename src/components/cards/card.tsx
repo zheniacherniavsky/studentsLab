@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { EditCardModal, EditCardType } from "../modal/editCardModal";
 
-const Card = ({ product: p }: { product: IProduct }) => {
+const Card = ({ product: p, tabindex }: { product: IProduct; tabindex: number }) => {
   const redux = useActions();
   const [showSignInModal, toggleSignInModal] = useState(false);
   const [editCardModal, toggleEditCardModal] = useState(false);
@@ -29,7 +29,7 @@ const Card = ({ product: p }: { product: IProduct }) => {
   const history = useHistory();
 
   return (
-    <div className="card_container">
+    <div tabIndex={100 + tabindex} className="card_container">
       {showSignInModal ? (
         <SignInModal
           closeCallback={() => {
