@@ -1,6 +1,6 @@
 import IProduct from "@/api/product.d";
 
-export enum CartActionTypes {
+export const enum CartActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
   REMOVE_FROM_CART = "REMOVE_FROM_CART",
   CHANGE_PRODUCT_COUNT = "CHANGE_PRODUCT_COUNT",

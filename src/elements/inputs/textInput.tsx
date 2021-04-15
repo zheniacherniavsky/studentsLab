@@ -1,10 +1,11 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect, useRef } from "react";
 
 interface TextInputProps {
   label: string;
   id: string;
   value: string;
   type: string;
+  autofocus: boolean;
   maxLength: number;
   handleChange: React.Dispatch<React.SetStateAction<string>>;
   errorDispatch: React.Dispatch<React.SetStateAction<string>>;
@@ -21,10 +22,19 @@ const TextInput = (props: TextInputProps) => {
     props.handleChange(value);
   };
 
+  const inputElement = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputElement.current && props.autofocus) {
+      inputElement.current.focus();
+    }
+  }, []);
+
   return (
     <label htmlFor={props.id}>
       <span>{props.label}</span>
       <input
+        ref={inputElement}
         id={props.id}
         type={props.type}
         className={props.value.length === props.maxLength ? "falseValidation" : ""} // todo: invalid

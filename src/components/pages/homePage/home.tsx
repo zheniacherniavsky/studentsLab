@@ -10,7 +10,6 @@ import CardsContainer from "@/components/cards/cardsContainer";
 
 import "@/components/pages/homePage/categories.scss";
 import SearchInput from "@/elements/searchInput";
-import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import Categories from "./categories";
 
 const HomePage = () => {
@@ -19,8 +18,6 @@ const HomePage = () => {
   const [topProducts, loadTopProducts] = useState([]);
 
   const [searchValue, setSearchValue] = useState("");
-
-  const { willUpdate } = useTypedSelector((state) => state.products);
 
   const [productsLoading, toggleProductsLoading] = useState(false);
 
@@ -36,9 +33,10 @@ const HomePage = () => {
     };
 
     preload();
-  }, [willUpdate]);
+  }, []);
 
   const loadProducts = async (search: string) => {
+    window.scrollTo(0, 0);
     updateSearchData(await getData(search));
     if (search !== "") showSearchData(true);
     else showSearchData(false);
@@ -47,10 +45,24 @@ const HomePage = () => {
   return (
     <div>
       <SearchInput value={searchValue} handleChange={setSearchValue} callback={loadProducts} showLoading />
-      {searchDataVisibility ? <CardsContainer class="" title="Search results" data={searchData} /> : null}
+      {searchDataVisibility ? (
+        <CardsContainer
+          class=""
+          title="Search results"
+          data={searchData}
+          setEditProduct={undefined}
+          toggleEditCardModal={undefined}
+        />
+      ) : null}
       <Categories />
       {!productsLoading ? (
-        <CardsContainer class="" title="New games" data={topProducts} />
+        <CardsContainer
+          class=""
+          title="New games"
+          data={topProducts}
+          setEditProduct={undefined}
+          toggleEditCardModal={undefined}
+        />
       ) : (
         <Loading hook className="loadingPage" />
       )}

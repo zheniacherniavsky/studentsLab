@@ -1,6 +1,7 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect, useRef } from "react";
 
 interface TextInputProps {
+  autofocus: boolean;
   label: string;
   type: string;
   id: string;
@@ -20,10 +21,20 @@ const LoginInput = (props: TextInputProps) => {
     }
   };
 
+  const inputElement = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputElement.current && props.autofocus) {
+      inputElement.current.focus();
+    }
+  }, []);
+
   return (
     <label htmlFor={props.id}>
       <span>{props.label}</span>
       <input
+        ref={inputElement}
+        name="login"
         type={props.type}
         id={props.id}
         className={props.value.length < 6 ? "" : "trueValidation"}

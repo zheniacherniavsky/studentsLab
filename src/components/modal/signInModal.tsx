@@ -58,6 +58,7 @@ const SignInModal = ({
         </div>
         <p>{error}</p>
         <LoginInput
+          autofocus
           label="Login"
           type="text"
           id="login"
@@ -66,6 +67,7 @@ const SignInModal = ({
           errorDispatch={setLoginError}
         />
         <PasswordInput
+          autocomplete={false}
           label="Password"
           type="password"
           id="password"

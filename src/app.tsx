@@ -6,6 +6,7 @@ import NavBar from "@/components/navbar";
 // Styles
 import "@/styles/styles.scss";
 import "@/styles/pages.scss";
+import ProfilePage from "@/components/pages/profilePage";
 import PrivateRoute from "./elements/privateRoute";
 import Loading from "./elements/loading";
 import CartPage from "./components/pages/cartPage";
@@ -19,7 +20,7 @@ interface IAppProps {
 const Pages = () => {
   const HomePage = React.lazy(() => import("@/components/pages/homePage/home"));
   const ProductPage = React.lazy(() => import("@/components/pages/productPage"));
-  const ProfilePage = React.lazy(() => import("@/components/pages/profilePage"));
+  const ProfilePageMemo = React.memo(ProfilePage);
 
   return (
     <div className="pages_container">
@@ -29,7 +30,7 @@ const Pages = () => {
             <HomePage />
           </Route>
           <PrivateRoute path="/profile" exact>
-            <ProfilePage />
+            <ProfilePageMemo />
           </PrivateRoute>
           <PrivateRoute path="/products/:platform" exact>
             <ProductPage />

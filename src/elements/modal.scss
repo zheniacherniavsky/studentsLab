@@ -2,9 +2,10 @@
   h2 {
     margin: 0;
   }
+
   // this div is a child
   .modal {
-    z-index: 100;
+    z-index: 1000;
     position: fixed;
     background: rgba($color: black, $alpha: 0.7);
     top: 0;
@@ -21,7 +22,7 @@
   // style for form
   form {
     max-height: 500px;
-    overflow: scroll;
+    overflow: auto;
     background: $lightblack;
     padding: 40px;
     display: flex;
@@ -90,6 +91,9 @@
 
           .radioButton {
             width: 20px;
+            &:focus {
+              outline: 3px solid $navbar_tilebottom;
+            }
           }
         }
       }

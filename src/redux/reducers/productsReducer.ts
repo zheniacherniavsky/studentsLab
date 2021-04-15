@@ -1,15 +1,15 @@
-import { ProductsAction, ProductsActionTypes, ProductsState } from "@/types/products";
+import { ProductsActions, ProductsActionsTypes, ProductsState } from "@/types/products";
 
 const initialState: ProductsState = {
-  willUpdate: false,
+  products: [],
 };
 
-const productsReducer = (state = initialState, action: ProductsAction): ProductsState => {
+const productsReducer = (state = initialState, action: ProductsActions): ProductsState => {
   switch (action.type) {
-    case ProductsActionTypes.UPDATE_PRODUCTS:
-      return { ...state, willUpdate: action.payload };
+    case ProductsActionsTypes.LOAD_PRODUCTS:
+      return { products: action.payload };
     default:
-      return state;
+      return state; // console.warn
   }
 };
 

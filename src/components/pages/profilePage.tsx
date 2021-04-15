@@ -1,6 +1,6 @@
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import "./profilePage.scss";
-import noPhotoImage from "@/assets/images/no-photo.png";
+import noPhotoImage from "@/assets/images/no-photo.jpg";
 import { useEffect, useState } from "react";
 import TextInput from "@/elements/inputs/textInput";
 import Textarea from "@/elements/inputs/textarea";
@@ -74,6 +74,7 @@ const ProfilePage = () => {
           </div>
           <div className="data">
             <TextInput
+              autofocus
               label="Username"
               id="login"
               type="text"

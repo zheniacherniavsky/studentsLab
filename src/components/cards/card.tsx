@@ -8,44 +8,41 @@ import useActions from "@/helpers/hooks/useActions";
 import useTypedSelector from "@/helpers/hooks/useTypedSelector";
 import SignInModal from "@/components/modal/signInModal";
 import { useState } from "react";
-import { EditCardModal, EditCardType } from "../modal/editCardModal";
+import { useHistory } from "react-router-dom";
 
-const Card = ({ product: p }: { product: IProduct }) => {
+const Card = ({
+  product: p,
+  tabindex,
+  toggleEditCardModal,
+  setEditProduct,
+}: {
+  product: IProduct;
+  tabindex: number;
+  toggleEditCardModal: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  setEditProduct: React.Dispatch<React.SetStateAction<IProduct | undefined>> | undefined;
+}) => {
   const redux = useActions();
   const [showSignInModal, toggleSignInModal] = useState(false);
-  const [editCardModal, toggleEditCardModal] = useState(false);
 
   const [inCardClassName, setInCardClassName] = useState("");
 
   const { username, isAdmin } = useTypedSelector((state) => state.user);
-  const { willUpdate } = useTypedSelector((state) => state.products);
 
   const rating = [];
   for (let i = 1; i <= 5; i++) {
     rating.push(i <= p.rating ? <span key={p.name + i} className="active" /> : <span key={p.name + i} />);
   }
 
+  const history = useHistory();
+
   return (
-    <div className="card_container">
+    <div tabIndex={100 + tabindex} className="card_container">
       {showSignInModal ? (
         <SignInModal
           closeCallback={() => {
             toggleSignInModal(false);
           }}
           closeCallbackSuccess={() => toggleSignInModal(false)}
-        />
-      ) : null}
-      {editCardModal ? (
-        <EditCardModal
-          closeCallback={() => {
-            toggleEditCardModal(false);
-          }}
-          closeCallbackSuccess={() => {
-            redux.updateProducts(!willUpdate);
-            toggleEditCardModal(false);
-          }}
-          product={p}
-          type={EditCardType.UPDATE}
         />
       ) : null}
       <div className={`front ${inCardClassName}`}>
@@ -77,8 +74,14 @@ const Card = ({ product: p }: { product: IProduct }) => {
               >
                 Add to cart
               </button>
-              {isAdmin ? (
-                <button type="button" onClick={() => toggleEditCardModal(true)}>
+              {isAdmin && history.location.pathname !== "/" ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (setEditProduct) setEditProduct(p);
+                    if (toggleEditCardModal) toggleEditCardModal(true);
+                  }}
+                >
                   Edit
                 </button>
               ) : null}

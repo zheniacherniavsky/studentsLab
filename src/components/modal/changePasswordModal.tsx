@@ -63,6 +63,7 @@ const ChangePasswordModal = ({ closeCallback }: { closeCallback: () => void }) =
         </div>
         <p>{error}</p>
         <PasswordInput
+          autocomplete
           label="Password"
           type="password"
           id="firstPassword"
@@ -71,6 +72,7 @@ const ChangePasswordModal = ({ closeCallback }: { closeCallback: () => void }) =
           errorDispatch={setPasswordError}
         />
         <ConfirmPasswordInput
+          autocomplete
           label="Repeat password"
           type="password"
           id="secondPassword"
