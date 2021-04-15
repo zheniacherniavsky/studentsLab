@@ -78,21 +78,21 @@ type ProductsType = {
   type: string;
   genre: string;
   age: string;
-  products: IProduct[];
-  updateProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
   toggleEditCardModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ProductsMemo = React.memo((p: ProductsType) => {
   const [productsLoading, toggleProductsLoading] = useState(false);
   const [searchName, setSearchName] = useState("");
+  const [products, updateProducts] = useState<IProduct[]>([]);
 
   const { isAdmin } = useTypedSelector((state) => state.user);
   const loadProducts = (search: string) => {
     window.scrollTo(0, 0);
     toggleProductsLoading(true);
     getProducts(search, p.platform, p.criteria, p.type, p.genre, p.age).then((result: IProduct[]) => {
-      p.updateProducts(result);
+      updateProducts(result);
+      console.warn("Products CHANGED");
       toggleProductsLoading(false);
     });
   };
@@ -113,7 +113,7 @@ const ProductsMemo = React.memo((p: ProductsType) => {
         ) : null}
       </div>
       {!productsLoading ? (
-        <CardsContainer class="" title="Products" data={p.products} />
+        <CardsContainer class="" title="Products" data={products} />
       ) : (
         <Loading hook className="loadingPage" />
       )}
@@ -129,8 +129,6 @@ export default function ProductPage() {
   const [type, setType] = useState("ascending");
   const [genre, setGenre] = useState("all genres");
   const [age, setAge] = useState("0");
-
-  const [products, updateProducts] = useState<IProduct[]>([]);
 
   const redux = useActions();
   const { willUpdate } = useTypedSelector((state) => state.products);
@@ -194,8 +192,6 @@ export default function ProductPage() {
         type={type}
         genre={genre}
         age={age}
-        products={products}
-        updateProducts={updateProducts}
         toggleEditCardModal={toggleEditCardModal}
       />
     </>

@@ -72,6 +72,7 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
           errorDispatch={setLoginError}
         />
         <PasswordInput
+          autocomplete
           label="Password"
           type="password"
           id="firstPassword"
@@ -80,6 +81,7 @@ const SignUpModal = ({ closeCallback }: { closeCallback: () => void }) => {
           errorDispatch={setPasswordError}
         />
         <ConfirmPasswordInput
+          autocomplete
           label="Repeat password"
           type="password"
           id="secondPassword"

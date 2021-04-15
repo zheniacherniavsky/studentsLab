@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 
 interface TextInputProps {
+  autocomplete: boolean;
   label: string;
   type: string;
   id: string;
@@ -24,9 +25,10 @@ const PasswordInput = (props: TextInputProps) => {
     <label htmlFor={props.id}>
       <span>{props.label}</span>
       <input
+        autoComplete={props.autocomplete ? "new-password" : undefined}
         type={props.type}
         id={props.id}
-        name="password"
+        name={props.autocomplete ? "new-password" : "password"}
         className={props.value.length < 6 ? "" : "trueValidation"}
         onChange={validate}
         value={props.value}
