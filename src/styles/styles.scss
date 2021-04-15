@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
+::-webkit-scrollbar {
+  width: 5px; /* ширина для вертикального скролла */
+  height: 0;
+  background-color: transparent;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+  background-color: #2b2b2b;
+  border-radius: 9em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $navbar_tilebottomlight;
+}
+
 body {
   margin: 0;
   padding: 0;

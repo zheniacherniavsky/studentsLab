@@ -2,6 +2,7 @@
   h2 {
     margin: 0;
   }
+
   // this div is a child
   .modal {
     z-index: 1000;
@@ -90,6 +91,9 @@
 
           .radioButton {
             width: 20px;
+            &:focus {
+              outline: 3px solid $navbar_tilebottom;
+            }
           }
         }
       }

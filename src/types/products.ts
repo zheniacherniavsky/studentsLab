@@ -1,13 +1,16 @@
-export const enum ProductsActionTypes {
-  UPDATE_PRODUCTS = "UPDATE_PRODUCTS",
+import IProduct from "@/api/product.d";
+
+export const enum ProductsActionsTypes {
+  LOAD_PRODUCTS = "LOAD_PRODUCTS",
 }
 
 export interface ProductsState {
-  willUpdate: boolean;
+  products: IProduct[];
 }
 
-interface UpdateProducts {
-  type: ProductsActionTypes.UPDATE_PRODUCTS;
-  payload: boolean;
+interface LoadProducts {
+  type: ProductsActionsTypes.LOAD_PRODUCTS;
+  payload: IProduct[];
 }
-export type ProductsAction = UpdateProducts;
+
+export type ProductsActions = LoadProducts;

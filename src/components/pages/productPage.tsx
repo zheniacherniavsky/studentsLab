@@ -1,4 +1,3 @@
-import getProducts from "@/api/apiGetProducts";
 import IProduct from "@/api/product.d";
 import { BoxRadioInput } from "@/elements/inputs/radioInput";
 import SelectInput from "@/elements/inputs/selectInput";
@@ -24,7 +23,6 @@ type MenuProps = {
 
 class Menu extends React.PureComponent<MenuProps> {
   render() {
-    console.warn("Menu loaded");
     return (
       <div className="menu page_content_container">
         <h2>{this.props.header}</h2>
@@ -78,46 +76,92 @@ type ProductsType = {
   type: string;
   genre: string;
   age: string;
-  toggleEditCardModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ProductsMemo = React.memo((p: ProductsType) => {
   const [productsLoading, toggleProductsLoading] = useState(false);
   const [searchName, setSearchName] = useState("");
-  const [products, updateProducts] = useState<IProduct[]>([]);
+
+  const redux = useActions();
+  const { products } = useTypedSelector((state) => state.products);
 
   const { isAdmin } = useTypedSelector((state) => state.user);
   const loadProducts = (search: string) => {
     window.scrollTo(0, 0);
-    toggleProductsLoading(true);
-    getProducts(search, p.platform, p.criteria, p.type, p.genre, p.age).then((result: IProduct[]) => {
-      updateProducts(result);
-      console.warn("Products CHANGED");
-      toggleProductsLoading(false);
-    });
+    redux.loadProducts(search, p.platform, p.criteria, p.type, p.genre, p.age, toggleProductsLoading);
   };
 
   useEffect(() => {
-    loadProducts(searchName);
+    redux.loadProducts(searchName, p.platform, p.criteria, p.type, p.genre, p.age, toggleProductsLoading);
   }, [p.age, p.criteria, p.type, p.genre]);
 
-  console.warn("PRODUCTS render");
+  const CardsContainerMemo = React.memo(CardsContainer);
+
+  const [addNewCardModal, toggleAddNewCardModal] = useState(false);
+  const [editCardModal, toggleEditCardModal] = useState(false);
+  const [editProduct, setEditProduct] = useState<IProduct | undefined>();
+
+  const emptyProduct = {
+    id: -1,
+    name: "",
+    shortdescription: "",
+    category: "",
+    date: "",
+    image: "",
+    age: 0,
+    platform: [],
+    price: 0,
+    rating: 5, // Rating should be based on purchases. It will not be implemented in this lab.
+  };
+
   return (
-    <div className="product">
-      <div className="search_buttons">
-        <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
-        {isAdmin ? (
-          <button type="button" onClick={() => p.toggleEditCardModal(true)}>
-            Create card
-          </button>
-        ) : null}
+    <>
+      {editCardModal ? (
+        <EditCardModal
+          closeCallback={() => {
+            toggleEditCardModal(false);
+          }}
+          closeCallbackSuccess={() => {
+            redux.loadProducts(searchName, p.platform, p.criteria, p.type, p.genre, p.age, toggleProductsLoading);
+            toggleEditCardModal(false);
+          }}
+          product={editProduct || emptyProduct}
+          type={EditCardType.UPDATE}
+        />
+      ) : null}
+      {addNewCardModal ? (
+        <EditCardModal
+          closeCallback={() => toggleAddNewCardModal(false)}
+          closeCallbackSuccess={() => {
+            loadProducts(searchName);
+            toggleAddNewCardModal(false);
+          }}
+          product={emptyProduct}
+          type={EditCardType.ADD}
+        />
+      ) : null}
+      <div className="product">
+        <div className="search_buttons">
+          <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
+          {isAdmin ? (
+            <button type="button" onClick={() => toggleAddNewCardModal(true)}>
+              Create card
+            </button>
+          ) : null}
+        </div>
+        {!productsLoading ? (
+          <CardsContainerMemo
+            class=""
+            title="Products"
+            data={products}
+            toggleEditCardModal={toggleEditCardModal}
+            setEditProduct={setEditProduct}
+          />
+        ) : (
+          <Loading hook className="loadingPage" />
+        )}
       </div>
-      {!productsLoading ? (
-        <CardsContainer class="" title="Products" data={products} />
-      ) : (
-        <Loading hook className="loadingPage" />
-      )}
-    </div>
+    </>
   );
 });
 
@@ -129,11 +173,6 @@ export default function ProductPage() {
   const [type, setType] = useState("ascending");
   const [genre, setGenre] = useState("all genres");
   const [age, setAge] = useState("0");
-
-  const redux = useActions();
-  const { willUpdate } = useTypedSelector((state) => state.products);
-
-  const [editCardModal, toggleEditCardModal] = useState(false);
 
   useEffect(() => {
     switch (platform) {
@@ -151,32 +190,9 @@ export default function ProductPage() {
         break;
     }
   }, [platform]); // dependencies
-  console.warn("PRODUCTSPAGE render");
 
   return (
     <>
-      {editCardModal ? (
-        <EditCardModal
-          closeCallback={() => toggleEditCardModal(false)}
-          closeCallbackSuccess={() => {
-            redux.updateProducts(!willUpdate);
-            toggleEditCardModal(false);
-          }}
-          product={{
-            id: -1,
-            name: "",
-            shortdescription: "",
-            category: "",
-            date: "",
-            image: "",
-            age: 0,
-            platform: [],
-            price: 0,
-            rating: 5, // Rating should be based on purchases. It will not be implemented in this lab.
-          }}
-          type={EditCardType.ADD}
-        />
-      ) : null}
       <Menu
         header={header}
         criteria={criteria}
@@ -186,14 +202,7 @@ export default function ProductPage() {
         setGenre={setGenre}
         setAge={setAge}
       />
-      <ProductsMemo
-        platform={platform}
-        criteria={criteria}
-        type={type}
-        genre={genre}
-        age={age}
-        toggleEditCardModal={toggleEditCardModal}
-      />
+      <ProductsMemo platform={platform} criteria={criteria} type={type} genre={genre} age={age} />
     </>
   );
 }
