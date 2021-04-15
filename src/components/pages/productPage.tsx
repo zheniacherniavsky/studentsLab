@@ -73,22 +73,21 @@ class Menu extends React.PureComponent<MenuProps> {
 }
 
 type ProductsType = {
-  searchName: string;
   platform: string;
   criteria: string;
   type: string;
   genre: string;
   age: string;
   products: IProduct[];
-  setSearchName: React.Dispatch<React.SetStateAction<string>>;
   updateProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
   toggleEditCardModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Products = (p: ProductsType) => {
+const ProductsMemo = React.memo((p: ProductsType) => {
   const [productsLoading, toggleProductsLoading] = useState(false);
-  const { isAdmin } = useTypedSelector((state) => state.user);
+  const [searchName, setSearchName] = useState("");
 
+  const { isAdmin } = useTypedSelector((state) => state.user);
   const loadProducts = (search: string) => {
     window.scrollTo(0, 0);
     toggleProductsLoading(true);
@@ -99,14 +98,14 @@ const Products = (p: ProductsType) => {
   };
 
   useEffect(() => {
-    loadProducts(p.searchName);
+    loadProducts(searchName);
   }, [p.age, p.criteria, p.type, p.genre]);
 
   console.warn("PRODUCTS render");
   return (
     <div className="product">
       <div className="search_buttons">
-        <SearchInput value={p.searchName} handleChange={p.setSearchName} callback={loadProducts} showLoading={false} />
+        <SearchInput value={searchName} handleChange={setSearchName} callback={loadProducts} showLoading={false} />
         {isAdmin ? (
           <button type="button" onClick={() => p.toggleEditCardModal(true)}>
             Create card
@@ -120,13 +119,12 @@ const Products = (p: ProductsType) => {
       )}
     </div>
   );
-};
+});
 
 export default function ProductPage() {
   // sort params
   const { platform } = useParams<{ platform: string }>(); // taking platform from url
   const [header, setHeader] = useState("");
-  const [searchName, setSearchName] = useState("");
   const [criteria, setCriteria] = useState("name");
   const [type, setType] = useState("ascending");
   const [genre, setGenre] = useState("all genres");
@@ -190,15 +188,13 @@ export default function ProductPage() {
         setGenre={setGenre}
         setAge={setAge}
       />
-      <Products
-        searchName={searchName}
+      <ProductsMemo
         platform={platform}
         criteria={criteria}
         type={type}
         genre={genre}
         age={age}
         products={products}
-        setSearchName={setSearchName}
         updateProducts={updateProducts}
         toggleEditCardModal={toggleEditCardModal}
       />
